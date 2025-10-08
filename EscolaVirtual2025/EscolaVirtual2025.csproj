@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A946B2AF-C525-42BC-ACB9-CB08CF281A08}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>EscolaVirtual2025</RootNamespace>
+    <AssemblyName>EscolaVirtual2025</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>Libraries\MaterialSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Academic\ClassSubject.cs" />
+    <Compile Include="Classes\Academic\Year.cs" />
+    <Compile Include="Classes\Academic\Subject.cs" />
+    <Compile Include="Classes\Academic\ClassRoom.cs" />
+    <Compile Include="Classes\Chat\Notification.cs" />
+    <Compile Include="Classes\Users\Student.cs" />
+    <Compile Include="Classes\Users\TeacherStudent.cs" />
+    <Compile Include="Classes\Users\Teacher.cs" />
+    <Compile Include="Classes\Users\User.cs" />
+    <Compile Include="Classes\Utils.cs" />
+    <Compile Include="Forms\Admin\AdminForms\ClassRooms\Form_AddClassRooms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\ClassRooms\Form_AddClassRooms.Designer.cs">
+      <DependentUpon>Form_AddClassRooms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_AddSubjectYearsChose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_AddSubjectYearsChose.Designer.cs">
+      <DependentUpon>Form_AddSubjectYearsChose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\ClassRooms\Form_CheckClassRooms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\ClassRooms\Form_CheckClassRooms.Designer.cs">
+      <DependentUpon>Form_CheckClassRooms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Students\Form_AddStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Students\Form_AddStudent.Designer.cs">
+      <DependentUpon>Form_AddStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Students\Form_StudentCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Students\Form_StudentCheck.Designer.cs">
+      <DependentUpon>Form_StudentCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_AddSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_AddSubject.Designer.cs">
+      <DependentUpon>Form_AddSubject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_SubjectsCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_SubjectsCheck.Designer.cs">
+      <DependentUpon>Form_SubjectsCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Teachers\Form_AddTeacherClassroomChose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Teachers\Form_AddTeacherClassroomChose.Designer.cs">
+      <DependentUpon>Form_AddTeacherClassroomChose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Teachers\Form_CheckTeachers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Teachers\Form_CheckTeachers.Designer.cs">
+      <DependentUpon>Form_CheckTeachers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Teachers\Form_TeacherAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Teachers\Form_TeacherAdd.Designer.cs">
+      <DependentUpon>Form_TeacherAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\YearForms\Form_AddYear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\YearForms\Form_AddYear.Designer.cs">
+      <DependentUpon>Form_AddYear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\YearForms\Form_CheckYears.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\YearForms\Form_CheckYears.Designer.cs">
+      <DependentUpon>Form_CheckYears.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\Form_Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\Form_Admin.Designer.cs">
+      <DependentUpon>Form_Admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\Panels\PanelAccountAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\Panels\PanelAccountAdmin.Designer.cs">
+      <DependentUpon>PanelAccountAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\Panels\PanelAccountAdminEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\Panels\PanelAccountAdminEdit.Designer.cs">
+      <DependentUpon>PanelAccountAdminEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Login.Designer.cs">
+      <DependentUpon>Form_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Admin\AdminForms\ClassRooms\Form_AddClassRooms.resx">
+      <DependentUpon>Form_AddClassRooms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Subjects\Form_AddSubjectYearsChose.resx">
+      <DependentUpon>Form_AddSubjectYearsChose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\ClassRooms\Form_CheckClassRooms.resx">
+      <DependentUpon>Form_CheckClassRooms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Students\Form_AddStudent.resx">
+      <DependentUpon>Form_AddStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Students\Form_StudentCheck.resx">
+      <DependentUpon>Form_StudentCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Subjects\Form_AddSubject.resx">
+      <DependentUpon>Form_AddSubject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Subjects\Form_SubjectsCheck.resx">
+      <DependentUpon>Form_SubjectsCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Teachers\Form_AddTeacherClassroomChose.resx">
+      <DependentUpon>Form_AddTeacherClassroomChose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Teachers\Form_CheckTeachers.resx">
+      <DependentUpon>Form_CheckTeachers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Teachers\Form_TeacherAdd.resx">
+      <DependentUpon>Form_TeacherAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\YearForms\Form_AddYear.resx">
+      <DependentUpon>Form_AddYear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\YearForms\Form_CheckYears.resx">
+      <DependentUpon>Form_CheckYears.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\Form_Admin.resx">
+      <DependentUpon>Form_Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\Panels\PanelAccountAdmin.resx">
+      <DependentUpon>PanelAccountAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\Panels\PanelAccountAdminEdit.resx">
+      <DependentUpon>PanelAccountAdminEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Login.resx">
+      <DependentUpon>Form_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Credenciais_Admin\Admin.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\MaterialSkin.dll" />
+    <Content Include="Resources\BookIcon.ico" />
+    <None Include="Resources\notificationRinging.png" />
+    <None Include="Resources\notification.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\account.png" />
+    <None Include="Resources\EscolaVirtualImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
