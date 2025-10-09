@@ -158,5 +158,17 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
             form_AddSubject.ShowDialog();
             UpdateListView();
         }
+
+        private void lsvCheckSubject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lsvCheckSubject.SelectedItems.Count > 0)
+            {
+                btnRemove.Enabled = true;
+            }
+            else
+            {
+                btnRemove.Enabled = false;
+            }
+        }
     }
 }

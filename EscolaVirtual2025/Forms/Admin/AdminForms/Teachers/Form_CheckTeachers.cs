@@ -20,15 +20,6 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         {
             InitializeComponent();
 
-            List<Teacher> lista = new List<Teacher>
-            {
-                new Teacher("mferreira", "abcd", "Maria Ferreira", "987654321", Program.Subjects[1]),
-                new Teacher("pcosta", "qwerty", "Pedro Costa", "456789123", Program.Subjects[0])
-            };
-
-            Program.Teachers = lista;
-            Program.Subjects.ForEach(sbjct => sbjct.Teachers.AddRange(lista));
-
             #region MaterialSkin
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -113,6 +104,18 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         private void Form_CheckTeachers_VisibleChanged(object sender, EventArgs e)
         {
             UpdateListView();
+        }
+
+        private void lsvCheckTeachers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lsvCheckTeachers.SelectedItems.Count == 0)
+            {
+                btnRemove.Enabled = false;
+            }
+            else
+            {
+                btnRemove.Enabled = true;
+            }
         }
     }
 }

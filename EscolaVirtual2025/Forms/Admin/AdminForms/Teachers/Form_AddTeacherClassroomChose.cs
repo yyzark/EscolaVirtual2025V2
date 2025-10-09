@@ -64,6 +64,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         public void UpdateListView()
         {
+            lsvCheckClassRooms.Items.Clear();
             foreach (var classroom in Program.ClassRooms)
             {
                 // Check if this classroom has the selected subject
@@ -94,7 +95,6 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            TeacherClassroomsChosen = false;
             this.Close();
         }
 
@@ -161,6 +161,20 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             else
             {
                 btnAdd.Enabled = false;
+            }
+        }
+
+        private void Form_AddTeacherClassroomChose_VisibleChanged(object sender, EventArgs e)
+        {
+            UpdateListView();
+        }
+
+        public void ResetListView()
+        {
+            p_Teacher.AssignedClassRooms.Clear();
+            foreach (ListViewItem checkedItem in lsvCheckClassRooms.CheckedItems)
+            {
+                checkedItem.Checked = false;
             }
         }
     }

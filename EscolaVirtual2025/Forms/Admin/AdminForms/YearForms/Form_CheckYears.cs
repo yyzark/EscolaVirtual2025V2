@@ -46,10 +46,6 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
             {
                 lsvCheckAno.Items.Add(new ListViewItem(idAno.ToString()));
             }
-            if (lsvCheckAno.Items.Count <= 0)
-            {
-                btnRemove.Enabled = false;
-            }
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -89,6 +85,18 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
             }
 
             UpdateListView();
+        }
+
+        private void lsvCheckAno_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lsvCheckAno.SelectedItems.Count == 0)
+            {
+                btnRemove.Enabled = false;
+            }
+            else
+            {
+                btnRemove.Enabled = true;
+            }
         }
     }
 }

@@ -52,30 +52,81 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            int yearIndex = cbbYear.SelectedIndex;
-            int classRoomIndex = cbbClassRoom.SelectedIndex;
+            if (Program.Users.Any(usr => usr.Username == txtLogin.Text.Trim()))
+            {
+                MessageBox.Show(
+                "Já existe um utilizador com este nome de utilizador!",
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
+                return;
+            }
+            else
+            {
+                if (txtPassword.Text.Length < 4)
+                {
+                    MessageBox.Show(
+                    "A senha deve ter pelo menos 4 caracteres!",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+                    return;
+                }
+                else
+                {
+                    // Verifica se o NIF tem exatamente 9 dígitos numéricos
+                    string nif = txtNIF.Text;
 
-            var selectedYear = Program.Anos[yearIndex];
-            var selectedClassRoom = selectedYear.ClassRooms[classRoomIndex];
+                    // Verifica duplicações de NIF em Teachers e Students
+                    bool nifExists = Program.Users.Any(u =>
+                    {
+                        if (u.UserType == UserType.Teacher && u is Teacher teacher)
+                            return teacher.NIF == nif;
 
-            // Criar aluno
-            Student newStudent = new Student(
-                txtLogin.Text,
-                txtPassword.Text,
-                txtName.Text,
-                txtNIF.Text,
-                selectedClassRoom);
-            
+                        if (u.UserType == UserType.Student && u is Student student)
+                            return student.NIF == nif;
 
-            // Adicionar o aluno na turma
-            Program.students.Add(newStudent);
-            selectedClassRoom.Students[selectedClassRoom.StudentsCount] = newStudent;
-            selectedClassRoom.StudentsCount++;
-            Program.Users.Add(newStudent);
+                        return false;
+                    });
 
-            MessageBox.Show("Aluno adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (nifExists)
+                    {
+                        MessageBox.Show("Já existe um utilizador (professor ou aluno) com este NIF.",
+                                        "NIF duplicado",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                        txtNIF.Focus();
+                        return;
+                    }
 
-            this.Close();
+                    int yearIndex = cbbYear.SelectedIndex;
+                    int classRoomIndex = cbbClassRoom.SelectedIndex;
+
+                    var selectedYear = Program.Anos[yearIndex];
+                    var selectedClassRoom = selectedYear.ClassRooms[classRoomIndex];
+
+                    // Criar aluno
+                    Student newStudent = new Student(
+                        txtLogin.Text,
+                        txtPassword.Text,
+                        txtName.Text,
+                        txtNIF.Text,
+                        selectedClassRoom);
+
+
+                    // Adicionar o aluno na turma
+                    Program.students.Add(newStudent);
+                    selectedClassRoom.Students[selectedClassRoom.StudentsCount] = newStudent;
+                    selectedClassRoom.StudentsCount++;
+                    Program.Users.Add(newStudent);
+
+                    MessageBox.Show("Aluno adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

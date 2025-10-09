@@ -300,13 +300,14 @@ namespace EscolaVirtual2025.Forms.Admin
                         }
                         else
                         {
-                            subject.Nodes.Add($"Professor: Não existe");
+                            subject.Nodes.Add($"Professor: ND");
                         }
                             clas.Nodes[1].Nodes.Add(subject);
                     }
 
                     tree.Nodes[0].Nodes.Add(clas);
                 }
+
                 //adicionar disciplinas
                 for (int j = 0; j < Program.Anos[i].Subjects.Count; j++)
                 {

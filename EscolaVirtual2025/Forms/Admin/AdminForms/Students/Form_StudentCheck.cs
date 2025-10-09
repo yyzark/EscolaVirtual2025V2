@@ -89,17 +89,23 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms
 
                 lsvStudents.Items.Add(item);
             }
-
-            if (lsvStudents.Items.Count <= 0)
-            {
-                btnRemove.Enabled = false;
-            }
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Form_AddStudent formAddStudent = new Form_AddStudent();
             formAddStudent.ShowDialog();
             lsvUpdate();
+        }
+
+        private void lsvStudents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lsvStudents.SelectedItems.Count <= 0)
+            {
+                btnRemove.Enabled = false;
+            }else
+            {
+                btnRemove.Enabled=true;
+            }
         }
     }
 }

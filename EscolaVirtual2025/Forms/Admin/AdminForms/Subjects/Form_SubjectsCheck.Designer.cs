@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SubjectsCheck));
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbbAno = new System.Windows.Forms.ComboBox();
@@ -47,11 +48,11 @@
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.tableLayoutPanelButtons);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 25);
+            this.panel1.Location = new System.Drawing.Point(2, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
-            this.panel1.Size = new System.Drawing.Size(527, 404);
+            this.panel1.Padding = new System.Windows.Forms.Padding(20);
+            this.panel1.Size = new System.Drawing.Size(396, 328);
             this.panel1.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -61,13 +62,13 @@
             this.tableLayoutPanel1.Controls.Add(this.cbbAno, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lsvCheckSubject, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(27, 25);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 20);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(473, 305);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(356, 248);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // cbbAno
@@ -75,10 +76,10 @@
             this.cbbAno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbbAno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbAno.FormattingEnabled = true;
-            this.cbbAno.Location = new System.Drawing.Point(3, 2);
-            this.cbbAno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbbAno.Location = new System.Drawing.Point(2, 2);
+            this.cbbAno.Margin = new System.Windows.Forms.Padding(2);
             this.cbbAno.Name = "cbbAno";
-            this.cbbAno.Size = new System.Drawing.Size(467, 24);
+            this.cbbAno.Size = new System.Drawing.Size(352, 21);
             this.cbbAno.TabIndex = 0;
             this.cbbAno.SelectedIndexChanged += new System.EventHandler(this.cbbAno_SelectedIndexChanged);
             // 
@@ -91,14 +92,14 @@
             this.lsvCheckSubject.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCheckSubject.FullRowSelect = true;
             this.lsvCheckSubject.HideSelection = false;
-            this.lsvCheckSubject.Location = new System.Drawing.Point(4, 29);
-            this.lsvCheckSubject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lsvCheckSubject.Location = new System.Drawing.Point(3, 23);
             this.lsvCheckSubject.Name = "lsvCheckSubject";
             this.lsvCheckSubject.Scrollable = false;
-            this.lsvCheckSubject.Size = new System.Drawing.Size(465, 272);
+            this.lsvCheckSubject.Size = new System.Drawing.Size(350, 222);
             this.lsvCheckSubject.TabIndex = 3;
             this.lsvCheckSubject.UseCompatibleStateImageBehavior = false;
             this.lsvCheckSubject.View = System.Windows.Forms.View.Details;
+            this.lsvCheckSubject.SelectedIndexChanged += new System.EventHandler(this.lsvCheckSubject_SelectedIndexChanged);
             // 
             // clmClassRoom
             // 
@@ -119,12 +120,12 @@
             this.tableLayoutPanelButtons.Controls.Add(this.btnAdd, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.btnRemove, 2, 0);
             this.tableLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(27, 330);
+            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(20, 268);
             this.tableLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             this.tableLayoutPanelButtons.RowCount = 1;
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(473, 49);
+            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(356, 40);
             this.tableLayoutPanelButtons.TabIndex = 2;
             // 
             // btnAdd
@@ -135,12 +136,12 @@
             this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAdd.HighEmphasis = true;
             this.btnAdd.Icon = null;
-            this.btnAdd.Location = new System.Drawing.Point(5, 7);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnAdd.Location = new System.Drawing.Point(4, 6);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAdd.Size = new System.Drawing.Size(226, 35);
+            this.btnAdd.Size = new System.Drawing.Size(170, 28);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Adicionar";
             this.btnAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -154,14 +155,15 @@
             this.btnRemove.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnRemove.Depth = 0;
             this.btnRemove.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRemove.Enabled = false;
             this.btnRemove.HighEmphasis = true;
             this.btnRemove.Icon = null;
-            this.btnRemove.Location = new System.Drawing.Point(241, 7);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnRemove.Location = new System.Drawing.Point(182, 6);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnRemove.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnRemove.Size = new System.Drawing.Size(227, 35);
+            this.btnRemove.Size = new System.Drawing.Size(170, 28);
             this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "Remover";
             this.btnRemove.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -171,14 +173,18 @@
             // 
             // Form_SubjectsCheck
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 431);
+            this.ClientSize = new System.Drawing.Size(400, 350);
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Form_SubjectsCheck";
-            this.Padding = new System.Windows.Forms.Padding(3, 25, 3, 2);
+            this.Padding = new System.Windows.Forms.Padding(2, 20, 2, 2);
+            this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_SubjectsCheck";
             this.Load += new System.EventHandler(this.Form_SubjectsCheck_Load);
             this.panel1.ResumeLayout(false);

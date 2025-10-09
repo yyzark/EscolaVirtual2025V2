@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_AddSubject));
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
+            this.btnYears = new MaterialSkin.Controls.MaterialButton();
             this.txtName = new MaterialSkin.Controls.MaterialTextBox();
             this.txtAbreviation = new MaterialSkin.Controls.MaterialTextBox();
-            this.btnCancel = new MaterialSkin.Controls.MaterialButton();
-            this.btnAccept = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnYears = new MaterialSkin.Controls.MaterialButton();
+            this.btnAccept = new MaterialSkin.Controls.MaterialButton();
+            this.btnCancel = new MaterialSkin.Controls.MaterialButton();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
@@ -47,7 +48,7 @@
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(2, 20);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(20);
             this.panelMain.Size = new System.Drawing.Size(396, 222);
             this.panelMain.TabIndex = 1;
             // 
@@ -69,6 +70,27 @@
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(356, 182);
             this.tableLayoutPanelMain.TabIndex = 0;
+            // 
+            // btnYears
+            // 
+            this.btnYears.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnYears.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnYears.Depth = 0;
+            this.btnYears.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnYears.HighEmphasis = true;
+            this.btnYears.Icon = null;
+            this.btnYears.Location = new System.Drawing.Point(4, 97);
+            this.btnYears.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnYears.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnYears.Name = "btnYears";
+            this.btnYears.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnYears.Size = new System.Drawing.Size(170, 79);
+            this.btnYears.TabIndex = 11;
+            this.btnYears.Text = "Editar anos";
+            this.btnYears.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnYears.UseAccentColor = false;
+            this.btnYears.UseVisualStyleBackColor = true;
+            this.btnYears.Click += new System.EventHandler(this.btnYears_Click);
             // 
             // txtName
             // 
@@ -108,25 +130,21 @@
             this.txtAbreviation.TextChanged += new System.EventHandler(this.txtAbreviation_TextChanged);
             this.txtAbreviation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAbreviation_KeyPress);
             // 
-            // btnCancel
+            // tableLayoutPanel13
             // 
-            this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCancel.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCancel.Depth = 0;
-            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.HighEmphasis = true;
-            this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(4, 51);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCancel.Size = new System.Drawing.Size(170, 34);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancelar";
-            this.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnCancel.UseAccentColor = false;
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel13.ColumnCount = 1;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.Controls.Add(this.btnAccept, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.btnCancel, 0, 1);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(178, 91);
+            this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 2;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(178, 91);
+            this.tableLayoutPanel13.TabIndex = 7;
             // 
             // btnAccept
             // 
@@ -150,42 +168,25 @@
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
-            // tableLayoutPanel13
+            // btnCancel
             // 
-            this.tableLayoutPanel13.ColumnCount = 1;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel13.Controls.Add(this.btnAccept, 0, 0);
-            this.tableLayoutPanel13.Controls.Add(this.btnCancel, 0, 1);
-            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(178, 91);
-            this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 2;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(178, 91);
-            this.tableLayoutPanel13.TabIndex = 7;
-            // 
-            // btnYears
-            // 
-            this.btnYears.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnYears.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnYears.Depth = 0;
-            this.btnYears.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnYears.HighEmphasis = true;
-            this.btnYears.Icon = null;
-            this.btnYears.Location = new System.Drawing.Point(4, 97);
-            this.btnYears.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnYears.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnYears.Name = "btnYears";
-            this.btnYears.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnYears.Size = new System.Drawing.Size(170, 79);
-            this.btnYears.TabIndex = 11;
-            this.btnYears.Text = "Editar anos";
-            this.btnYears.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnYears.UseAccentColor = false;
-            this.btnYears.UseVisualStyleBackColor = true;
-            this.btnYears.Click += new System.EventHandler(this.btnYears_Click);
+            this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancel.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCancel.Depth = 0;
+            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCancel.HighEmphasis = true;
+            this.btnCancel.Icon = null;
+            this.btnCancel.Location = new System.Drawing.Point(4, 51);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCancel.Size = new System.Drawing.Size(170, 34);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCancel.UseAccentColor = false;
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // Form_AddSubject
             // 
@@ -194,9 +195,13 @@
             this.ClientSize = new System.Drawing.Size(400, 244);
             this.Controls.Add(this.panelMain);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Form_AddSubject";
             this.Padding = new System.Windows.Forms.Padding(2, 20, 2, 2);
+            this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_AddSubject";
             this.Load += new System.EventHandler(this.Form_AddSubject_Load);
             this.panelMain.ResumeLayout(false);

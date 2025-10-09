@@ -342,10 +342,6 @@ namespace EscolaVirtual2025
             }
         }
 
-        private void Form_Login_Shown(object sender, EventArgs e)
-        {
-        }
-
         private void Form_Login_VisibleChanged(object sender, EventArgs e)
         {
             this.ActiveControl = null;

@@ -142,8 +142,11 @@
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form_AddSubjectYearsChose";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
+            this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_AddSubjectYearsChose";
             this.Load += new System.EventHandler(this.Form_AddSubjectYearsChose_Load);
             this.VisibleChanged += new System.EventHandler(this.Form_AddSubjectYearsChose_VisibleChanged);

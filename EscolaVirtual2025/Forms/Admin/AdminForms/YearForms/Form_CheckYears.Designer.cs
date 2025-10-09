@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_CheckYears));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lsvCheckAno = new System.Windows.Forms.ListView();
             this.clmYear = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -63,6 +64,7 @@
             this.lsvCheckAno.TabIndex = 3;
             this.lsvCheckAno.UseCompatibleStateImageBehavior = false;
             this.lsvCheckAno.View = System.Windows.Forms.View.Details;
+            this.lsvCheckAno.SelectedIndexChanged += new System.EventHandler(this.lsvCheckAno_SelectedIndexChanged);
             // 
             // clmYear
             // 
@@ -113,6 +115,7 @@
             this.btnRemove.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnRemove.Depth = 0;
             this.btnRemove.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRemove.Enabled = false;
             this.btnRemove.HighEmphasis = true;
             this.btnRemove.Icon = null;
             this.btnRemove.Location = new System.Drawing.Point(181, 6);
@@ -135,8 +138,12 @@
             this.ClientSize = new System.Drawing.Size(400, 350);
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form_CheckYears";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_CheckYears";
             this.Load += new System.EventHandler(this.Form_CheckYears_Load);
             this.panel1.ResumeLayout(false);

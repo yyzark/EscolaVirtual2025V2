@@ -66,11 +66,6 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (lsvCheckYears.CheckedItems.Count <= 0)
-            {
-                p_Subject.Years.Clear();
-                SubjectYearsChosen = false;
-            }
             this.Close();
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_StudentCheck));
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdd = new MaterialSkin.Controls.MaterialButton();
@@ -142,6 +143,7 @@
             this.lsvStudents.TabIndex = 2;
             this.lsvStudents.UseCompatibleStateImageBehavior = false;
             this.lsvStudents.View = System.Windows.Forms.View.Details;
+            this.lsvStudents.SelectedIndexChanged += new System.EventHandler(this.lsvStudents_SelectedIndexChanged);
             // 
             // clmUsername
             // 
@@ -170,6 +172,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form_StudentCheck";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.Sizable = false;

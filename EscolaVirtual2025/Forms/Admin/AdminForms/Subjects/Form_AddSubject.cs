@@ -115,7 +115,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            if(!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar) && !Char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true;
             }

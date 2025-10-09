@@ -49,12 +49,14 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             {
                 cbbYear.ForeColor = Color.Black;
                 cbbYear.DropDownStyle = ComboBoxStyle.DropDownList;
+                btnAccept.Enabled = true;
             }
             else
             {
                 cbbYear.Text = "Ano";
                 cbbYear.ForeColor = Color.Gray;
                 cbbYear.DropDownStyle = ComboBoxStyle.DropDown;
+                btnAccept.Enabled = false;
             }
         }
 

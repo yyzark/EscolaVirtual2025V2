@@ -53,7 +53,11 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             if (cbbSubjects.SelectedIndex != -1)
             {
                 btnClassRooms.Enabled = true;
-                newTeacher.AssignedSubject = Program.Subjects[cbbSubjects.SelectedIndex];
+                if (Program.Subjects[cbbSubjects.SelectedIndex] != newTeacher.AssignedSubject)
+                {
+                    newTeacher.AssignedSubject = Program.Subjects[cbbSubjects.SelectedIndex];
+                    form_AddTeacherClassroomChose.ResetListView();
+                }
             }
             else
             {
@@ -103,91 +107,103 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            // Verifica se o NIF tem exatamente 9 dígitos numéricos
-            string nif = txtNIF.Text.Trim();
-            if (nif.Length != 9 || !nif.All(char.IsDigit))
+            if (Program.Users.Any(usr => usr.Username == txtLogin.Text.Trim()))
             {
-                MessageBox.Show("O NIF deve conter exatamente 9 dígitos numéricos.",
-                                "NIF inválido",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                txtNIF.Focus();
+                MessageBox.Show(
+                "Já existe um utilizador com este nome de utilizador!",
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
                 return;
             }
-
-            string login = txtLogin.Text.Trim();
-
-            // Verifica duplicações de Login (para todos os utilizadores)
-            bool loginExists = Program.Users.Any(u =>
-                u.Username.Equals(login, StringComparison.OrdinalIgnoreCase));
-
-            if (loginExists)
+            else
             {
-                MessageBox.Show("Já existe um utilizador com este login.",
-                                "Login duplicado",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                txtLogin.Focus();
-                return;
-            }
-
-            // Verifica duplicações de NIF em Teachers e Students
-            bool nifExists = Program.Users.Any(u =>
-            {
-                if (u.UserType == UserType.Teacher && u is Teacher teacher)
-                    return teacher.NIF == nif;
-
-                if (u.UserType == UserType.Student && u is Student student)
-                    return student.NIF == nif;
-
-                return false;
-            });
-
-            if (nifExists)
-            {
-                MessageBox.Show("Já existe um utilizador (professor ou aluno) com este NIF.",
-                                "NIF duplicado",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                txtNIF.Focus();
-                return;
-            }
-
-            // Cria o professor com os dados inseridos
-            newTeacher.Name = txtName.Text.Trim();
-            newTeacher.NIF = nif;
-            newTeacher.Username = login;
-            newTeacher.Password = txtPassword.Text.Trim();
-            // A disciplina foi definida no combo box
-
-            // Adiciona às listas globais
-            if (!Program.Teachers.Contains(newTeacher))
-                Program.Teachers.Add(newTeacher);
-
-            if (!Program.Users.Contains(newTeacher))
-                Program.Users.Add(newTeacher);
-
-            // Atualiza as turmas associadas
-            foreach (var classroom in Program.ClassRooms)
-            {
-                foreach (var classSubject in classroom.Subjects)
+                if (txtPassword.Text.Length < 4)
                 {
-                    if (classSubject.Subject.Id == newTeacher.AssignedSubject.Id &&
-                        classSubject.AssignedTeacher == newTeacher)
+                    MessageBox.Show(
+                    "A senha deve ter pelo menos 4 caracteres!",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+                    return;
+                }
+                else
+                {
+                    // Verifica se o NIF tem exatamente 9 dígitos numéricos
+                    string nif = txtNIF.Text;
+
+                    // Verifica duplicações de NIF em Teachers e Students
+                    bool nifExists = Program.Users.Any(u =>
                     {
-                        if (!newTeacher.AssignedClassRooms.Contains(classroom))
-                            newTeacher.AssignedClassRooms.Add(classroom);
+                        if (u.UserType == UserType.Teacher && u is Teacher teacher)
+                            return teacher.NIF == nif;
+
+                        if (u.UserType == UserType.Student && u is Student student)
+                            return student.NIF == nif;
+
+                        return false;
+                    });
+
+                    if (nifExists)
+                    {
+                        MessageBox.Show("Já existe um utilizador (professor ou aluno) com este NIF.",
+                                        "NIF duplicado",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                        txtNIF.Focus();
+                        return;
                     }
+
+                    // Cria o professor com os dados inseridos
+                    newTeacher.Name = txtName.Text.Trim();
+                    newTeacher.NIF = nif;
+                    newTeacher.Username = txtLogin.Text;
+                    newTeacher.Password = txtPassword.Text.Trim();
+                    // A disciplina foi definida no combo box
+
+                    // Adiciona às listas globais
+                    if (!Program.Teachers.Contains(newTeacher))
+                        Program.Teachers.Add(newTeacher);
+
+                    if (!Program.Users.Contains(newTeacher))
+                        Program.Users.Add(newTeacher);
+
+                    // Atualiza as turmas associadas
+                    foreach (ClassRoom classroom in Program.ClassRooms)
+                    {
+                        foreach (ClassSubject classSubject in classroom.Subjects)
+                        {
+                            if (classSubject.Subject.Id == newTeacher.AssignedSubject.Id &&
+                                classSubject.AssignedTeacher == newTeacher)
+                            {
+                                if (!newTeacher.AssignedClassRooms.Contains(classroom))
+                                    newTeacher.AssignedClassRooms.Add(classroom);
+                            }
+                        }
+                    }
+
+                    foreach(Year yr in Program.Anos)
+                    {
+                        foreach(Subject sbjct in yr.Subjects)
+                        {
+                            if (!sbjct.Teachers.Contains(newTeacher) && sbjct == Program.Subjects[cbbSubjects.SelectedIndex])
+                                sbjct.Teachers.Add(newTeacher);
+                        }
+                    }
+
+
+
+                    // Sucesso
+                    MessageBox.Show("Professor adicionado com sucesso!",
+                                    "Sucesso",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+
+                    this.Close();
                 }
             }
-
-            // Sucesso
-            MessageBox.Show("Professor adicionado com sucesso!",
-                            "Sucesso",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-
-            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -197,7 +213,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Utils.IsAllowedCharacter(e.KeyChar))
+            if (!Utils.IsAllowedCharacter(e.KeyChar) && !Char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -205,7 +221,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Utils.IsAllowedCharacter(e.KeyChar))
+            if (!Utils.IsAllowedCharacter(e.KeyChar) && !Char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -213,7 +229,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void txtNIF_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar))
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -221,7 +237,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Utils.IsAllowedNameCharacter(e.KeyChar) || Char.IsDigit(e.KeyChar))
+            if (!Utils.IsAllowedNameCharacter(e.KeyChar) || Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

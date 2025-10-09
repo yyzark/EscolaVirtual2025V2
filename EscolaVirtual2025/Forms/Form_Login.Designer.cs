@@ -163,7 +163,6 @@
             this.Text = "Escola Virtual";
             this.Activated += new System.EventHandler(this.Form_Login_Activated);
             this.Load += new System.EventHandler(this.Form_Login_Load);
-            this.Shown += new System.EventHandler(this.Form_Login_Shown);
             this.SizeChanged += new System.EventHandler(this.Form_Login_SizeChanged);
             this.VisibleChanged += new System.EventHandler(this.Form_Login_VisibleChanged);
             this.ResumeLayout(false);
