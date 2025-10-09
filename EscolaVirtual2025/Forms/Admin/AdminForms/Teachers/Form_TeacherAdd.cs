@@ -103,7 +103,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            // ✅ Verifica se o NIF tem exatamente 9 dígitos numéricos
+            // Verifica se o NIF tem exatamente 9 dígitos numéricos
             string nif = txtNIF.Text.Trim();
             if (nif.Length != 9 || !nif.All(char.IsDigit))
             {
@@ -117,7 +117,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
             string login = txtLogin.Text.Trim();
 
-            // ❌ Verifica duplicações de Login (para todos os utilizadores)
+            // Verifica duplicações de Login (para todos os utilizadores)
             bool loginExists = Program.Users.Any(u =>
                 u.Username.Equals(login, StringComparison.OrdinalIgnoreCase));
 
@@ -131,7 +131,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 return;
             }
 
-            // ❌ Verifica duplicações de NIF em Teachers e Students
+            // Verifica duplicações de NIF em Teachers e Students
             bool nifExists = Program.Users.Any(u =>
             {
                 if (u.UserType == UserType.Teacher && u is Teacher teacher)
@@ -153,21 +153,21 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 return;
             }
 
-            // ✅ Cria o professor com os dados inseridos
+            // Cria o professor com os dados inseridos
             newTeacher.Name = txtName.Text.Trim();
             newTeacher.NIF = nif;
             newTeacher.Username = login;
             newTeacher.Password = txtPassword.Text.Trim();
             // A disciplina foi definida no combo box
 
-            // ✅ Adiciona às listas globais
+            // Adiciona às listas globais
             if (!Program.Teachers.Contains(newTeacher))
                 Program.Teachers.Add(newTeacher);
 
             if (!Program.Users.Contains(newTeacher))
                 Program.Users.Add(newTeacher);
 
-            // ✅ Atualiza as turmas associadas
+            // Atualiza as turmas associadas
             foreach (var classroom in Program.ClassRooms)
             {
                 foreach (var classSubject in classroom.Subjects)
@@ -181,13 +181,50 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 }
             }
 
-            // ✅ Sucesso
+            // Sucesso
             MessageBox.Show("Professor adicionado com sucesso!",
                             "Sucesso",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
 
             this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Utils.IsAllowedCharacter(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Utils.IsAllowedCharacter(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtNIF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Utils.IsAllowedNameCharacter(e.KeyChar) || Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -51,7 +51,7 @@
             this.panelMain.Margin = new System.Windows.Forms.Padding(4);
             this.panelMain.Name = "panelMain";
             this.panelMain.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
-            this.panelMain.Size = new System.Drawing.Size(591, 416);
+            this.panelMain.Size = new System.Drawing.Size(609, 463);
             this.panelMain.TabIndex = 2;
             // 
             // tableLayoutPanelMain
@@ -76,7 +76,7 @@
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(537, 366);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(555, 413);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // txtNIF
@@ -88,17 +88,18 @@
             this.txtNIF.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNIF.Hint = "NIF";
             this.txtNIF.LeadingIcon = null;
-            this.txtNIF.Location = new System.Drawing.Point(272, 102);
+            this.txtNIF.Location = new System.Drawing.Point(281, 118);
             this.txtNIF.Margin = new System.Windows.Forms.Padding(4);
             this.txtNIF.MaxLength = 9;
             this.txtNIF.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNIF.Multiline = false;
             this.txtNIF.Name = "txtNIF";
-            this.txtNIF.Size = new System.Drawing.Size(261, 50);
+            this.txtNIF.Size = new System.Drawing.Size(270, 50);
             this.txtNIF.TabIndex = 15;
             this.txtNIF.Text = "";
             this.txtNIF.TrailingIcon = null;
             this.txtNIF.TextChanged += new System.EventHandler(this.txtNIF_TextChanged);
+            this.txtNIF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNIF_KeyPress);
             // 
             // txtPassword
             // 
@@ -109,26 +110,27 @@
             this.txtPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtPassword.Hint = "Password";
             this.txtPassword.LeadingIcon = null;
-            this.txtPassword.Location = new System.Drawing.Point(272, 4);
+            this.txtPassword.Location = new System.Drawing.Point(281, 4);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.MaxLength = 16;
             this.txtPassword.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPassword.Multiline = false;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(261, 50);
+            this.txtPassword.Size = new System.Drawing.Size(270, 50);
             this.txtPassword.TabIndex = 13;
             this.txtPassword.Text = "";
             this.txtPassword.TrailingIcon = null;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             // 
             // cbbSubjects
             // 
             this.cbbSubjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbbSubjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbSubjects.FormattingEnabled = true;
-            this.cbbSubjects.Location = new System.Drawing.Point(3, 199);
+            this.cbbSubjects.Location = new System.Drawing.Point(3, 231);
             this.cbbSubjects.Name = "cbbSubjects";
-            this.cbbSubjects.Size = new System.Drawing.Size(262, 24);
+            this.cbbSubjects.Size = new System.Drawing.Size(271, 24);
             this.cbbSubjects.TabIndex = 15;
             this.cbbSubjects.SelectedIndexChanged += new System.EventHandler(this.cbbSubjects_SelectedIndexChanged);
             // 
@@ -147,11 +149,12 @@
             this.txtLogin.MouseState = MaterialSkin.MouseState.OUT;
             this.txtLogin.Multiline = false;
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(260, 50);
+            this.txtLogin.Size = new System.Drawing.Size(269, 50);
             this.txtLogin.TabIndex = 12;
             this.txtLogin.Text = "";
             this.txtLogin.TrailingIcon = null;
             this.txtLogin.TextChanged += new System.EventHandler(this.txtLogin_TextChanged);
+            this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
             // 
             // btnCancel
             // 
@@ -161,17 +164,18 @@
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(273, 301);
+            this.btnCancel.Location = new System.Drawing.Point(282, 349);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCancel.Size = new System.Drawing.Size(259, 58);
+            this.btnCancel.Size = new System.Drawing.Size(268, 57);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
             this.btnCancel.UseAccentColor = false;
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnClassRooms
             // 
@@ -182,12 +186,12 @@
             this.btnClassRooms.Enabled = false;
             this.btnClassRooms.HighEmphasis = true;
             this.btnClassRooms.Icon = null;
-            this.btnClassRooms.Location = new System.Drawing.Point(273, 203);
+            this.btnClassRooms.Location = new System.Drawing.Point(282, 235);
             this.btnClassRooms.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnClassRooms.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClassRooms.Name = "btnClassRooms";
             this.btnClassRooms.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClassRooms.Size = new System.Drawing.Size(259, 84);
+            this.btnClassRooms.Size = new System.Drawing.Size(268, 100);
             this.btnClassRooms.TabIndex = 11;
             this.btnClassRooms.Text = "Editar turmas";
             this.btnClassRooms.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -204,12 +208,12 @@
             this.btnAccept.Enabled = false;
             this.btnAccept.HighEmphasis = true;
             this.btnAccept.Icon = null;
-            this.btnAccept.Location = new System.Drawing.Point(5, 301);
+            this.btnAccept.Location = new System.Drawing.Point(5, 349);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnAccept.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAccept.Size = new System.Drawing.Size(258, 58);
+            this.btnAccept.Size = new System.Drawing.Size(267, 57);
             this.btnAccept.TabIndex = 6;
             this.btnAccept.Text = "Aceitar";
             this.btnAccept.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -226,23 +230,24 @@
             this.txtName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtName.Hint = "Nome";
             this.txtName.LeadingIcon = null;
-            this.txtName.Location = new System.Drawing.Point(4, 102);
+            this.txtName.Location = new System.Drawing.Point(4, 118);
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.MaxLength = 32;
             this.txtName.MouseState = MaterialSkin.MouseState.OUT;
             this.txtName.Multiline = false;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(260, 50);
+            this.txtName.Size = new System.Drawing.Size(269, 50);
             this.txtName.TabIndex = 14;
             this.txtName.Text = "";
             this.txtName.TrailingIcon = null;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress);
             // 
             // Form_TeacherAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(599, 450);
+            this.ClientSize = new System.Drawing.Size(617, 497);
             this.Controls.Add(this.panelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;

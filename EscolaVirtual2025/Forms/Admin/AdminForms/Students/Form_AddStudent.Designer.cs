@@ -73,7 +73,7 @@
             this.panelMain.Controls.Add(this.tableLayoutPanelMain);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(4, 30);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
             this.panelMain.Name = "panelMain";
             this.panelMain.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
             this.panelMain.Size = new System.Drawing.Size(525, 458);
@@ -124,7 +124,7 @@
             this.txtNIF.Hint = "NIF";
             this.txtNIF.LeadingIcon = null;
             this.txtNIF.Location = new System.Drawing.Point(4, 106);
-            this.txtNIF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNIF.Margin = new System.Windows.Forms.Padding(4);
             this.txtNIF.MaxLength = 9;
             this.txtNIF.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNIF.Multiline = false;
@@ -146,7 +146,7 @@
             this.txtPassword.Hint = "Password";
             this.txtPassword.LeadingIcon = null;
             this.txtPassword.Location = new System.Drawing.Point(4, 4);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.MaxLength = 16;
             this.txtPassword.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPassword.Multiline = false;
@@ -184,7 +184,7 @@
             this.txtName.Hint = "Nome";
             this.txtName.LeadingIcon = null;
             this.txtName.Location = new System.Drawing.Point(4, 106);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.MaxLength = 32;
             this.txtName.MouseState = MaterialSkin.MouseState.OUT;
             this.txtName.Multiline = false;
@@ -206,7 +206,7 @@
             this.txtLogin.Hint = "Username";
             this.txtLogin.LeadingIcon = null;
             this.txtLogin.Location = new System.Drawing.Point(4, 4);
-            this.txtLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLogin.Margin = new System.Windows.Forms.Padding(4);
             this.txtLogin.MaxLength = 16;
             this.txtLogin.MouseState = MaterialSkin.MouseState.OUT;
             this.txtLogin.Multiline = false;
@@ -312,7 +312,7 @@
             this.cbbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbYear.FormattingEnabled = true;
             this.cbbYear.Location = new System.Drawing.Point(4, 55);
-            this.cbbYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbYear.Margin = new System.Windows.Forms.Padding(4);
             this.cbbYear.Name = "cbbYear";
             this.cbbYear.Size = new System.Drawing.Size(227, 24);
             this.cbbYear.TabIndex = 2;
@@ -435,7 +435,7 @@
             this.cbbClassRoom.Enabled = false;
             this.cbbClassRoom.FormattingEnabled = true;
             this.cbbClassRoom.Location = new System.Drawing.Point(4, 55);
-            this.cbbClassRoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbClassRoom.Margin = new System.Windows.Forms.Padding(4);
             this.cbbClassRoom.Name = "cbbClassRoom";
             this.cbbClassRoom.Size = new System.Drawing.Size(228, 24);
             this.cbbClassRoom.TabIndex = 2;
@@ -469,7 +469,7 @@
             this.ClientSize = new System.Drawing.Size(533, 492);
             this.Controls.Add(this.panelMain);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form_AddStudent";
             this.Padding = new System.Windows.Forms.Padding(4, 30, 4, 4);
