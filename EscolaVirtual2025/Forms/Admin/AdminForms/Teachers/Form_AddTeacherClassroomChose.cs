@@ -18,7 +18,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
     {
         private Teacher m_teacher;
         private bool m_teacherClassroomsChosen;
-
+        private Subject m_subject;
         public bool TeacherClassroomsChosen
         {
             get { return m_teacherClassroomsChosen; }
@@ -31,6 +31,11 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             set { m_teacher = value; }
         }
 
+        public Subject p_Subject
+        {
+            get { return m_subject; }
+            set { m_subject = value; }
+        }
         public Form_AddTeacherClassroomChose(Teacher teacher)
         {
             InitializeComponent();
@@ -54,79 +59,109 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void Form_AddTeacherClassroomChose_Load(object sender, EventArgs e)
         {
-            LoadClassSubjects();
+            UpdateListView();
         }
 
-        private void LoadClassSubjects()
+        public void UpdateListView()
         {
-            lsvCheckClassRooms.Items.Clear();
-
-            // percorre todas as turmas
-            foreach (var cls in Program.ClassRooms.OrderBy(c => c.Year.AnoId).ThenBy(c => c.Id))
+            foreach (var classroom in Program.ClassRooms)
             {
-                foreach (var classSub in cls.Subjects)
+                // Check if this classroom has the selected subject
+                bool hasSubject = classroom.Subjects.Any(s => s.Subject.Id == p_Subject.Id);
+                if (!hasSubject)
+                    continue;
+
+                // Create ListViewItem
+                var item = new ListViewItem(classroom.Year.AnoId + "º" + classroom.Id.ToString());
+
+                if (p_Teacher.AssignedClassRooms != null)
                 {
-                    string display = $"{cls.Year.AnoId}º{cls.Id} - {classSub.Subject.Name}";
-                    var item = new ListViewItem(display);
-                    item.Tag = classSub;
-
-                    // marca se já tiver este teacher atribuído
-                    if (classSub.AssignedTeacher != null && classSub.AssignedTeacher == p_Teacher)
+                    // Optionally mark if the teacher already teaches in this classroom
+                    bool alreadyAssigned = p_Teacher.AssignedClassRooms.Any(c => c.Id == classroom.Id);
+                    if (alreadyAssigned)
+                    {
                         item.Checked = true;
-
-                    lsvCheckClassRooms.Items.Add(item);
+                    }
                 }
+
+                // Add item to list view
+                lsvCheckClassRooms.Items.Add(item);
             }
+
+            // Optional: auto-resize columns for better display
+            lsvCheckClassRooms.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        private void lsvCheckClassRooms_ItemChecked(object sender, ItemCheckedEventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
         {
-            btnAdd.Enabled = lsvCheckClassRooms.CheckedItems.Count > 0;
+            TeacherClassroomsChosen = false;
+            this.Close();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // Primeiro, remove o teacher das que estavam atribuídas antes
-            foreach (var cls in Program.ClassRooms)
+            // Limpa qualquer ligação anterior desse professor à disciplina em outras turmas (opcional)
+            foreach (var classroom in Program.ClassRooms)
             {
-                foreach (var cs in cls.Subjects)
+                foreach (var classSubject in classroom.Subjects)
                 {
-                    if (cs.AssignedTeacher == p_Teacher)
-                        cs.AssignedTeacher = null;
+                    // Se a disciplina for a mesma, e o professor for este, limpa
+                    if (classSubject.Subject.Id == p_Subject.Id && classSubject.AssignedTeacher == p_Teacher)
+                    {
+                        classSubject.AssignedTeacher = null;
+                    }
                 }
             }
 
-            // Depois, atribui o teacher às novas selecionadas
-            foreach (ListViewItem item in lsvCheckClassRooms.CheckedItems)
+            // Agora atribui o professor às turmas selecionadas
+            foreach (ListViewItem item in lsvCheckClassRooms.Items)
             {
-                var classSub = (ClassSubject)item.Tag;
-                classSub.AssignedTeacher = p_Teacher;
+                // Extrai o ID da turma a partir do texto (supondo que o texto contém o ID)
+                string itemText = item.Text;
+                var classroom = Program.ClassRooms.FirstOrDefault(c => itemText.Contains(c.Id.ToString()));
+
+                if (classroom == null)
+                    continue;
+
+                // Se a turma está marcada (checked), liga o professor à disciplina
+                if (item.Checked)
+                {
+                    var classSubject = classroom.Subjects.FirstOrDefault(s => s.Subject.Id == p_Subject.Id);
+                    if (classSubject != null)
+                    {
+                        classSubject.AssignedTeacher = p_Teacher;
+
+                        // Garante que o professor saiba onde ensina (caso uses esta lista em algum lugar)
+                        if (!p_Teacher.AssignedClassRooms.Contains(classroom))
+                            p_Teacher.AssignedClassRooms.Add(classroom);
+                    }
+                }
+                else
+                {
+                    // Se desmarcada, remove a ligação (se existir)
+                    var classSubject = classroom.Subjects.FirstOrDefault(s => s.Subject.Id == p_Subject.Id);
+                    if (classSubject != null && classSubject.AssignedTeacher == p_Teacher)
+                    {
+                        classSubject.AssignedTeacher = null;
+                    }
+
+                    p_Teacher.AssignedClassRooms.RemoveAll(c => c.Id == classroom.Id);
+                }
             }
 
             TeacherClassroomsChosen = true;
             this.Close();
         }
-
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void lsvCheckClassRooms_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            // Limpa todas as ligações deste teacher
-            foreach (var cls in Program.ClassRooms)
+            if (lsvCheckClassRooms.CheckedItems.Count > 0)
             {
-                foreach (var cs in cls.Subjects)
-                {
-                    if (cs.AssignedTeacher == p_Teacher)
-                        cs.AssignedTeacher = null;
-                }
+                btnAdd.Enabled = true;
             }
-
-            TeacherClassroomsChosen = false;
-            this.Close();
-        }
-
-        private void Form_AddTeacherClassroomChose_VisibleChanged(object sender, EventArgs e)
-        {
-            LoadClassSubjects();
+            else
+            {
+                btnAdd.Enabled = false;
+            }
         }
     }
-    
 }

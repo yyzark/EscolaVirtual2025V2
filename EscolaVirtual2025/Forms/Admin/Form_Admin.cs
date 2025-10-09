@@ -24,6 +24,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms;
 using EscolaVirtual2025.Forms.Admin.AdminForms.Subjects;
 using EscolaVirtual2025.Forms.Admin.AdminForms.Teachers;
+using System.Diagnostics.Eventing.Reader;
 namespace EscolaVirtual2025.Forms.Admin
 {
     public partial class Form_Admin : MaterialForm
@@ -293,8 +294,15 @@ namespace EscolaVirtual2025.Forms.Admin
                     {
                         TreeNode subject = new TreeNode();
                         subject.Text = Program.Anos[i].ClassRooms[j].Subjects[h].Subject.Name;
-                        subject.Nodes.Add($"Professor: {Program.Anos[i].ClassRooms[j].Subjects[h].AssignedTeacher.Name}");
-                        clas.Nodes[1].Nodes.Add(subject);
+                        if(Program.Anos[i].ClassRooms[j].Subjects[h].AssignedTeacher != null)
+                            {
+                            subject.Nodes.Add($"Professor: {Program.Anos[i].ClassRooms[j].Subjects[h].AssignedTeacher.Name}");
+                        }
+                        else
+                        {
+                            subject.Nodes.Add($"Professor: Não existe");
+                        }
+                            clas.Nodes[1].Nodes.Add(subject);
                     }
 
                     tree.Nodes[0].Nodes.Add(clas);

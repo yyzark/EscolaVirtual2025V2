@@ -10,27 +10,23 @@ namespace EscolaVirtual2025.Classes.Users
     public class Teacher : TeacherStudent
     {
         private Subject m_assignedSubject;
+        private List<ClassRoom> m_assignedClassRooms;
 
+        public List <ClassRoom> AssignedClassRooms
+        {
+            get {  return m_assignedClassRooms; }
+            set { m_assignedClassRooms = value;}
+        }
         public Subject AssignedSubject
         {
             get { return m_assignedSubject; }
             set { m_assignedSubject = value; }
         }
-
-        //cavalo especial de corrida nº2
-        public List<ClassRoom> AssignedClassRooms
-        {
-            get
-            {
-                return Program.ClassRooms
-                              .Where(c => c.Subjects.Any(cs => cs.AssignedTeacher == this))
-                              .ToList();
-            }
-        }
         public Teacher(string username, string password, string name, string nif, Subject subject) :
         base(username, password, name, UserType.Teacher, nif)
         {
             m_assignedSubject = subject;
+            m_assignedClassRooms = new List<ClassRoom>();
         }
     }
 }

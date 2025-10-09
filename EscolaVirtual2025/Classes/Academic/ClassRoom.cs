@@ -31,6 +31,10 @@ namespace EscolaVirtual2025.Classes.Academic
             m_students = new Student[20];
             m_year = year;
             m_studentsCount = 0;
+            foreach(Subject sbjct in Year.Subjects)
+            {
+                Subjects.Add(new ClassSubject(null, sbjct));
+            }
         }
         public List<ClassSubject> Subjects
         {
@@ -68,6 +72,5 @@ namespace EscolaVirtual2025.Classes.Academic
                 }
             }
         }
-
     }
 }

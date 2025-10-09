@@ -44,11 +44,11 @@
             this.panel1.Controls.Add(this.lsvCheckClassRooms);
             this.panel1.Controls.Add(this.tableLayoutPanelButtons);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 24);
+            this.panel1.Location = new System.Drawing.Point(4, 30);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(20);
-            this.panel1.Size = new System.Drawing.Size(378, 284);
+            this.panel1.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
+            this.panel1.Size = new System.Drawing.Size(504, 349);
             this.panel1.TabIndex = 3;
             // 
             // lsvCheckClassRooms
@@ -60,10 +60,11 @@
             this.lsvCheckClassRooms.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCheckClassRooms.FullRowSelect = true;
             this.lsvCheckClassRooms.HideSelection = false;
-            this.lsvCheckClassRooms.Location = new System.Drawing.Point(20, 20);
+            this.lsvCheckClassRooms.Location = new System.Drawing.Point(27, 25);
+            this.lsvCheckClassRooms.Margin = new System.Windows.Forms.Padding(4);
             this.lsvCheckClassRooms.Name = "lsvCheckClassRooms";
             this.lsvCheckClassRooms.Scrollable = false;
-            this.lsvCheckClassRooms.Size = new System.Drawing.Size(338, 204);
+            this.lsvCheckClassRooms.Size = new System.Drawing.Size(450, 250);
             this.lsvCheckClassRooms.TabIndex = 4;
             this.lsvCheckClassRooms.UseCompatibleStateImageBehavior = false;
             this.lsvCheckClassRooms.View = System.Windows.Forms.View.Details;
@@ -83,12 +84,12 @@
             this.tableLayoutPanelButtons.Controls.Add(this.btnAdd, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.btnRemove, 2, 0);
             this.tableLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(20, 224);
+            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(27, 275);
             this.tableLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             this.tableLayoutPanelButtons.RowCount = 1;
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(338, 40);
+            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(450, 49);
             this.tableLayoutPanelButtons.TabIndex = 2;
             // 
             // btnAdd
@@ -100,12 +101,12 @@
             this.btnAdd.Enabled = false;
             this.btnAdd.HighEmphasis = true;
             this.btnAdd.Icon = null;
-            this.btnAdd.Location = new System.Drawing.Point(4, 6);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAdd.Location = new System.Drawing.Point(5, 7);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAdd.Size = new System.Drawing.Size(161, 28);
+            this.btnAdd.Size = new System.Drawing.Size(215, 35);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Concluir";
             this.btnAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -121,28 +122,30 @@
             this.btnRemove.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRemove.HighEmphasis = true;
             this.btnRemove.Icon = null;
-            this.btnRemove.Location = new System.Drawing.Point(173, 6);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRemove.Location = new System.Drawing.Point(230, 7);
+            this.btnRemove.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnRemove.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnRemove.Size = new System.Drawing.Size(161, 28);
+            this.btnRemove.Size = new System.Drawing.Size(215, 35);
             this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "Cancelar";
             this.btnRemove.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
             this.btnRemove.UseAccentColor = false;
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // Form_AddTeacherClassroomChose
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 311);
+            this.ClientSize = new System.Drawing.Size(512, 383);
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_AddTeacherClassroomChose";
-            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(4, 30, 4, 4);
             this.Text = "Form_AddTeacherClassroomChose";
             this.Load += new System.EventHandler(this.Form_AddTeacherClassroomChose_Load);
             this.panel1.ResumeLayout(false);

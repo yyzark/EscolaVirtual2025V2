@@ -59,6 +59,15 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
             foreach (ColumnHeader col in lsvCheckClassRoom.Columns)
                 col.Width = -2; // auto resize
+
+            if( Program.Anos.Count == 0 )
+            {
+                btnAdd.Enabled = false;
+            }
+            else
+            {
+                btnAdd.Enabled = true;
+            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)

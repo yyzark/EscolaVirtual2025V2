@@ -85,10 +85,12 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
             if (result == DialogResult.Yes)
             {
-                // Cria e adiciona a turma
-                selectedYear.ClassRooms.Add(new ClassRoom(classLetter, selectedYear));
-                Program.ClassRooms.Add(new ClassRoom(classLetter, selectedYear));
+                ClassRoom newClassRoom = new ClassRoom(classLetter, selectedYear);
 
+                // Cria e adiciona a turma
+                selectedYear.ClassRooms.Add(newClassRoom);
+                Program.ClassRooms.Add(newClassRoom);
+                
                 MessageBox.Show(
                     $"Turma \"{classLetter}\" adicionada com sucesso ao ano {selectedYear.AnoId}.",
                     "Sucesso",

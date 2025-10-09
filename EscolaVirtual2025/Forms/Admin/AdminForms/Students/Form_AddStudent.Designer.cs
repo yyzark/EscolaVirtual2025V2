@@ -72,10 +72,11 @@
             // 
             this.panelMain.Controls.Add(this.tableLayoutPanelMain);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(3, 24);
+            this.panelMain.Location = new System.Drawing.Point(4, 30);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(20);
-            this.panelMain.Size = new System.Drawing.Size(394, 373);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
+            this.panelMain.Size = new System.Drawing.Size(525, 458);
             this.panelMain.TabIndex = 0;
             // 
             // tableLayoutPanelMain
@@ -88,13 +89,13 @@
             this.tableLayoutPanelMain.Controls.Add(this.tableLayoutPanel1, 0, 1);
             this.tableLayoutPanelMain.Controls.Add(this.tableLayoutPanel3, 1, 1);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelMain.Location = new System.Drawing.Point(20, 20);
+            this.tableLayoutPanelMain.Location = new System.Drawing.Point(27, 25);
             this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 2;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(354, 333);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(471, 408);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // tableLayoutPanel4
@@ -104,13 +105,13 @@
             this.tableLayoutPanel4.Controls.Add(this.txtNIF, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.txtPassword, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(177, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(235, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(177, 166);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(236, 204);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
             // txtNIF
@@ -120,13 +121,15 @@
             this.txtNIF.Depth = 0;
             this.txtNIF.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtNIF.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNIF.Hint = "NIF";
             this.txtNIF.LeadingIcon = null;
-            this.txtNIF.Location = new System.Drawing.Point(3, 86);
+            this.txtNIF.Location = new System.Drawing.Point(4, 106);
+            this.txtNIF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNIF.MaxLength = 9;
             this.txtNIF.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNIF.Multiline = false;
             this.txtNIF.Name = "txtNIF";
-            this.txtNIF.Size = new System.Drawing.Size(171, 50);
+            this.txtNIF.Size = new System.Drawing.Size(228, 50);
             this.txtNIF.TabIndex = 2;
             this.txtNIF.Text = "";
             this.txtNIF.TrailingIcon = null;
@@ -140,13 +143,15 @@
             this.txtPassword.Depth = 0;
             this.txtPassword.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtPassword.Hint = "Password";
             this.txtPassword.LeadingIcon = null;
-            this.txtPassword.Location = new System.Drawing.Point(3, 3);
+            this.txtPassword.Location = new System.Drawing.Point(4, 4);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.MaxLength = 16;
             this.txtPassword.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPassword.Multiline = false;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(171, 50);
+            this.txtPassword.Size = new System.Drawing.Size(228, 50);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "";
             this.txtPassword.TrailingIcon = null;
@@ -166,7 +171,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(177, 166);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(235, 204);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // txtName
@@ -176,13 +181,15 @@
             this.txtName.Depth = 0;
             this.txtName.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtName.Hint = "Nome";
             this.txtName.LeadingIcon = null;
-            this.txtName.Location = new System.Drawing.Point(3, 86);
+            this.txtName.Location = new System.Drawing.Point(4, 106);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtName.MaxLength = 32;
             this.txtName.MouseState = MaterialSkin.MouseState.OUT;
             this.txtName.Multiline = false;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(171, 50);
+            this.txtName.Size = new System.Drawing.Size(227, 50);
             this.txtName.TabIndex = 1;
             this.txtName.Text = "";
             this.txtName.TrailingIcon = null;
@@ -196,13 +203,15 @@
             this.txtLogin.Depth = 0;
             this.txtLogin.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtLogin.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtLogin.Hint = "Username";
             this.txtLogin.LeadingIcon = null;
-            this.txtLogin.Location = new System.Drawing.Point(3, 3);
+            this.txtLogin.Location = new System.Drawing.Point(4, 4);
+            this.txtLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtLogin.MaxLength = 16;
             this.txtLogin.MouseState = MaterialSkin.MouseState.OUT;
             this.txtLogin.Multiline = false;
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(171, 50);
+            this.txtLogin.Size = new System.Drawing.Size(227, 50);
             this.txtLogin.TabIndex = 0;
             this.txtLogin.Text = "";
             this.txtLogin.TrailingIcon = null;
@@ -215,12 +224,12 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 166);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 204);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(235, 204);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel6
@@ -234,7 +243,7 @@
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(235, 204);
             this.tableLayoutPanel6.TabIndex = 4;
             // 
             // tableLayoutPanel7
@@ -248,7 +257,7 @@
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(235, 204);
             this.tableLayoutPanel7.TabIndex = 5;
             // 
             // tableLayoutPanel10
@@ -264,7 +273,7 @@
             this.tableLayoutPanel10.RowCount = 2;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(235, 204);
             this.tableLayoutPanel10.TabIndex = 1;
             // 
             // tableLayoutPanel12
@@ -280,7 +289,7 @@
             this.tableLayoutPanel12.RowCount = 2;
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(177, 83);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(235, 102);
             this.tableLayoutPanel12.TabIndex = 1;
             // 
             // materialLabel1
@@ -289,10 +298,11 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(3, 0);
+            this.materialLabel1.Location = new System.Drawing.Point(4, 0);
+            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(171, 41);
+            this.materialLabel1.Size = new System.Drawing.Size(227, 51);
             this.materialLabel1.TabIndex = 3;
             this.materialLabel1.Text = "Ano:";
             // 
@@ -301,9 +311,10 @@
             this.cbbYear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbYear.FormattingEnabled = true;
-            this.cbbYear.Location = new System.Drawing.Point(3, 44);
+            this.cbbYear.Location = new System.Drawing.Point(4, 55);
+            this.cbbYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbbYear.Name = "cbbYear";
-            this.cbbYear.Size = new System.Drawing.Size(171, 21);
+            this.cbbYear.Size = new System.Drawing.Size(227, 24);
             this.cbbYear.TabIndex = 2;
             this.cbbYear.SelectedIndexChanged += new System.EventHandler(this.cbbYear_SelectedIndexChanged);
             // 
@@ -316,12 +327,12 @@
             this.btnAccept.Enabled = false;
             this.btnAccept.HighEmphasis = true;
             this.btnAccept.Icon = null;
-            this.btnAccept.Location = new System.Drawing.Point(4, 125);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAccept.Location = new System.Drawing.Point(5, 161);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnAccept.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAccept.Size = new System.Drawing.Size(169, 36);
+            this.btnAccept.Size = new System.Drawing.Size(225, 36);
             this.btnAccept.TabIndex = 6;
             this.btnAccept.Text = "Aceitar";
             this.btnAccept.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -335,12 +346,12 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(177, 166);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(235, 204);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(236, 204);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // tableLayoutPanel5
@@ -354,7 +365,7 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(236, 204);
             this.tableLayoutPanel5.TabIndex = 3;
             // 
             // tableLayoutPanel8
@@ -368,7 +379,7 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(236, 204);
             this.tableLayoutPanel8.TabIndex = 4;
             // 
             // tableLayoutPanel9
@@ -384,7 +395,7 @@
             this.tableLayoutPanel9.RowCount = 2;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(177, 167);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(236, 204);
             this.tableLayoutPanel9.TabIndex = 0;
             // 
             // tableLayoutPanel11
@@ -400,7 +411,7 @@
             this.tableLayoutPanel11.RowCount = 2;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(177, 83);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(236, 102);
             this.tableLayoutPanel11.TabIndex = 1;
             // 
             // materialLabel2
@@ -409,10 +420,11 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(3, 0);
+            this.materialLabel2.Location = new System.Drawing.Point(4, 0);
+            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(171, 41);
+            this.materialLabel2.Size = new System.Drawing.Size(228, 51);
             this.materialLabel2.TabIndex = 4;
             this.materialLabel2.Text = "Turma:";
             // 
@@ -422,9 +434,10 @@
             this.cbbClassRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbClassRoom.Enabled = false;
             this.cbbClassRoom.FormattingEnabled = true;
-            this.cbbClassRoom.Location = new System.Drawing.Point(3, 44);
+            this.cbbClassRoom.Location = new System.Drawing.Point(4, 55);
+            this.cbbClassRoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbbClassRoom.Name = "cbbClassRoom";
-            this.cbbClassRoom.Size = new System.Drawing.Size(171, 21);
+            this.cbbClassRoom.Size = new System.Drawing.Size(228, 24);
             this.cbbClassRoom.TabIndex = 2;
             this.cbbClassRoom.SelectedIndexChanged += new System.EventHandler(this.cbbClassRoom_SelectedIndexChanged);
             // 
@@ -436,12 +449,12 @@
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(4, 125);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancel.Location = new System.Drawing.Point(5, 161);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCancel.Size = new System.Drawing.Size(169, 36);
+            this.btnCancel.Size = new System.Drawing.Size(226, 36);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -451,14 +464,15 @@
             // 
             // Form_AddStudent
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 400);
+            this.ClientSize = new System.Drawing.Size(533, 492);
             this.Controls.Add(this.panelMain);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Form_AddStudent";
-            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(4, 30, 4, 4);
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_AddStudent";

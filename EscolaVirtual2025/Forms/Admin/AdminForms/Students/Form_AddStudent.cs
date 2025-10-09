@@ -38,103 +38,16 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
             );
             #endregion
 
-            #region textbox placeholders
-            txtPassword.GotFocus += (s, e) =>
-            {
-                if (txtPassword.Text == "Password")
-                {
-                    txtPassword.Text = "";
-                    txtPassword.ForeColor = Color.Black;
-                }
-            };
-
-            txtPassword.LostFocus += (s, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(txtPassword.Text))
-                {
-                    txtPassword.Text = "Password";
-                    txtPassword.ForeColor = Color.Gray;
-                }
-            };
-
-            txtLogin.GotFocus += (s, e) =>
-            {
-                if (txtLogin.Text == "Username")
-                {
-                    txtLogin.Text = "";
-                    txtLogin.ForeColor = Color.Black;
-                }
-            };
-
-            txtLogin.LostFocus += (s, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(txtLogin.Text))
-                {
-                    txtLogin.Text = "Username";
-                    txtLogin.ForeColor = Color.Gray;
-                }
-            };
-
-            txtNIF.GotFocus += (s, e) =>
-            {
-                if (txtNIF.Text == "NIF")
-                {
-                    txtNIF.Text = "";
-                    txtNIF.ForeColor = Color.Black;
-                }
-            };
-
-            txtNIF.LostFocus += (s, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(txtNIF.Text))
-                {
-                    txtNIF.Text = "NIF";
-                    txtNIF.ForeColor = Color.Gray;
-                }
-            };
-
-            txtName.GotFocus += (s, e) =>
-            {
-                if (txtName.Text == "Nome")
-                {
-                    txtName.Text = "";
-                    txtName.ForeColor = Color.Black;
-                }
-            };
-
-            txtName.LostFocus += (s, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(txtName.Text))
-                {
-                    txtName.Text = "Nome";
-                    txtName.ForeColor = Color.Gray;
-                }
-            };
-            #endregion
         }
 
         private void Form_AddStudent_Load(object sender, EventArgs e)
         {
-            DefaultProps();
-
             foreach (Year year in Program.Anos)
             {
                 cbbYear.Items.Add(year.AnoId);
             }
 
             Program.Anos.Sort((y1, y2) => y1.AnoId.CompareTo(y2.AnoId));
-        }
-
-        private void DefaultProps()
-        {
-            txtPassword.Text = "Password";
-            txtPassword.ForeColor = Color.Gray;
-            txtLogin.Text = "Username";
-            txtLogin.ForeColor = Color.Gray;
-            txtNIF.Text = "NIF";
-            txtNIF.ForeColor = Color.Gray;
-            txtName.Text = "Nome";
-            txtName.ForeColor = Color.Gray;
         }
 
         private void btnAccept_Click(object sender, EventArgs e)

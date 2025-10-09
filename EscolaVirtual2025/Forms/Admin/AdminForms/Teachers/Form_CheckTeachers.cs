@@ -22,8 +22,8 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
             List<Teacher> lista = new List<Teacher>
             {
-                new Teacher("mferreira", "abcd", "Maria Ferreira", "987654321", new Subject("Matemática", "MAT", 1)),
-                new Teacher("pcosta", "qwerty", "Pedro Costa", "456789123", new Subject("Português", "PT", 2))
+                new Teacher("mferreira", "abcd", "Maria Ferreira", "987654321", Program.Subjects[1]),
+                new Teacher("pcosta", "qwerty", "Pedro Costa", "456789123", Program.Subjects[0])
             };
 
             Program.Teachers = lista;
@@ -72,6 +72,15 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             // Ajusta automaticamente as colunas à largura do conteúdo
             foreach (ColumnHeader col in lsvCheckTeachers.Columns)
                 col.Width = -2; // auto resize
+
+            if(Program.ClassRooms.Count == 0)
+            {
+                btnAdd.Enabled = false;
+            }
+            else
+            {
+                btnAdd.Enabled = true;
+            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -98,6 +107,11 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         {
             Form_TeacherAdd form_TeacherAdd = new Form_TeacherAdd();
             form_TeacherAdd.ShowDialog();
+            UpdateListView();
+        }
+
+        private void Form_CheckTeachers_VisibleChanged(object sender, EventArgs e)
+        {
             UpdateListView();
         }
     }
