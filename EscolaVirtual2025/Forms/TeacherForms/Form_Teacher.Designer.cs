@@ -40,18 +40,18 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCreateGrade = new MaterialSkin.Controls.MaterialButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbbClassRoom = new MaterialSkin.Controls.MaterialComboBox();
             this.cbbYear = new MaterialSkin.Controls.MaterialComboBox();
-            this.btnCreateGrade = new MaterialSkin.Controls.MaterialButton();
             this.panelTreeView = new System.Windows.Forms.Panel();
             this.lsbStudents = new System.Windows.Forms.ListBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuAccount.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
-            this.panelTreeView.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panelTreeView.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnUser
@@ -63,13 +63,13 @@
             this.btnUser.Depth = 0;
             this.btnUser.HighEmphasis = true;
             this.btnUser.Icon = null;
-            this.btnUser.Location = new System.Drawing.Point(539, 25);
-            this.btnUser.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnUser.MinimumSize = new System.Drawing.Size(160, 39);
+            this.btnUser.Location = new System.Drawing.Point(719, 31);
+            this.btnUser.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnUser.MinimumSize = new System.Drawing.Size(213, 48);
             this.btnUser.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnUser.Name = "btnUser";
             this.btnUser.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnUser.Size = new System.Drawing.Size(160, 39);
+            this.btnUser.Size = new System.Drawing.Size(213, 48);
             this.btnUser.TabIndex = 2;
             this.btnUser.Text = "materialButton1";
             this.btnUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
@@ -99,6 +99,7 @@
             this.materialToolStripItemAccount.Name = "materialToolStripItemAccount";
             this.materialToolStripItemAccount.Size = new System.Drawing.Size(160, 32);
             this.materialToolStripItemAccount.Text = "Conta";
+            this.materialToolStripItemAccount.Click += new System.EventHandler(this.materialToolStripItemAccount_Click);
             // 
             // materialToolStripItemNotification
             // 
@@ -134,10 +135,11 @@
             // 
             this.panelMain.Controls.Add(this.tableLayoutPanelMain);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(3, 64);
+            this.panelMain.Location = new System.Drawing.Point(4, 79);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(20);
-            this.panelMain.Size = new System.Drawing.Size(693, 253);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
+            this.panelMain.Size = new System.Drawing.Size(924, 311);
             this.panelMain.TabIndex = 4;
             // 
             // tableLayoutPanelMain
@@ -148,12 +150,12 @@
             this.tableLayoutPanelMain.Controls.Add(this.tableLayoutPanelButtons, 1, 0);
             this.tableLayoutPanelMain.Controls.Add(this.panelTreeView, 0, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelMain.Location = new System.Drawing.Point(20, 20);
+            this.tableLayoutPanelMain.Location = new System.Drawing.Point(27, 25);
             this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(653, 213);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(870, 261);
             this.tableLayoutPanelMain.TabIndex = 3;
             // 
             // tableLayoutPanelButtons
@@ -163,14 +165,54 @@
             this.tableLayoutPanelButtons.Controls.Add(this.btnCreateGrade, 0, 1);
             this.tableLayoutPanelButtons.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(336, 0);
-            this.tableLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
+            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(448, 0);
+            this.tableLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(13, 0, 13, 12);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             this.tableLayoutPanelButtons.RowCount = 2;
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(307, 203);
+            this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(409, 249);
             this.tableLayoutPanelButtons.TabIndex = 3;
+            // 
+            // btnCreateGrade
+            // 
+            this.btnCreateGrade.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCreateGrade.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCreateGrade.Depth = 0;
+            this.btnCreateGrade.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCreateGrade.Enabled = false;
+            this.btnCreateGrade.Font = new System.Drawing.Font("Calibri", 36F);
+            this.btnCreateGrade.HighEmphasis = true;
+            this.btnCreateGrade.Icon = null;
+            this.btnCreateGrade.Location = new System.Drawing.Point(5, 133);
+            this.btnCreateGrade.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnCreateGrade.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCreateGrade.Name = "btnCreateGrade";
+            this.btnCreateGrade.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCreateGrade.Size = new System.Drawing.Size(399, 109);
+            this.btnCreateGrade.TabIndex = 0;
+            this.btnCreateGrade.Text = "Notas";
+            this.btnCreateGrade.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCreateGrade.UseAccentColor = false;
+            this.btnCreateGrade.UseVisualStyleBackColor = true;
+            this.btnCreateGrade.Click += new System.EventHandler(this.btnCreateGrade_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.cbbClassRoom, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbbYear, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(409, 126);
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // cbbClassRoom
             // 
@@ -188,11 +230,12 @@
             this.cbbClassRoom.Hint = "Turma";
             this.cbbClassRoom.IntegralHeight = false;
             this.cbbClassRoom.ItemHeight = 43;
-            this.cbbClassRoom.Location = new System.Drawing.Point(156, 3);
+            this.cbbClassRoom.Location = new System.Drawing.Point(208, 4);
+            this.cbbClassRoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbbClassRoom.MaxDropDownItems = 4;
             this.cbbClassRoom.MouseState = MaterialSkin.MouseState.OUT;
             this.cbbClassRoom.Name = "cbbClassRoom";
-            this.cbbClassRoom.Size = new System.Drawing.Size(145, 49);
+            this.cbbClassRoom.Size = new System.Drawing.Size(192, 49);
             this.cbbClassRoom.StartIndex = 0;
             this.cbbClassRoom.TabIndex = 5;
             this.cbbClassRoom.SelectedIndexChanged += new System.EventHandler(this.cbbClassRoom_SelectedIndexChanged);
@@ -212,37 +255,15 @@
             this.cbbYear.Hint = "Ano";
             this.cbbYear.IntegralHeight = false;
             this.cbbYear.ItemHeight = 43;
-            this.cbbYear.Location = new System.Drawing.Point(3, 3);
+            this.cbbYear.Location = new System.Drawing.Point(4, 4);
+            this.cbbYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbbYear.MaxDropDownItems = 4;
             this.cbbYear.MouseState = MaterialSkin.MouseState.OUT;
             this.cbbYear.Name = "cbbYear";
-            this.cbbYear.Size = new System.Drawing.Size(144, 49);
+            this.cbbYear.Size = new System.Drawing.Size(191, 49);
             this.cbbYear.StartIndex = 0;
             this.cbbYear.TabIndex = 4;
             this.cbbYear.SelectedIndexChanged += new System.EventHandler(this.cbbYear_SelectedIndexChanged);
-            // 
-            // btnCreateGrade
-            // 
-            this.btnCreateGrade.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateGrade.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCreateGrade.Depth = 0;
-            this.btnCreateGrade.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCreateGrade.Enabled = false;
-            this.btnCreateGrade.Font = new System.Drawing.Font("Calibri", 36F);
-            this.btnCreateGrade.HighEmphasis = true;
-            this.btnCreateGrade.Icon = null;
-            this.btnCreateGrade.Location = new System.Drawing.Point(4, 109);
-            this.btnCreateGrade.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCreateGrade.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCreateGrade.Name = "btnCreateGrade";
-            this.btnCreateGrade.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCreateGrade.Size = new System.Drawing.Size(299, 88);
-            this.btnCreateGrade.TabIndex = 0;
-            this.btnCreateGrade.Text = "Notas";
-            this.btnCreateGrade.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnCreateGrade.UseAccentColor = false;
-            this.btnCreateGrade.UseVisualStyleBackColor = true;
-            this.btnCreateGrade.Click += new System.EventHandler(this.btnCreateGrade_Click);
             // 
             // panelTreeView
             // 
@@ -251,7 +272,7 @@
             this.panelTreeView.Location = new System.Drawing.Point(0, 0);
             this.panelTreeView.Margin = new System.Windows.Forms.Padding(0);
             this.panelTreeView.Name = "panelTreeView";
-            this.panelTreeView.Size = new System.Drawing.Size(326, 213);
+            this.panelTreeView.Size = new System.Drawing.Size(435, 261);
             this.panelTreeView.TabIndex = 4;
             // 
             // lsbStudents
@@ -259,40 +280,25 @@
             this.lsbStudents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsbStudents.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lsbStudents.FormattingEnabled = true;
-            this.lsbStudents.ItemHeight = 19;
+            this.lsbStudents.ItemHeight = 24;
             this.lsbStudents.Location = new System.Drawing.Point(0, 0);
             this.lsbStudents.Margin = new System.Windows.Forms.Padding(0);
             this.lsbStudents.Name = "lsbStudents";
-            this.lsbStudents.Size = new System.Drawing.Size(326, 213);
+            this.lsbStudents.Size = new System.Drawing.Size(435, 261);
             this.lsbStudents.TabIndex = 0;
             this.lsbStudents.SelectedIndexChanged += new System.EventHandler(this.lsbStudents_SelectedIndexChanged);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.cbbClassRoom, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cbbYear, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(307, 103);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
             // Form_Teacher
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 320);
+            this.ClientSize = new System.Drawing.Size(932, 394);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.btnUser);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form_Teacher";
+            this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Escola Virtual";
@@ -303,8 +309,8 @@
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.tableLayoutPanelButtons.ResumeLayout(false);
             this.tableLayoutPanelButtons.PerformLayout();
-            this.panelTreeView.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panelTreeView.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -1,6 +1,7 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Forms.TeacherForms.TeacherAccount;
 using EscolaVirtual2025.Forms.TeacherForms.TeacherChat;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -175,6 +176,14 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             Form_TeacherChat form_TeacherChat = new Form_TeacherChat(tchr);
             this.Hide();
             form_TeacherChat.ShowDialog();
+            this.Show();
+        }
+
+        private void materialToolStripItemAccount_Click(object sender, EventArgs e)
+        {
+            Form_TeacherAccount form_TeacherAccount = new Form_TeacherAccount();
+            this.Hide();
+            form_TeacherAccount.ShowDialog();
             this.Show();
         }
     }

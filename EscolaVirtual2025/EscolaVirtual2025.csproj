@@ -229,6 +229,12 @@
     <Compile Include="Forms\TeacherForms\Form_Teacher.Designer.cs">
       <DependentUpon>Form_Teacher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TeacherForms\TeacherAccount\Form_TeacherAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeacherForms\TeacherAccount\Form_TeacherAccount.Designer.cs">
+      <DependentUpon>Form_TeacherAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeacherForms\TeacherChat\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\Form_Teacher.resx">
       <DependentUpon>Form_Teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeacherForms\TeacherAccount\Form_TeacherAccount.resx">
+      <DependentUpon>Form_TeacherAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\TeacherChat\Form_Chat.resx">
       <DependentUpon>Form_Chat.cs</DependentUpon>

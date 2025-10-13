@@ -295,5 +295,10 @@ namespace EscolaVirtual2025.Forms.StudentsForms
                 );
             }
         }
+
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
