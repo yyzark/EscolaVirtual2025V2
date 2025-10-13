@@ -24,6 +24,9 @@ namespace EscolaVirtual2025.Classes.Academic
             get { return m_students; }
             set { m_students = value; }
         }
+
+        public ClassRoom() {}
+
         public ClassRoom(char id, Year year)
         {
             m_id = id;

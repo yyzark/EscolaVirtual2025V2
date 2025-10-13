@@ -104,6 +104,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
                 Program.Users.Remove(student);
                 Program.students.Remove(student);
+
                 // Limpa referência na turma
                 classRoomToRemove.Students[i] = null;
             }

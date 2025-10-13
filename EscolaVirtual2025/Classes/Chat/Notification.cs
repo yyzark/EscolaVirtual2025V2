@@ -31,6 +31,7 @@ namespace EscolaVirtual2025.Classes.Chat
         public User Sender
         {
             get { return m_sender; }
+            set { m_sender = value; }
         }
 
         public User Reciever

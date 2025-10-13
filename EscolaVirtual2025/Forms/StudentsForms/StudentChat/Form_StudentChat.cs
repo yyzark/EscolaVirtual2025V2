@@ -34,7 +34,10 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
 
             m_chat = chat;
 
-            Text = $"Chat com: {chat.Teacher.Name}";
+            if (chat.Teacher != null)
+                Text = $"Chat com: {chat.Teacher.Name}";
+            else if (chat.Admin != null)
+                Text = $"Chat com: {chat.Admin.Name}";
         }
 
         private void Form_StudentChat_Load(object sender, EventArgs e)

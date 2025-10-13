@@ -165,6 +165,7 @@ namespace EscolaVirtual2025
             //Aluno para teste
             Student yyzark = new Student("yyzark", "1234", "Nikita Khveshchuk", "281118400", decimoA, new SchoolCard(-1));
             decimoA.Students[0] = yyzark;
+            decimoA.StudentsCount++;
             Program.Users.Add(yyzark);
             Program.students.Add(yyzark);
 

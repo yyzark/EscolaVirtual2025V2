@@ -1,6 +1,6 @@
-﻿namespace EscolaVirtual2025.Forms.StudentsForms.StudentChat
+﻿namespace EscolaVirtual2025.Forms.Admin.AdminChats
 {
-    partial class Form_StudentChats
+    partial class Form_AdminChats
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_StudentChats));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_AdminChats));
             this.lsbChats = new MaterialSkin.Controls.MaterialListBox();
             this.SuspendLayout();
             // 
@@ -37,30 +37,31 @@
             this.lsbChats.BackColor = System.Drawing.Color.White;
             this.lsbChats.BorderColor = System.Drawing.Color.LightGray;
             this.lsbChats.Depth = 0;
+            this.lsbChats.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsbChats.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lsbChats.Location = new System.Drawing.Point(23, 87);
+            this.lsbChats.Location = new System.Drawing.Point(20, 84);
             this.lsbChats.MouseState = MaterialSkin.MouseState.HOVER;
             this.lsbChats.Name = "lsbChats";
             this.lsbChats.SelectedIndex = -1;
             this.lsbChats.SelectedItem = null;
-            this.lsbChats.Size = new System.Drawing.Size(294, 230);
-            this.lsbChats.TabIndex = 0;
+            this.lsbChats.Size = new System.Drawing.Size(360, 296);
+            this.lsbChats.TabIndex = 1;
             this.lsbChats.DoubleClick += new System.EventHandler(this.lsbChats_DoubleClick);
             // 
-            // Form_StudentChats
+            // Form_AdminChats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 340);
+            this.ClientSize = new System.Drawing.Size(400, 400);
             this.Controls.Add(this.lsbChats);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form_StudentChats";
+            this.Name = "Form_AdminChats";
             this.Padding = new System.Windows.Forms.Padding(20, 84, 20, 20);
             this.Sizable = false;
-            this.Text = "Chat\'s disponíveis";
-            this.Load += new System.EventHandler(this.Form_StudentChats_Load);
-            this.VisibleChanged += new System.EventHandler(this.Form_StudentChats_VisibleChanged);
+            this.Text = "Pedidos:";
+            this.Load += new System.EventHandler(this.Form_AdminChats_Load);
+            this.VisibleChanged += new System.EventHandler(this.Form_AdminChats_VisibleChanged);
             this.ResumeLayout(false);
 
         }

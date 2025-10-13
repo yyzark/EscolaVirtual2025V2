@@ -21,5 +21,8 @@ namespace EscolaVirtual2025.Classes
         {
             m_NIF = nif;
         }
+
+        public TeacherStudent() : base()
+        { }
     }
 }

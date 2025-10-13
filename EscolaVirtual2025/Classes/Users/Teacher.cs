@@ -29,5 +29,13 @@ namespace EscolaVirtual2025.Classes.Users
             m_assignedSubject = subject;
             m_assignedClassRooms = new List<ClassRoom>();
         }
+
+        public Teacher(string username, string password, string name, string nif, List<ClassRoom> classRooms, Subject subject) :
+        base(username, password, name, UserType.Teacher, nif)
+        {
+            m_assignedSubject = subject;
+            m_assignedClassRooms = classRooms;
+        }
+        public Teacher() : base() { }
     }
 }

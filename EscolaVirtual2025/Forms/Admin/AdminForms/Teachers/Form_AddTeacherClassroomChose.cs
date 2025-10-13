@@ -19,6 +19,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         private Teacher m_teacher;
         private bool m_teacherClassroomsChosen;
         private Subject m_subject;
+        private bool m_edit;
         public bool TeacherClassroomsChosen
         {
             get { return m_teacherClassroomsChosen; }
@@ -36,7 +37,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             get { return m_subject; }
             set { m_subject = value; }
         }
-        public Form_AddTeacherClassroomChose(Teacher teacher)
+        public Form_AddTeacherClassroomChose(Teacher teacher, bool edit)
         {
             InitializeComponent();
 
@@ -55,6 +56,8 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
             p_Teacher = teacher;
             TeacherClassroomsChosen = false;
+            m_edit = edit;
+            m_subject = teacher.AssignedSubject;
         }
 
         private void Form_AddTeacherClassroomChose_Load(object sender, EventArgs e)
@@ -68,7 +71,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             foreach (var classroom in Program.ClassRooms)
             {
                 // Check if this classroom has the selected subject
-                bool hasSubject = classroom.Subjects.Any(s => s.Subject.Id == p_Subject.Id && s.AssignedTeacher == null);
+                bool hasSubject = classroom.Subjects.Any(s => s.Subject.Id == p_Subject.Id && s.AssignedTeacher == null || s.AssignedTeacher != m_teacher);
                 if (!hasSubject)
                     continue;
 
@@ -154,13 +157,32 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         }
         private void lsvCheckClassRooms_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            if (lsvCheckClassRooms.CheckedItems.Count > 0)
+            if (m_edit)
             {
-                btnAdd.Enabled = true;
+                bool canEnableAdd = false;
+
+                foreach (ListViewItem lsvItem in lsvCheckClassRooms.CheckedItems)
+                {
+                    string[] parts = lsvItem.Text.Split('º');
+                    int anoId = Convert.ToInt32(parts[0].Trim());
+                    string turmaNome = parts[1].Trim();
+
+                    bool jaAtribuida = m_teacher.AssignedClassRooms.Any(clsrm =>
+                        clsrm.Year.AnoId == anoId &&
+                        clsrm.Id.ToString().Equals(turmaNome));
+
+                    if (!jaAtribuida)
+                    {
+                        canEnableAdd = true;
+                        break;
+                    }
+                }
+
+                btnAdd.Enabled = canEnableAdd;
             }
             else
             {
-                btnAdd.Enabled = false;
+                btnAdd.Enabled = lsvCheckClassRooms.CheckedItems.Count > 0;
             }
         }
 

@@ -92,6 +92,7 @@
             this.materialToolStripItemNotification.Name = "materialToolStripItemNotification";
             this.materialToolStripItemNotification.Size = new System.Drawing.Size(160, 32);
             this.materialToolStripItemNotification.Text = "Notificações";
+            this.materialToolStripItemNotification.Click += new System.EventHandler(this.materialToolStripItemNotification_Click);
             // 
             // Separator
             // 

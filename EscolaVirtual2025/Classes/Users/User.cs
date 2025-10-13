@@ -42,6 +42,8 @@ namespace EscolaVirtual2025.Classes
             get { return m_userType; }
         }
 
+        public User() { }
+
         public User(
         string username, 
         string password, 

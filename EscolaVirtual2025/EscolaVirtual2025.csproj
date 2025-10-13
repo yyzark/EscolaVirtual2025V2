@@ -85,6 +85,24 @@
     <Compile Include="Classes\Users\Teacher.cs" />
     <Compile Include="Classes\Users\User.cs" />
     <Compile Include="Classes\Utils.cs" />
+    <Compile Include="Forms\Admin\AdminChats\Form_AdminChats.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminChats\Form_AdminChats.Designer.cs">
+      <DependentUpon>Form_AdminChats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminChats\Form_StudentRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminChats\Form_StudentRequest.Designer.cs">
+      <DependentUpon>Form_StudentRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminChats\Form_TeacherRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminChats\Form_TeacherRequest.Designer.cs">
+      <DependentUpon>Form_TeacherRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Admin\AdminForms\ClassRooms\Form_AddClassRooms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +138,12 @@
     </Compile>
     <Compile Include="Forms\Admin\AdminForms\Subjects\Form_AddSubject.Designer.cs">
       <DependentUpon>Form_AddSubject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_EditSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminForms\Subjects\Form_EditSubject.Designer.cs">
+      <DependentUpon>Form_EditSubject.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\AdminForms\Subjects\Form_SubjectsCheck.cs">
       <SubType>Form</SubType>
@@ -229,6 +253,12 @@
     <Compile Include="Forms\TeacherForms\Form_Teacher.Designer.cs">
       <DependentUpon>Form_Teacher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TeacherForms\TeacherAccount\Form_EditTeacherAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeacherForms\TeacherAccount\Form_EditTeacherAccount.Designer.cs">
+      <DependentUpon>Form_EditTeacherAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeacherForms\TeacherAccount\Form_TeacherAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,6 +285,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Admin\AdminChats\Form_AdminChats.resx">
+      <DependentUpon>Form_AdminChats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminChats\Form_StudentRequest.resx">
+      <DependentUpon>Form_StudentRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminChats\Form_TeacherRequest.resx">
+      <DependentUpon>Form_TeacherRequest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminForms\ClassRooms\Form_AddClassRooms.resx">
       <DependentUpon>Form_AddClassRooms.cs</DependentUpon>
     </EmbeddedResource>
@@ -272,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminForms\Subjects\Form_AddSubject.resx">
       <DependentUpon>Form_AddSubject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AdminForms\Subjects\Form_EditSubject.resx">
+      <DependentUpon>Form_EditSubject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminForms\Subjects\Form_SubjectsCheck.resx">
       <DependentUpon>Form_SubjectsCheck.cs</DependentUpon>
@@ -329,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\Form_Teacher.resx">
       <DependentUpon>Form_Teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeacherForms\TeacherAccount\Form_EditTeacherAccount.resx">
+      <DependentUpon>Form_EditTeacherAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\TeacherAccount\Form_TeacherAccount.resx">
       <DependentUpon>Form_TeacherAccount.cs</DependentUpon>

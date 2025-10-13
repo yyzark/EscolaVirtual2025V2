@@ -154,9 +154,35 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Form_AddSubject form_AddSubject = new Form_AddSubject();
-            form_AddSubject.ShowDialog();
-            UpdateListView();
+            if (btnAdd.Text == "Adicionar")
+            {
+                Form_AddSubject form_AddSubject = new Form_AddSubject();
+                form_AddSubject.ShowDialog();
+                UpdateListView();
+            }
+            else
+            {
+                if (lsvCheckSubject.SelectedItems.Count == 0)
+                    return;
+
+                // Obtém o Id da disciplina selecionada
+                int subjectId = (int)lsvCheckSubject.SelectedItems[0].Tag;
+
+                // Busca o Subject global
+                Subject subjectToEdit = Program.Subjects.FirstOrDefault(s => s.Id == subjectId);
+                if (subjectToEdit == null)
+                {
+                    MessageBox.Show("Disciplina não encontrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Abre o Form_EditSubject passando o subject
+                Form_EditSubject form_EditSubject = new Form_EditSubject(subjectToEdit);
+                form_EditSubject.ShowDialog();
+
+                // Atualiza a ListView após edição
+                UpdateListView();
+            }
         }
 
         private void lsvCheckSubject_SelectedIndexChanged(object sender, EventArgs e)
@@ -164,9 +190,11 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
             if (lsvCheckSubject.SelectedItems.Count > 0)
             {
                 btnRemove.Enabled = true;
+                btnAdd.Text = "Editar";
             }
             else
             {
+                btnAdd.Text = "Adicionar";
                 btnRemove.Enabled = false;
             }
         }

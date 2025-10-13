@@ -1,4 +1,5 @@
-﻿using EscolaVirtual2025.Classes.Users;
+﻿using EscolaVirtual2025.Classes.Chat;
+using EscolaVirtual2025.Classes.Users;
 using EscolaVirtual2025.Forms.StudentsForms.MainPanel;
 using EscolaVirtual2025.Forms.StudentsForms.StudentChat;
 using MaterialSkin;
@@ -256,11 +257,23 @@ namespace EscolaVirtual2025.Forms.StudentsForms
 
         private void tsmiNotifications_Click(object sender, EventArgs e)
         {
-            Form_StudentChats form_StudentChats = new Form_StudentChats();
-            this.Hide();
-            form_StudentChats.ShowDialog();
-            this.Show();
-            menuStrip1.BackColor = materialSkinManager.ColorScheme.PrimaryColor;
+            if (ChatManager.GetChatsByStudent(stdnt).Count > 0)
+            {
+                Form_StudentChats form_StudentChats = new Form_StudentChats();
+                this.Hide();
+                form_StudentChats.ShowDialog();
+                this.Show();
+                menuStrip1.BackColor = materialSkinManager.ColorScheme.PrimaryColor;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Ainda não tem notificações!",
+                    "Informação",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                    );
+            }
         }
 
         private void chart1_DoubleClick(object sender, MouseEventArgs e)

@@ -1,7 +1,11 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Chat;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Forms.Admin.AdminChats;
 using EscolaVirtual2025.Forms.Admin.AdminForms;
+using EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms;
+using EscolaVirtual2025.Forms.Admin.AdminForms.Subjects;
+using EscolaVirtual2025.Forms.Admin.AdminForms.Teachers;
 using EscolaVirtual2025.Forms.Admin.AdminForms.YearForms;
 using EscolaVirtual2025.Forms.Admin.Panels;
 using MaterialSkin;
@@ -10,21 +14,19 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO.Pipes;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms;
-using EscolaVirtual2025.Forms.Admin.AdminForms.Subjects;
-using EscolaVirtual2025.Forms.Admin.AdminForms.Teachers;
-using System.Diagnostics.Eventing.Reader;
 namespace EscolaVirtual2025.Forms.Admin
 {
     public partial class Form_Admin : MaterialForm
@@ -134,14 +136,15 @@ namespace EscolaVirtual2025.Forms.Admin
                 $"Tem {notificationCount} novas notificações" :
                 $"Tem {1} nova notificação";
 
-                menuAccount.Items[1].Text = $"Notificações ({notificationCount})";
+                menuAccount.Items[1].Text = $"Notificações";
                 menuAccount.Items[1].Image = Properties.Resources.notificationRinging;
                 notifyIcon.ShowBalloonTip(3000);
             }
-
-            notificationCount = 0;
-
-
+            else
+            {
+                menuAccount.Items[1].Text = $"Notificações";
+                menuAccount.Items[1].Image = Properties.Resources.notification;
+            }
             #endregion
         }
 
@@ -359,6 +362,42 @@ namespace EscolaVirtual2025.Forms.Admin
             Form_CheckTeachers form_CheckTeachers = new Form_CheckTeachers();
             form_CheckTeachers.ShowDialog();
             UpdateTreeView();
+        }
+
+        private void materialToolStripItemNotification_Click(object sender, EventArgs e)
+        {
+            if (Program.Users[0].Notifications.Count == 0)
+            {
+                MessageBox.Show("Não há pedidos pendentes", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            Form_AdminChats form_AdminChats = new Form_AdminChats();
+            this.Hide();
+            form_AdminChats.ShowDialog();
+            this.Show();
+            UpdateTreeView();
+
+            #region notificações
+            int notificationCount = Program.userAtual.Notifications.Count(n => !n.Read);
+
+            if (notificationCount > 0)
+            {
+                notifyIcon.BalloonTipText = notificationCount > 1 ?
+                $"Tem {notificationCount} novas notificações" :
+                $"Tem {1} nova notificação";
+
+                menuAccount.Items[1].Text = $"Notificações";
+                menuAccount.Items[1].Image = Properties.Resources.notificationRinging;
+                notifyIcon.ShowBalloonTip(3000);
+            }
+            else
+            {
+                menuAccount.Items[1].Text = $"Notificações";
+                menuAccount.Items[1].Image = Properties.Resources.notification;
+                notifyIcon.ShowBalloonTip(3000);
+            }
+            #endregion
+            this.Show();
         }
     }
 }

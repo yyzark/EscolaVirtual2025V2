@@ -37,7 +37,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             #endregion
 
             newTeacher = new Teacher(null, null, null, null, null);
-            form_AddTeacherClassroomChose = new Form_AddTeacherClassroomChose(newTeacher);
+            form_AddTeacherClassroomChose = new Form_AddTeacherClassroomChose(newTeacher, false);
         }
 
         private void Form_TeacherAdd_Load(object sender, EventArgs e)

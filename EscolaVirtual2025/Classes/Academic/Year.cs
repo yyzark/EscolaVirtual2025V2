@@ -34,6 +34,8 @@ namespace EscolaVirtual2025.Classes.Academic
             this.anoId = AnoId;
         }
 
+        public Year() { }
+
         public void ReorderClassLetters()
         {
             ClassRooms = ClassRooms.OrderBy(c => c.Id).ToList();

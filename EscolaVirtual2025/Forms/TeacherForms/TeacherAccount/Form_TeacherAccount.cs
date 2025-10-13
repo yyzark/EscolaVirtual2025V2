@@ -51,22 +51,12 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
             this.Close();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnClassRooms_Click(object sender, EventArgs e)
         {
             string result = "Turmas: ";
             foreach (ClassRoom clsrm in tchr.AssignedClassRooms)
             {
-                result += "\n" + $"{clsrm.Year}º{clsrm.Id}";
+                result += "\n" + $"{clsrm.Year.AnoId}º{clsrm.Id}";
             }
             MessageBox.Show(result, "Turmas", MessageBoxButtons.OK, MessageBoxIcon.Information );
         }
@@ -79,6 +69,14 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
         private void btnShowPassword_MouseUp(object sender, MouseEventArgs e)
         {
             lblPassword.Text = $"Senha: {new String('*', tchr.Password.Length)}";
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            Form_EditTeacherAccount form_EditTeacherAccount = new Form_EditTeacherAccount(tchr);
+            this.Hide();
+            form_EditTeacherAccount.ShowDialog();
+            this.Close();
         }
     }
 }

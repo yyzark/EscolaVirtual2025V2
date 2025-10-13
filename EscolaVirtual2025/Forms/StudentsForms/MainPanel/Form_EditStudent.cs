@@ -193,6 +193,12 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
                         }
                     }
 
+                    foreach (Notification notification in Program.Users[0].Notifications)
+                    {
+                        if (notification.Sender == stdnt)
+                            Program.Users[0].Notifications.Remove(notification);
+                    }
+
                     Program.Users[0].Notifications.Add(new Request(stdnt, Program.Users[0], new Student(txtLogin.Text, txtPassword.Text, txtName.Text, nif, stdnt.ClassRoom.Year.ClassRooms[cbbClassRoom.SelectedIndex], stdnt.SchoolCard)));
 
                     MessageBox.Show("O pedido foi enviado ao administrador!.",

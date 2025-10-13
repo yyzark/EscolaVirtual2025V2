@@ -42,16 +42,26 @@ namespace EscolaVirtual2025.Forms.StudentsForms.StudentChat
 
         private void Form_StudentChats_Load(object sender, EventArgs e)
         {
-           lsbChats.Items.Clear();
+            lsbChats.Items.Clear();
             m_currentChats.Clear();
-
-            if (m_student == null) return;
 
             foreach (var chat in ChatManager.GetChatsByStudent(m_student))
             {
                 m_currentChats.Add(chat);
-                lsbChats.Items.Add(new MaterialListBoxItem(chat.Teacher.Name));
+
+                string name = chat.Teacher != null ? chat.Teacher.Name : chat.Admin.Name;
+
+                bool hasUnread = m_student.Notifications.Any(n =>
+                    !n.Read &&
+                    ((chat.Teacher != null && n.Sender == chat.Teacher) ||
+                     (chat.Admin != null && n.Sender == chat.Admin))
+                );
+
+                string displayText = hasUnread ? "[NÃO LIDO] " + name : name;
+
+                lsbChats.Items.Add(new MaterialListBoxItem(displayText));
             }
+
         }
 
         private void lsbChats_DoubleClick(object sender, EventArgs e)
@@ -60,8 +70,31 @@ namespace EscolaVirtual2025.Forms.StudentsForms.StudentChat
             if (index < 0 || index >= m_currentChats.Count) return;
 
             Chat chat = m_currentChats[index];
+            m_student.Notifications[index].Read = true;
             Form_StudentChat chatForm = new Form_StudentChat(chat);
+            this.Hide();
             chatForm.ShowDialog();
+            this.Show();
+        }
+
+        private void Form_StudentChats_VisibleChanged(object sender, EventArgs e)
+        {
+            foreach (var chat in ChatManager.GetChatsByStudent(m_student))
+            {
+                m_currentChats.Add(chat);
+
+                string name = chat.Teacher != null ? chat.Teacher.Name : chat.Admin.Name;
+
+                bool hasUnread = m_student.Notifications.Any(n =>
+                    !n.Read &&
+                    ((chat.Teacher != null && n.Sender == chat.Teacher) ||
+                     (chat.Admin != null && n.Sender == chat.Admin))
+                );
+
+                string displayText = hasUnread ? "[NÃO LIDO] " + name : name;
+
+                lsbChats.Items.Add(new MaterialListBoxItem(displayText));
+            } 
         }
     }
 }
