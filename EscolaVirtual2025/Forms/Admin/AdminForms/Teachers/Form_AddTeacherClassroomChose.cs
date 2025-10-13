@@ -68,7 +68,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             foreach (var classroom in Program.ClassRooms)
             {
                 // Check if this classroom has the selected subject
-                bool hasSubject = classroom.Subjects.Any(s => s.Subject.Id == p_Subject.Id);
+                bool hasSubject = classroom.Subjects.Any(s => s.Subject.Id == p_Subject.Id && s.AssignedTeacher == null);
                 if (!hasSubject)
                     continue;
 

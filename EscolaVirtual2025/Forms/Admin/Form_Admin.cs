@@ -38,7 +38,6 @@ namespace EscolaVirtual2025.Forms.Admin
         public Form_Admin()
         {
             InitializeComponent();
-
             this.StartPosition = FormStartPosition.CenterScreen;
 
             #region MaterialSkin

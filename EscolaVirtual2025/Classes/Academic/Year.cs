@@ -33,5 +33,15 @@ namespace EscolaVirtual2025.Classes.Academic
         {
             this.anoId = AnoId;
         }
+
+        public void ReorderClassLetters()
+        {
+            ClassRooms = ClassRooms.OrderBy(c => c.Id).ToList();
+
+            for (int i = 0; i < ClassRooms.Count; i++)
+            {
+                ClassRooms[i].Id = Utils.alphabet[i];
+            }
+        }
     }
 }

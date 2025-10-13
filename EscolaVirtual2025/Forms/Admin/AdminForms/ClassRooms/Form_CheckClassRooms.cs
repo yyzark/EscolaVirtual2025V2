@@ -79,31 +79,43 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             }
 
             // Obtém o ID da sala selecionada
-            char selectedId = Convert.ToChar(lsvCheckClassRoom.SelectedItems[0].Text.Split('º')[1]);
+            string selectedText = lsvCheckClassRoom.SelectedItems[0].Text;
+            string[] parts = selectedText.Split('º');
 
-            // Procura e remove a sala correspondente
-            bool removed = false;
+            int yearId = Convert.ToInt32(parts[0]);
+            char selectedLetter = parts[1][0];
 
-            foreach (var ano in Program.Anos)
+            var selectedYear = Program.Anos.FirstOrDefault(a => a.AnoId == yearId);
+            var classRoomToRemove = selectedYear.ClassRooms.FirstOrDefault(cls => cls.Id == selectedLetter);
+
+            DialogResult result = MessageBox.Show(
+                $"Tem a certeza que deseja remover a turma \"{yearId}º{selectedLetter}\"?",
+                "Confirmação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+            
+            if (result == DialogResult.No)
+                return;
+
+            for (int i = 0; i < classRoomToRemove.StudentsCount; i++)
             {
-                var classRoomToRemove = ano.ClassRooms.FirstOrDefault(cls => cls.Id == selectedId);
-                if (classRoomToRemove != null)
-                {
-                    ano.ClassRooms.Remove(classRoomToRemove);
-                    removed = true;
-                    break;
-                }
+                var student = classRoomToRemove.Students[i];
+
+                Program.Users.Remove(student);
+                Program.students.Remove(student);
+                // Limpa referência na turma
+                classRoomToRemove.Students[i] = null;
             }
 
-            if (removed)
-            {
-                MessageBox.Show("Sala removida com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                UpdateListView();
-            }
-            else
-            {
-                MessageBox.Show("Não foi possível encontrar a sala selecionada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // Remove a turma
+            selectedYear.ClassRooms.Remove(classRoomToRemove);
+            Program.ClassRooms.Remove(classRoomToRemove);
+
+            selectedYear.ReorderClassLetters();
+
+            MessageBox.Show("Turma removida com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            UpdateListView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -115,9 +127,13 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
         private void lsvCheckClassRoom_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lsvCheckClassRoom.SelectedItems[0].Index != -1)
+            if (lsvCheckClassRoom.SelectedIndices.Count > 0)
             {
                 btnRemove.Enabled = true;
+            }
+            else
+            {
+                btnRemove.Enabled = false;
             }
         }
     }

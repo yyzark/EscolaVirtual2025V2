@@ -43,6 +43,9 @@ namespace EscolaVirtual2025
         //
         public static User userAtual;
 
+        //
+        public static int SchoolCardsCounter;
+
         [STAThread]
         static void Main()
         {
@@ -55,7 +58,7 @@ namespace EscolaVirtual2025
             //objeto global do form de login
             formLogin = new Form_Login();
 
-
+            
             Application.Run(formLogin);
         }
     }

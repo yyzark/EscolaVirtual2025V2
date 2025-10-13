@@ -130,7 +130,7 @@
             this.btnUser.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnUser.Size = new System.Drawing.Size(160, 39);
             this.btnUser.TabIndex = 1;
-            this.btnUser.Text = "materialButton1";
+            this.btnUser.Text = "Conta";
             this.btnUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
             this.btnUser.UseAccentColor = false;
             this.btnUser.UseVisualStyleBackColor = true;
@@ -159,7 +159,7 @@
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(3, 64);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(20);
             this.panelMain.Size = new System.Drawing.Size(794, 459);
             this.panelMain.TabIndex = 3;
             // 
@@ -321,7 +321,7 @@
             this.panelTreeView.Location = new System.Drawing.Point(0, 0);
             this.panelTreeView.Margin = new System.Windows.Forms.Padding(0);
             this.panelTreeView.Name = "panelTreeView";
-            this.panelTreeView.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelTreeView.Padding = new System.Windows.Forms.Padding(6);
             this.panelTreeView.Size = new System.Drawing.Size(377, 419);
             this.panelTreeView.TabIndex = 4;
             // 
@@ -343,7 +343,7 @@
             this.Name = "Form_Admin";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Escola Virtual";
+            this.Text = "     Escola Virtual";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_Admin_FormClosed);
             this.Load += new System.EventHandler(this.Form_Admin_Load);
             this.SizeChanged += new System.EventHandler(this.Form_Admin_SizeChanged);

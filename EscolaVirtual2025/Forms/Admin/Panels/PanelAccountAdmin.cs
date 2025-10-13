@@ -51,5 +51,10 @@ namespace EscolaVirtual2025.Forms.Admin
         {
 
         }
+
+        private void grbDetails_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EscolaVirtual2025.Classes.Users;
 
 namespace EscolaVirtual2025.Classes.Users
 {

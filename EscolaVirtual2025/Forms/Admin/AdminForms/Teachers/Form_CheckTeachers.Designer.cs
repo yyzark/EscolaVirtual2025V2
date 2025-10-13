@@ -50,7 +50,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(20);
-            this.panel1.Size = new System.Drawing.Size(556, 596);
+            this.panel1.Size = new System.Drawing.Size(572, 635);
             this.panel1.TabIndex = 2;
             // 
             // lsvCheckTeachers
@@ -67,7 +67,7 @@
             this.lsvCheckTeachers.MultiSelect = false;
             this.lsvCheckTeachers.Name = "lsvCheckTeachers";
             this.lsvCheckTeachers.Scrollable = false;
-            this.lsvCheckTeachers.Size = new System.Drawing.Size(516, 516);
+            this.lsvCheckTeachers.Size = new System.Drawing.Size(532, 555);
             this.lsvCheckTeachers.TabIndex = 3;
             this.lsvCheckTeachers.UseCompatibleStateImageBehavior = false;
             this.lsvCheckTeachers.View = System.Windows.Forms.View.Details;
@@ -96,12 +96,12 @@
             this.tableLayoutPanelButtons.Controls.Add(this.btnAdd, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.btnRemove, 2, 0);
             this.tableLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(20, 536);
+            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(20, 575);
             this.tableLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             this.tableLayoutPanelButtons.RowCount = 1;
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(516, 40);
+            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(532, 40);
             this.tableLayoutPanelButtons.TabIndex = 2;
             // 
             // btnAdd
@@ -118,7 +118,7 @@
             this.btnAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAdd.Size = new System.Drawing.Size(250, 28);
+            this.btnAdd.Size = new System.Drawing.Size(258, 28);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Adicionar";
             this.btnAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -135,12 +135,12 @@
             this.btnRemove.Enabled = false;
             this.btnRemove.HighEmphasis = true;
             this.btnRemove.Icon = null;
-            this.btnRemove.Location = new System.Drawing.Point(262, 6);
+            this.btnRemove.Location = new System.Drawing.Point(270, 6);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnRemove.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnRemove.Size = new System.Drawing.Size(250, 28);
+            this.btnRemove.Size = new System.Drawing.Size(258, 28);
             this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "Remover";
             this.btnRemove.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -152,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 623);
+            this.ClientSize = new System.Drawing.Size(578, 662);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
