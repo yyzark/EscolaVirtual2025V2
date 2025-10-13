@@ -13,14 +13,10 @@ namespace EscolaVirtual2025.Classes.Chat
     }
     public class Notification
     {
-        private readonly string m_message;
-        private readonly NotificationType m_type;
         private bool m_read;
-        public string Message
-        {
-            get { return m_message; }
-        } 
-
+        private NotificationType m_type;
+        private User m_sender;
+        private User m_reciever;
         public bool Read
         {
             get { return m_read; }
@@ -30,13 +26,24 @@ namespace EscolaVirtual2025.Classes.Chat
         public NotificationType Type
         {
             get { return m_type; }
+            set { m_type = value; }
+        }
+        public User Sender
+        {
+            get { return m_sender; }
         }
 
-        public Notification(string message, NotificationType type)
+        public User Reciever
         {
-            m_message = message;
+            get { return m_reciever; }
+        }
+
+        public Notification(NotificationType type, User sender, User reciever)
+        {
             m_type = type;
             m_read = false;
+            m_sender = sender;
+            m_reciever = reciever;
         }
     }
 }

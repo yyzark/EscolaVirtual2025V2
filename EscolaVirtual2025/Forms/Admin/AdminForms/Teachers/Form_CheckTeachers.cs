@@ -89,7 +89,19 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             if (confirm == DialogResult.Yes)
             {
                 Program.Teachers.Remove(selectedTeacher);
+                Program.Users.Remove(selectedTeacher);
                 Program.Subjects.ForEach(sb => sb.Teachers.Remove(selectedTeacher));
+
+                Program.Anos.ForEach(yr =>
+                {
+                    yr.ClassRooms.ForEach(clas =>
+                    {
+                        clas.Subjects
+                            .Where(sb => sb.AssignedTeacher != null && sb.AssignedTeacher.NIF == selectedTeacher.NIF).ToList()
+                            .ForEach(sb => sb.AssignedTeacher = null);
+                    });
+                });
+
                 UpdateListView();
             }
         }

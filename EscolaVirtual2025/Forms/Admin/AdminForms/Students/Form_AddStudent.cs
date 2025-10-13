@@ -107,19 +107,25 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                     var selectedYear = Program.Anos[yearIndex];
                     var selectedClassRoom = selectedYear.ClassRooms[classRoomIndex];
 
+                    
+
                     // Criar aluno
                     Student newStudent = new Student(
                         txtLogin.Text,
                         txtPassword.Text,
                         txtName.Text,
                         txtNIF.Text,
-                        selectedClassRoom);
+                        selectedClassRoom,
+                        new SchoolCard(Program.SchoolCardsCounter+1)
+                        );
 
+                    Program.SchoolCardsCounter++;
 
                     // Adicionar o aluno na turma
                     Program.students.Add(newStudent);
                     selectedClassRoom.Students[selectedClassRoom.StudentsCount] = newStudent;
                     selectedClassRoom.StudentsCount++;
+                    selectedClassRoom.OrderStudentsByName();
                     Program.Users.Add(newStudent);
 
                     MessageBox.Show("Aluno adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);

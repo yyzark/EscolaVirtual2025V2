@@ -28,7 +28,6 @@ namespace EscolaVirtual2025
         {
             InitializeComponent();
 
-            this.StartPosition = FormStartPosition.CenterScreen;
             #region MaterialSkin
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -134,7 +133,9 @@ namespace EscolaVirtual2025
 
 
             //add do admin
-            Program.Users.Add(new User("JC", "GOAT","Jorge Carvalho", Classes.UserType.Admin));
+            Program.Users.Add(new User("JC", "GOAT","Jorge Carvalho", UserType.Admin));
+            //id do cartão escolar inicial a 0
+            Program.SchoolCardsCounter = 0;
 
             #region Credenciais Iniciais (probably apagar depois)            
             string cred = File.ReadLines("Credenciais_Admin\\Admin.txt").First();
@@ -156,6 +157,27 @@ namespace EscolaVirtual2025
 
             Program.Anos[0].Subjects.AddRange(Program.Subjects);
             Program.Anos[1].Subjects.AddRange(Program.Subjects);
+
+            #endregion
+
+            #region TESTES PARA APAGAR NAO ESQUECER
+            ClassRoom decimoA = new ClassRoom('A', Program.Anos[0]);
+            //Aluno para teste
+            Student yyzark = new Student("yyzark", "1234", "Nikita Khveshchuk", "281118400", decimoA, new SchoolCard(-1));
+            decimoA.Students[0] = yyzark;
+            Program.Users.Add(yyzark);
+            Program.students.Add(yyzark);
+
+            Program.ClassRooms.Add(decimoA);
+            Program.Anos[0].ClassRooms.Add(decimoA);
+            //add do professor para fzr testes
+            Teacher JRC = new Teacher("JRC", "1234", "José Costa", "999999999",Program.Subjects[4]);
+            decimoA.Subjects[4].AssignedTeacher = JRC;
+            Program.Subjects[4].Teachers.Add(JRC);
+            JRC.AssignedClassRooms.Add(decimoA);
+            Program.Users.Add(JRC);
+            Program.Teachers.Add(JRC);
+
 
             #endregion
         }
@@ -232,10 +254,23 @@ namespace EscolaVirtual2025
             }
             else if (user.UserType == Classes.UserType.Teacher)
             {
+                Program.userAtual = user;
+                Forms.TeacherForms.Form_Teacher formTeacher = new Forms.TeacherForms.Form_Teacher();
+                this.Hide();
+                formTeacher.Show();
+                //limpar campos
+                txtLogin.Text = "";
+                txtPassword.Text = "";
             }
             else if (user.UserType == Classes.UserType.Student)
             {
-
+                Program.userAtual = user;
+                Forms.StudentsForms.Form_Student formStudent = new Forms.StudentsForms.Form_Student();
+                this.Hide();
+                formStudent.Show();
+                //limpar campos
+                txtLogin.Text = "";
+                txtPassword.Text = "";
             }
         }
 

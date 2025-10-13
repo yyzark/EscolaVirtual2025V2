@@ -72,5 +72,24 @@ namespace EscolaVirtual2025.Classes.Academic
                 }
             }
         }
+
+        public void OrderStudentsByName()
+        {
+            if (m_studentsCount <= 1) return; 
+
+            List<Student> alunosExistentes = m_students
+                .Take(m_studentsCount)
+                .ToList();
+
+            alunosExistentes = alunosExistentes
+                .OrderBy(s => s.Name)
+                .ToList();
+
+            for (int i = 0; i < m_studentsCount; i++)
+            {
+                m_students[i] = alunosExistentes[i];
+            }
+        }
+
     }
 }

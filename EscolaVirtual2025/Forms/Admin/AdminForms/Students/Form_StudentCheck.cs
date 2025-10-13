@@ -63,6 +63,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms
                     var year = Program.Anos.FirstOrDefault(y => y.AnoId == studentToRemove.ClassRoom.Year.AnoId);
                     var classRoom = year.ClassRooms.FirstOrDefault(cr => cr.Id == studentToRemove.ClassRoom.Id);
                     classRoom.RemoveStudent(studentToRemove);
+                    classRoom.OrderStudentsByName();
                     // Remover o aluno da lista global de users
                     Program.Users.Remove(studentToRemove);
                     // Remover o item da ListView
