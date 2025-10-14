@@ -80,7 +80,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         private void ver()
         {
 
-            if (txtLogin.Text != string.Empty && txtName.Text != string.Empty && txtNIF.Text.Length == 9 && txtPassword.Text != string.Empty && form_AddTeacherClassroomChose.TeacherClassroomsChosen == true)
+            if ( txtLogin.Text != string.Empty && txtName.Text != string.Empty && txtNIF.Text.Length == 9 && txtPassword.Text != string.Empty && form_AddTeacherClassroomChose.TeacherClassroomsChosen == true)
             {
                 btnAccept.Enabled = true;
             }
@@ -119,10 +119,10 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             }
             else
             {
-                if (txtPassword.Text.Length < 4)
+                if (txtPassword.Text.Length < 6)
                 {
                     MessageBox.Show(
-                    "A senha deve ter pelo menos 4 caracteres!",
+                    "A senha deve ter pelo menos 6 caracteres!",
                     "Erro",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error

@@ -369,6 +369,7 @@ namespace EscolaVirtual2025.Forms.Admin
             if (Program.Users[0].Notifications.Count == 0)
             {
                 MessageBox.Show("Não há pedidos pendentes", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
             Form_AdminChats form_AdminChats = new Form_AdminChats();

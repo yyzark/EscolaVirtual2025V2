@@ -64,7 +64,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
             }
             else
             {
-                if (txtPassword.Text.Length < 4)
+                if (txtPassword.Text.Length < 6)
                 {
                     MessageBox.Show(
                     "A senha deve ter pelo menos 4 caracteres!",

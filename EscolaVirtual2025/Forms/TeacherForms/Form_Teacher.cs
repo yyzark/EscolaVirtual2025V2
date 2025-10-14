@@ -80,7 +80,6 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             {
                cbbYear.Items.Add(yr.AnoId + "º");
             }
-            
         }
 
         private void btnUser_Click(object sender, EventArgs e)
@@ -185,6 +184,10 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             this.Hide();
             form_TeacherAccount.ShowDialog();
             this.Show();
+        }
+
+        private void Form_Teacher_VisibleChanged(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -98,6 +98,16 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
+            if (Program.Users.Any(usr => usr.Username == newData.Username.Trim()))
+            {
+                MessageBox.Show(
+                "Já existe um utilizador com este nome de utilizador!",
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
+                return;
+            }
             ChatManager.SendGetNotificationFromAdmin(oldData)
                .AddMessage(Program.Users[0].Name, "A alteração de dados foi aprovada!");
 

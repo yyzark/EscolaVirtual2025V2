@@ -79,6 +79,11 @@ namespace EscolaVirtual2025.Forms.StudentsForms.StudentChat
 
         private void Form_StudentChats_VisibleChanged(object sender, EventArgs e)
         {
+            if (!this.Visible) return;
+
+            lsbChats.Items.Clear();
+            m_currentChats.Clear();
+
             foreach (var chat in ChatManager.GetChatsByStudent(m_student))
             {
                 m_currentChats.Add(chat);
@@ -92,9 +97,8 @@ namespace EscolaVirtual2025.Forms.StudentsForms.StudentChat
                 );
 
                 string displayText = hasUnread ? "[NÃO LIDO] " + name : name;
-
                 lsbChats.Items.Add(new MaterialListBoxItem(displayText));
-            } 
+            }
         }
     }
 }

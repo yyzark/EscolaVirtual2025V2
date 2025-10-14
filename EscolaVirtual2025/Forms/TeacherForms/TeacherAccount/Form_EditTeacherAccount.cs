@@ -118,10 +118,10 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-                if (txtPassword.Text.Length < 4)
+                if (txtPassword.Text.Length < 6)
                 {
                     MessageBox.Show(
-                    "A senha deve ter pelo menos 4 caracteres!",
+                    "A senha deve ter pelo menos 6 caracteres!",
                     "Erro",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -185,6 +185,38 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
         private void txtNIF_TextChanged(object sender, EventArgs e)
         {
             ver();
+        }
+
+        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Utils.IsAllowedCharacter(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Utils.IsAllowedCharacter(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Utils.IsAllowedNameCharacter(e.KeyChar) || Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtNIF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

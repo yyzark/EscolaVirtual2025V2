@@ -3,42 +3,46 @@ using EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
 {
     public partial class Form_EditSubject : MaterialForm
     {
-        private Form_AddSubjectYearsChose subjectYearsChose;
-        private Subject newSubject;
+        private readonly Form_AddSubjectYearsChose subjectYearsChose;
+        private readonly Subject originalSubject; // referência original
+        private Subject editedSubject;            // cópia editável
+
         public Form_EditSubject(Subject subject)
         {
             InitializeComponent();
-
 
             #region MaterialSkin
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(
-            Primary.Red300,    // cor principal clara
-            Primary.Red700,    // cor principal escura
-            Primary.Red100,    // cor de fundo ou destaque
-            Accent.Orange200,  // acento laranja suave
-            TextShade.WHITE    // cor do texto;
+                Primary.Red300,
+                Primary.Red700,
+                Primary.Red100,
+                Accent.Orange200,
+                TextShade.WHITE
             );
             #endregion
 
+            originalSubject = subject;
 
-            newSubject = subject;
-            subjectYearsChose = new Form_AddSubjectYearsChose(newSubject);
+            // cria cópia independente para editar sem alterar o original diretamente
+            editedSubject = new Subject
+            {
+                Id = subject.Id,
+                Name = subject.Name,
+                Abreviation = subject.Abreviation,
+                Years = subject.Years.ToList()
+            };
+
+            subjectYearsChose = new Form_AddSubjectYearsChose(editedSubject);
 
             txtName.Hint = "Nome";
             txtAbreviation.Hint = "Abreviação";
@@ -46,8 +50,24 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
 
         private void Form_EditSubject_Load(object sender, EventArgs e)
         {
-            txtAbreviation.Text = newSubject.Abreviation;
-            txtName.Text = newSubject.Name;
+            txtName.Text = editedSubject.Name;
+            txtAbreviation.Text = editedSubject.Abreviation;
+            UpdateAcceptButtonState();
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e) => UpdateAcceptButtonState();
+        private void txtAbreviation_TextChanged(object sender, EventArgs e) => UpdateAcceptButtonState();
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtAbreviation_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
 
         private void btnYears_Click(object sender, EventArgs e)
@@ -56,72 +76,75 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
             UpdateAcceptButtonState();
         }
 
-        private void txtAbreviation_TextChanged(object sender, EventArgs e)
-        {
-            UpdateAcceptButtonState();
-        }
-
         private void UpdateAcceptButtonState()
         {
-            // Verifica se algum campo mudou
-            bool nameChanged = txtName.Text != newSubject.Name;
-            bool abbrChanged = txtAbreviation.Text != newSubject.Abreviation;
-            bool yearsChanged = !subjectYearsChose.p_Subject.Years.SequenceEqual(newSubject.Years);
+            bool nameChanged = txtName.Text != originalSubject.Name;
+            bool abbrChanged = txtAbreviation.Text != originalSubject.Abreviation;
+            bool yearsChanged = !subjectYearsChose.p_Subject.Years.SequenceEqual(originalSubject.Years);
 
-            // Ativa o botão se alguma informação mudou e se os campos não estão vazios
-            btnAccept.Enabled = (nameChanged || abbrChanged || yearsChanged)
-                                && !string.IsNullOrWhiteSpace(txtName.Text)
-                                && !string.IsNullOrWhiteSpace(txtAbreviation.Text)
-                                && subjectYearsChose.SubjectYearsChosen;
-        }
-
-
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-            UpdateAcceptButtonState();
-        }
-
-        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar) && !Char.IsWhiteSpace(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtAbreviation_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            btnAccept.Enabled =
+                (nameChanged || abbrChanged || yearsChanged)
+                && !string.IsNullOrWhiteSpace(txtName.Text)
+                && !string.IsNullOrWhiteSpace(txtAbreviation.Text)
+                && subjectYearsChose.SubjectYearsChosen;
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            newSubject.Name = txtName.Text;
-            newSubject.Abreviation = txtAbreviation.Text;
-            newSubject.Years = subjectYearsChose.p_Subject.Years;
+            // Atualiza dados da cópia
+            editedSubject.Name = txtName.Text.Trim();
+            editedSubject.Abreviation = txtAbreviation.Text.Trim();
+            editedSubject.Years = subjectYearsChose.p_Subject.Years.ToList();
 
-            if (!Program.Subjects.Contains(newSubject))
+            // === 1️⃣ Atualiza lista global de Subjects ===
+            int idx = Program.Subjects.IndexOf(originalSubject);
+            if (idx >= 0)
+                Program.Subjects[idx] = editedSubject;
+            else
+                Program.Subjects.Add(editedSubject);
+
+            // === 2️⃣ Atualiza cada Ano ===
+            foreach (var year in Program.Anos)
             {
-                newSubject.Id = Program.Subjects.Count + 1;
-                Program.Subjects.Add(newSubject);
+                year.Subjects.RemoveAll(s => s.Id == originalSubject.Id);
+
+                if (editedSubject.Years.Any(y => y.AnoId == year.AnoId))
+                {
+                    if (!year.Subjects.Any(s => s.Id == editedSubject.Id))
+                        year.Subjects.Add(editedSubject);
+                }
+
+                // Atualiza as turmas dentro do ano
+                foreach (var cls in year.ClassRooms)
+                {
+                    cls.Subjects.RemoveAll(cs => cs.Subject.Id == originalSubject.Id);
+
+                    if (editedSubject.Years.Any(y => y.AnoId == year.AnoId))
+                    {
+                        if (!cls.Subjects.Any(cs => cs.Subject.Id == editedSubject.Id))
+                            cls.Subjects.Add(new ClassSubject(null, editedSubject));
+                    }
+                }
             }
 
-            foreach (var year in newSubject.Years)
+            // === 3️⃣ Atualiza turmas globais ===
+            foreach (var cls in Program.ClassRooms)
             {
-                var targetYear = Program.Anos.FirstOrDefault(a => a.AnoId == year.AnoId);
-                if (targetYear != null)
-                {
-                    if (!targetYear.Subjects.Contains(newSubject))
-                        targetYear.Subjects.Add(newSubject);
+                cls.Subjects.RemoveAll(cs => cs.Subject.Id == originalSubject.Id);
 
-                    foreach (var cls in targetYear.ClassRooms)
-                    {
-                        if (!cls.Subjects.Any(cs => cs.Subject == newSubject))
-                            cls.Subjects.Add(new ClassSubject(null, newSubject));
-                    }
+                if (editedSubject.Years.Any(y => y.AnoId == cls.Year.AnoId))
+                {
+                    if (!cls.Subjects.Any(cs => cs.Subject.Id == editedSubject.Id))
+                        cls.Subjects.Add(new ClassSubject(null, editedSubject));
+                }
+            }
+
+            // === 4️⃣ Atualiza professores ===
+            foreach (var teacher in Program.Teachers)
+            {
+                if (teacher.AssignedSubject != null && teacher.AssignedSubject.Id == originalSubject.Id)
+                {
+                    teacher.AssignedSubject = editedSubject;
                 }
             }
 

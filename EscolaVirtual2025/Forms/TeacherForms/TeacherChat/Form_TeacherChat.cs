@@ -124,5 +124,16 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
             Form_Chat chatForm = new Form_Chat(chat);
             chatForm.ShowDialog();
         }
+
+        private void Form_TeacherChat_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            foreach(Chat chat in ChatManager.Chats)
+            {
+                if(chat.Messages.Count == 0)
+                {
+                    ChatManager.Chats.Remove(chat);
+                }
+            }
+        }
     }
 }

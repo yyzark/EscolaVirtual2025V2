@@ -136,7 +136,7 @@
             this.panelMain.Controls.Add(this.tableLayoutPanelMain);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(4, 79);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
             this.panelMain.Name = "panelMain";
             this.panelMain.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
             this.panelMain.Size = new System.Drawing.Size(924, 311);
@@ -210,7 +210,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(409, 126);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -231,7 +231,7 @@
             this.cbbClassRoom.IntegralHeight = false;
             this.cbbClassRoom.ItemHeight = 43;
             this.cbbClassRoom.Location = new System.Drawing.Point(208, 4);
-            this.cbbClassRoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbClassRoom.Margin = new System.Windows.Forms.Padding(4);
             this.cbbClassRoom.MaxDropDownItems = 4;
             this.cbbClassRoom.MouseState = MaterialSkin.MouseState.OUT;
             this.cbbClassRoom.Name = "cbbClassRoom";
@@ -256,7 +256,7 @@
             this.cbbYear.IntegralHeight = false;
             this.cbbYear.ItemHeight = 43;
             this.cbbYear.Location = new System.Drawing.Point(4, 4);
-            this.cbbYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbYear.Margin = new System.Windows.Forms.Padding(4);
             this.cbbYear.MaxDropDownItems = 4;
             this.cbbYear.MouseState = MaterialSkin.MouseState.OUT;
             this.cbbYear.Name = "cbbYear";
@@ -296,7 +296,8 @@
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.btnUser);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "Form_Teacher";
             this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
             this.Sizable = false;
@@ -304,6 +305,7 @@
             this.Text = "Escola Virtual";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_Teacher_FormClosed);
             this.Load += new System.EventHandler(this.Form_Teacher_Load);
+            this.VisibleChanged += new System.EventHandler(this.Form_Teacher_VisibleChanged);
             this.menuAccount.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
             this.tableLayoutPanelMain.ResumeLayout(false);

@@ -37,6 +37,8 @@ namespace EscolaVirtual2025.Classes.Academic
             set { m_Id = value; }
         }
 
+        public Subject() { }
+
         public Subject(string name,string abreviation ,int id)
         {
             m_name = name;

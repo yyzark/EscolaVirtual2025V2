@@ -44,10 +44,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLogin.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLogin.Location = new System.Drawing.Point(314, 197);
+            this.txtLogin.Location = new System.Drawing.Point(419, 242);
+            this.txtLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtLogin.MaxLength = 16;
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(150, 31);
+            this.txtLogin.Size = new System.Drawing.Size(199, 36);
             this.txtLogin.TabIndex = 0;
             this.txtLogin.TextChanged += new System.EventHandler(this.txtLogin_TextChanged);
             this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
@@ -58,9 +59,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(335, 100);
+            this.lblTitle.Location = new System.Drawing.Point(447, 123);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(129, 59);
+            this.lblTitle.Size = new System.Drawing.Size(163, 73);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Login";
             // 
@@ -71,9 +73,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLogin.AutoSize = true;
             this.lblLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogin.Location = new System.Drawing.Point(310, 174);
+            this.lblLogin.Location = new System.Drawing.Point(413, 214);
+            this.lblLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(52, 20);
+            this.lblLogin.Size = new System.Drawing.Size(66, 25);
             this.lblLogin.TabIndex = 2;
             this.lblLogin.Text = "Login:";
             // 
@@ -83,11 +86,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPassword.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(201, 264);
+            this.txtPassword.Location = new System.Drawing.Point(268, 325);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.MaxLength = 16;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(150, 31);
+            this.txtPassword.Size = new System.Drawing.Size(199, 36);
             this.txtPassword.TabIndex = 3;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
@@ -99,9 +103,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(197, 241);
+            this.lblPassword.Location = new System.Drawing.Point(263, 297);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(82, 20);
+            this.lblPassword.Size = new System.Drawing.Size(104, 25);
             this.lblPassword.TabIndex = 4;
             this.lblPassword.Text = "Password:";
             // 
@@ -112,9 +117,10 @@
             this.lblAlert.AutoSize = true;
             this.lblAlert.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlert.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblAlert.Location = new System.Drawing.Point(378, 303);
+            this.lblAlert.Location = new System.Drawing.Point(504, 373);
+            this.lblAlert.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAlert.Name = "lblAlert";
-            this.lblAlert.Size = new System.Drawing.Size(210, 20);
+            this.lblAlert.Size = new System.Drawing.Size(263, 25);
             this.lblAlert.TabIndex = 6;
             this.lblAlert.Text = "Login ou password invalidos!";
             this.lblAlert.Visible = false;
@@ -131,12 +137,12 @@
             this.btnEnter.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnter.HighEmphasis = true;
             this.btnEnter.Icon = null;
-            this.btnEnter.Location = new System.Drawing.Point(36, 279);
-            this.btnEnter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnEnter.Location = new System.Drawing.Point(48, 343);
+            this.btnEnter.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnEnter.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnEnter.Name = "btnEnter";
             this.btnEnter.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnEnter.Size = new System.Drawing.Size(150, 36);
+            this.btnEnter.Size = new System.Drawing.Size(200, 44);
             this.btnEnter.TabIndex = 7;
             this.btnEnter.Text = "Entrar";
             this.btnEnter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -147,9 +153,9 @@
             // Form_Login
             // 
             this.AcceptButton = this.btnEnter;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 380);
+            this.ClientSize = new System.Drawing.Size(800, 468);
             this.Controls.Add(this.btnEnter);
             this.Controls.Add(this.lblAlert);
             this.Controls.Add(this.lblPassword);
@@ -158,8 +164,11 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.txtLogin);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(600, 380);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(800, 468);
             this.Name = "Form_Login";
+            this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
             this.Sizable = false;
             this.Text = "Escola Virtual";
             this.Activated += new System.EventHandler(this.Form_Login_Activated);

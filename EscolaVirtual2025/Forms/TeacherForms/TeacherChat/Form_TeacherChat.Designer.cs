@@ -85,9 +85,11 @@
             // 
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(20, 126);
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(27, 155);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(349, 277);
+            this.listBox1.Size = new System.Drawing.Size(465, 340);
             this.listBox1.TabIndex = 0;
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
@@ -97,11 +99,11 @@
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.listBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 24);
+            this.panel1.Location = new System.Drawing.Point(4, 30);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(20);
-            this.panel1.Size = new System.Drawing.Size(389, 423);
+            this.panel1.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
+            this.panel1.Size = new System.Drawing.Size(519, 520);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -110,12 +112,13 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.cbbTurmas, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(20, 69);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(27, 85);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(349, 49);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(465, 60);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // cbbTurmas
@@ -134,11 +137,12 @@
             this.cbbTurmas.FormattingEnabled = true;
             this.cbbTurmas.IntegralHeight = false;
             this.cbbTurmas.ItemHeight = 43;
-            this.cbbTurmas.Location = new System.Drawing.Point(3, 3);
+            this.cbbTurmas.Location = new System.Drawing.Point(4, 4);
+            this.cbbTurmas.Margin = new System.Windows.Forms.Padding(4);
             this.cbbTurmas.MaxDropDownItems = 4;
             this.cbbTurmas.MouseState = MaterialSkin.MouseState.OUT;
             this.cbbTurmas.Name = "cbbTurmas";
-            this.cbbTurmas.Size = new System.Drawing.Size(343, 49);
+            this.cbbTurmas.Size = new System.Drawing.Size(457, 49);
             this.cbbTurmas.StartIndex = 0;
             this.cbbTurmas.TabIndex = 2;
             this.cbbTurmas.SelectedIndexChanged += new System.EventHandler(this.cbbTurmas_SelectedIndexChanged);
@@ -149,12 +153,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.cbbAnos, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 20);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(27, 25);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(349, 49);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(465, 60);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // cbbAnos
@@ -172,28 +177,31 @@
             this.cbbAnos.FormattingEnabled = true;
             this.cbbAnos.IntegralHeight = false;
             this.cbbAnos.ItemHeight = 43;
-            this.cbbAnos.Location = new System.Drawing.Point(3, 3);
+            this.cbbAnos.Location = new System.Drawing.Point(4, 4);
+            this.cbbAnos.Margin = new System.Windows.Forms.Padding(4);
             this.cbbAnos.MaxDropDownItems = 4;
             this.cbbAnos.MouseState = MaterialSkin.MouseState.OUT;
             this.cbbAnos.Name = "cbbAnos";
-            this.cbbAnos.Size = new System.Drawing.Size(343, 49);
+            this.cbbAnos.Size = new System.Drawing.Size(457, 49);
             this.cbbAnos.StartIndex = 0;
             this.cbbAnos.TabIndex = 2;
             this.cbbAnos.SelectedIndexChanged += new System.EventHandler(this.cbbAnos_SelectedIndexChanged);
             // 
             // Form_TeacherChat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 450);
+            this.ClientSize = new System.Drawing.Size(527, 554);
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form_TeacherChat";
-            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(4, 30, 4, 4);
             this.Sizable = false;
             this.Text = "Form_TeacherChat";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_TeacherChat_FormClosed);
             this.Load += new System.EventHandler(this.Form_TeacherChat_Load);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

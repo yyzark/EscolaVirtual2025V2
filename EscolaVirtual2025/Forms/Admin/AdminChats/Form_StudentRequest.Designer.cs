@@ -59,10 +59,11 @@
             this.grbFrom.Controls.Add(this.tableLayoutPanel2);
             this.grbFrom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grbFrom.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.grbFrom.Location = new System.Drawing.Point(3, 3);
+            this.grbFrom.Location = new System.Drawing.Point(4, 4);
+            this.grbFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grbFrom.Name = "grbFrom";
-            this.grbFrom.Padding = new System.Windows.Forms.Padding(10);
-            this.grbFrom.Size = new System.Drawing.Size(391, 337);
+            this.grbFrom.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.grbFrom.Size = new System.Drawing.Size(521, 414);
             this.grbFrom.TabIndex = 2;
             this.grbFrom.TabStop = false;
             this.grbFrom.Text = "De";
@@ -77,7 +78,8 @@
             this.tableLayoutPanel2.Controls.Add(this.lblUser, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblName, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 36);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 45);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -85,7 +87,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(371, 291);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(495, 357);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
             // lblNif
@@ -94,10 +96,11 @@
             this.lblNif.Depth = 0;
             this.lblNif.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNif.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNif.Location = new System.Drawing.Point(3, 232);
+            this.lblNif.Location = new System.Drawing.Point(4, 284);
+            this.lblNif.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNif.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNif.Name = "lblNif";
-            this.lblNif.Size = new System.Drawing.Size(365, 59);
+            this.lblNif.Size = new System.Drawing.Size(487, 73);
             this.lblNif.TabIndex = 5;
             this.lblNif.Text = "Nif:";
             this.lblNif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -108,10 +111,11 @@
             this.lblClassRoom.Depth = 0;
             this.lblClassRoom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblClassRoom.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblClassRoom.Location = new System.Drawing.Point(3, 174);
+            this.lblClassRoom.Location = new System.Drawing.Point(4, 213);
+            this.lblClassRoom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClassRoom.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblClassRoom.Name = "lblClassRoom";
-            this.lblClassRoom.Size = new System.Drawing.Size(365, 58);
+            this.lblClassRoom.Size = new System.Drawing.Size(487, 71);
             this.lblClassRoom.TabIndex = 4;
             this.lblClassRoom.Text = "Turma:";
             this.lblClassRoom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,10 +126,11 @@
             this.lblPassword.Depth = 0;
             this.lblPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPassword.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblPassword.Location = new System.Drawing.Point(3, 116);
+            this.lblPassword.Location = new System.Drawing.Point(4, 142);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPassword.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(365, 58);
+            this.lblPassword.Size = new System.Drawing.Size(487, 71);
             this.lblPassword.TabIndex = 3;
             this.lblPassword.Text = "Password:";
             this.lblPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -136,10 +141,11 @@
             this.lblUser.Depth = 0;
             this.lblUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblUser.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblUser.Location = new System.Drawing.Point(3, 0);
+            this.lblUser.Location = new System.Drawing.Point(4, 0);
+            this.lblUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUser.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(365, 58);
+            this.lblUser.Size = new System.Drawing.Size(487, 71);
             this.lblUser.TabIndex = 1;
             this.lblUser.Text = "Utilizador:";
             this.lblUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -150,10 +156,11 @@
             this.lblName.Depth = 0;
             this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblName.Location = new System.Drawing.Point(3, 58);
+            this.lblName.Location = new System.Drawing.Point(4, 71);
+            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblName.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(365, 58);
+            this.lblName.Size = new System.Drawing.Size(487, 71);
             this.lblName.TabIndex = 2;
             this.lblName.Text = "Nome:";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -168,12 +175,13 @@
             this.tableLayoutPanel1.Controls.Add(this.grbTo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.grbFrom, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 64);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 79);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 383);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1059, 471);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // btnAccept
@@ -184,15 +192,15 @@
             this.btnAccept.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAccept.HighEmphasis = true;
             this.btnAccept.Icon = null;
-            this.btnAccept.Location = new System.Drawing.Point(401, 349);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAccept.Location = new System.Drawing.Point(534, 429);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnAccept.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAccept.Size = new System.Drawing.Size(389, 28);
+            this.btnAccept.Size = new System.Drawing.Size(520, 35);
             this.btnAccept.TabIndex = 7;
             this.btnAccept.Text = "Aprovar";
-            this.btnAccept.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnAccept.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
             this.btnAccept.UseAccentColor = false;
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
@@ -205,15 +213,15 @@
             this.btnReject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnReject.HighEmphasis = true;
             this.btnReject.Icon = null;
-            this.btnReject.Location = new System.Drawing.Point(4, 349);
-            this.btnReject.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnReject.Location = new System.Drawing.Point(5, 429);
+            this.btnReject.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnReject.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnReject.Name = "btnReject";
             this.btnReject.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnReject.Size = new System.Drawing.Size(389, 28);
+            this.btnReject.Size = new System.Drawing.Size(519, 35);
             this.btnReject.TabIndex = 6;
             this.btnReject.Text = "Recusar";
-            this.btnReject.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnReject.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
             this.btnReject.UseAccentColor = false;
             this.btnReject.UseVisualStyleBackColor = true;
             this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
@@ -224,10 +232,11 @@
             this.grbTo.Controls.Add(this.tableLayoutPanel3);
             this.grbTo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grbTo.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.grbTo.Location = new System.Drawing.Point(400, 3);
+            this.grbTo.Location = new System.Drawing.Point(533, 4);
+            this.grbTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grbTo.Name = "grbTo";
-            this.grbTo.Padding = new System.Windows.Forms.Padding(10);
-            this.grbTo.Size = new System.Drawing.Size(391, 337);
+            this.grbTo.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.grbTo.Size = new System.Drawing.Size(522, 414);
             this.grbTo.TabIndex = 3;
             this.grbTo.TabStop = false;
             this.grbTo.Text = "Para";
@@ -242,7 +251,8 @@
             this.tableLayoutPanel3.Controls.Add(this.lblNewLogin, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.lblNewName, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(10, 36);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(13, 45);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 5;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -250,7 +260,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(371, 291);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(496, 357);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
             // lblNewNif
@@ -259,10 +269,11 @@
             this.lblNewNif.Depth = 0;
             this.lblNewNif.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNewNif.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNewNif.Location = new System.Drawing.Point(3, 232);
+            this.lblNewNif.Location = new System.Drawing.Point(4, 284);
+            this.lblNewNif.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNewNif.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNewNif.Name = "lblNewNif";
-            this.lblNewNif.Size = new System.Drawing.Size(365, 59);
+            this.lblNewNif.Size = new System.Drawing.Size(488, 73);
             this.lblNewNif.TabIndex = 5;
             this.lblNewNif.Text = "Nif:";
             this.lblNewNif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -273,10 +284,11 @@
             this.lblNewClassRoom.Depth = 0;
             this.lblNewClassRoom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNewClassRoom.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNewClassRoom.Location = new System.Drawing.Point(3, 174);
+            this.lblNewClassRoom.Location = new System.Drawing.Point(4, 213);
+            this.lblNewClassRoom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNewClassRoom.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNewClassRoom.Name = "lblNewClassRoom";
-            this.lblNewClassRoom.Size = new System.Drawing.Size(365, 58);
+            this.lblNewClassRoom.Size = new System.Drawing.Size(488, 71);
             this.lblNewClassRoom.TabIndex = 4;
             this.lblNewClassRoom.Text = "Turma:";
             this.lblNewClassRoom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -287,10 +299,11 @@
             this.lblNewPassword.Depth = 0;
             this.lblNewPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNewPassword.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNewPassword.Location = new System.Drawing.Point(3, 116);
+            this.lblNewPassword.Location = new System.Drawing.Point(4, 142);
+            this.lblNewPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNewPassword.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNewPassword.Name = "lblNewPassword";
-            this.lblNewPassword.Size = new System.Drawing.Size(365, 58);
+            this.lblNewPassword.Size = new System.Drawing.Size(488, 71);
             this.lblNewPassword.TabIndex = 3;
             this.lblNewPassword.Text = "Password:";
             this.lblNewPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -301,10 +314,11 @@
             this.lblNewLogin.Depth = 0;
             this.lblNewLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNewLogin.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNewLogin.Location = new System.Drawing.Point(3, 0);
+            this.lblNewLogin.Location = new System.Drawing.Point(4, 0);
+            this.lblNewLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNewLogin.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNewLogin.Name = "lblNewLogin";
-            this.lblNewLogin.Size = new System.Drawing.Size(365, 58);
+            this.lblNewLogin.Size = new System.Drawing.Size(488, 71);
             this.lblNewLogin.TabIndex = 1;
             this.lblNewLogin.Text = "Utilizador:";
             this.lblNewLogin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -315,23 +329,26 @@
             this.lblNewName.Depth = 0;
             this.lblNewName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNewName.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNewName.Location = new System.Drawing.Point(3, 58);
+            this.lblNewName.Location = new System.Drawing.Point(4, 71);
+            this.lblNewName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNewName.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNewName.Name = "lblNewName";
-            this.lblNewName.Size = new System.Drawing.Size(365, 58);
+            this.lblNewName.Size = new System.Drawing.Size(488, 71);
             this.lblNewName.TabIndex = 2;
             this.lblNewName.Text = "Nome:";
             this.lblNewName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form_StudentRequest
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Form_StudentRequest";
+            this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
             this.Sizable = false;
             this.Text = "Form_StudentRequest";
             this.Load += new System.EventHandler(this.Form_StudentRequest_Load);

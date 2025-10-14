@@ -48,12 +48,12 @@ namespace EscolaVirtual2025
 
             txtPassword.Text = "Senha";
             txtPassword.ForeColor = Color.Gray;
-            txtPassword.UseSystemPasswordChar = false;
+            txtPassword.PasswordChar = '\0';
 
             // Eventos
             txtLogin.Enter += (s, e) =>
             {
-                if (txtLogin.Text == "Nome de utilizador")
+                if (txtLogin.Text == "Utilizador")
                 {
                     txtLogin.Text = "";
                     txtLogin.ForeColor = Color.Black;
@@ -85,7 +85,7 @@ namespace EscolaVirtual2025
                 {
                     txtPassword.Text = "Senha";
                     txtPassword.ForeColor = Color.Gray;
-                    txtPassword.PasswordChar = '*'; // mostra texto
+                    txtPassword.PasswordChar = '\0'; // mostra texto
                 }
             };
             #endregion
@@ -137,10 +137,13 @@ namespace EscolaVirtual2025
             //id do cartão escolar inicial a 0
             Program.SchoolCardsCounter = 0;
 
-            #region Credenciais Iniciais (probably apagar depois)            
+            #region Credenciais Iniciais (probably apagar depois)  
             string cred = File.ReadLines("Credenciais_Admin\\Admin.txt").First();
             txtLogin.Text = cred.Split(' ')[0];
             txtPassword.Text = cred.Split(' ')[1];
+            txtLogin.ForeColor = Color.Black;
+            txtPassword.ForeColor = Color.Black;
+            txtPassword.PasswordChar = '*';
             #endregion
 
             #region anos e disciplinas default
@@ -157,28 +160,6 @@ namespace EscolaVirtual2025
 
             Program.Anos[0].Subjects.AddRange(Program.Subjects);
             Program.Anos[1].Subjects.AddRange(Program.Subjects);
-
-            #endregion
-
-            #region TESTES PARA APAGAR NAO ESQUECER
-            ClassRoom decimoA = new ClassRoom('A', Program.Anos[0]);
-            //Aluno para teste
-            Student yyzark = new Student("yyzark", "1234", "Nikita Khveshchuk", "281118400", decimoA, new SchoolCard(-1));
-            decimoA.Students[0] = yyzark;
-            decimoA.StudentsCount++;
-            Program.Users.Add(yyzark);
-            Program.students.Add(yyzark);
-
-            Program.ClassRooms.Add(decimoA);
-            Program.Anos[0].ClassRooms.Add(decimoA);
-            //add do professor para fzr testes
-            Teacher JRC = new Teacher("JRC", "1234", "José Costa", "999999999",Program.Subjects[4]);
-            decimoA.Subjects[4].AssignedTeacher = JRC;
-            Program.Subjects[4].Teachers.Add(JRC);
-            JRC.AssignedClassRooms.Add(decimoA);
-            Program.Users.Add(JRC);
-            Program.Teachers.Add(JRC);
-
 
             #endregion
         }
