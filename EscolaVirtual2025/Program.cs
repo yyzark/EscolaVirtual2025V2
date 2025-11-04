@@ -1,14 +1,16 @@
 ﻿using EscolaVirtual2025.Classes;
+using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Classes.Chat;
+using EscolaVirtual2025.Classes.Users;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.IO.Pipes;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EscolaVirtual2025.Classes.Users;
-using EscolaVirtual2025.Classes.Academic;
-using System.IO.Pipes;
-using System.Globalization;
-using System.Threading;
 
 
 namespace EscolaVirtual2025
@@ -46,6 +48,13 @@ namespace EscolaVirtual2025
         //
         public static int SchoolCardsCounter;
 
+
+        // 🔹 Caminho base na pasta "Documents"
+        private static readonly string documentsPath =
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private static readonly string saveFolder =
+            Path.Combine(documentsPath, "EscolaData"); // Subpasta
+
         [STAThread]
         static void Main()
         {
@@ -60,6 +69,59 @@ namespace EscolaVirtual2025
 
             
             Application.Run(formLogin);
+        }
+
+        public static void Save()
+        {
+            Directory.CreateDirectory(saveFolder); 
+
+            var options = new System.Text.Json.JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles
+            };
+
+            File.WriteAllText(Path.Combine(saveFolder, "users.json"), System.Text.Json.JsonSerializer.Serialize(Users, options));
+            File.WriteAllText(Path.Combine(saveFolder, "anos.json"), System.Text.Json.JsonSerializer.Serialize(Anos, options));
+            File.WriteAllText(Path.Combine(saveFolder, "subjects.json"), System.Text.Json.JsonSerializer.Serialize(Subjects, options));
+            File.WriteAllText(Path.Combine(saveFolder, "teachers.json"), System.Text.Json.JsonSerializer.Serialize(Teachers, options));
+            File.WriteAllText(Path.Combine(saveFolder, "students.json"), System.Text.Json.JsonSerializer.Serialize(students, options));
+            File.WriteAllText(Path.Combine(saveFolder, "classrooms.json"), System.Text.Json.JsonSerializer.Serialize(ClassRooms, options));
+            ChatManager.Save();
+        }
+
+        public static void Load()
+        {
+            if (!Directory.Exists(saveFolder))
+            {
+                Directory.CreateDirectory(saveFolder);
+
+                Users = new List<User>();
+                Anos = new List<Year>();
+                Subjects = new List<Subject>();
+                Teachers = new List<Teacher>();
+                students = new List<Student>();
+                ClassRooms = new List<ClassRoom>();
+                return;
+            }
+
+            Users = LoadList<User>("users.json");
+            Anos = LoadList<Year>("anos.json");
+            Subjects = LoadList<Subject>("subjects.json");
+            Teachers = LoadList<Teacher>("teachers.json");
+            students = LoadList<Student>("students.json");
+            ClassRooms = LoadList<ClassRoom>("classrooms.json");
+            ChatManager.Load();
+        }
+
+        private static List<T> LoadList<T>(string fileName)
+        {
+            string filePath = Path.Combine(saveFolder, fileName);
+            if (!File.Exists(filePath))
+                return new List<T>(); // Devolve uma lista vazia se o arquivo não existir
+
+            string json = File.ReadAllText(filePath);
+            return System.Text.Json.JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
         }
     }
 }

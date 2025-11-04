@@ -129,7 +129,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                     Program.Users.Add(newStudent);
 
                     MessageBox.Show("Aluno adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    Program.Save();
                     this.Close();
                 }
             }

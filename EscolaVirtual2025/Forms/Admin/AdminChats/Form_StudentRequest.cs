@@ -119,7 +119,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
 
             // Remove notificação do admin
             Program.Users[0].Notifications.Remove(m_notification);
-
+            Program.Save();
             this.Close();
         }
     }

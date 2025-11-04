@@ -100,6 +100,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
                     MessageBoxIcon.Information
                 );
 
+                Program.Save();
                 this.Close();
             }
         }

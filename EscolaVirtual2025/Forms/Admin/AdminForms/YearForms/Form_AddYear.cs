@@ -62,7 +62,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
             MessageBox.Show($"{newYear}º ano adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             Program.Anos.Sort((a, b) => a.AnoId.CompareTo(b.AnoId));
-
+            Program.Save();
             this.Close();
         }
     }

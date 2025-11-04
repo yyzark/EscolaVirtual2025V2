@@ -46,7 +46,7 @@
             this.tableLayoutPanel1.Controls.Add(this.cbbYear, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 30);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
             this.tableLayoutPanel1.RowCount = 2;
@@ -119,7 +119,7 @@
             this.cbbYear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbbYear.FormattingEnabled = true;
             this.cbbYear.Location = new System.Drawing.Point(17, 16);
-            this.cbbYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbbYear.Margin = new System.Windows.Forms.Padding(4);
             this.cbbYear.Name = "cbbYear";
             this.cbbYear.Size = new System.Drawing.Size(251, 24);
             this.cbbYear.TabIndex = 2;
@@ -135,7 +135,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form_AddClassRooms";
             this.Padding = new System.Windows.Forms.Padding(4, 30, 4, 4);

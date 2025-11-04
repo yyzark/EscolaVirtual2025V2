@@ -40,13 +40,13 @@
             this.listMessages.BorderColor = System.Drawing.Color.LightGray;
             this.listMessages.Depth = 0;
             this.listMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.listMessages.Location = new System.Drawing.Point(15, 65);
-            this.listMessages.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listMessages.Location = new System.Drawing.Point(20, 80);
+            this.listMessages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listMessages.MouseState = MaterialSkin.MouseState.HOVER;
             this.listMessages.Name = "listMessages";
             this.listMessages.SelectedIndex = -1;
             this.listMessages.SelectedItem = null;
-            this.listMessages.Size = new System.Drawing.Size(405, 268);
+            this.listMessages.Size = new System.Drawing.Size(540, 330);
             this.listMessages.TabIndex = 0;
             // 
             // txtMessage
@@ -56,13 +56,13 @@
             this.txtMessage.Depth = 0;
             this.txtMessage.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtMessage.LeadingIcon = null;
-            this.txtMessage.Location = new System.Drawing.Point(15, 349);
-            this.txtMessage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMessage.Location = new System.Drawing.Point(20, 430);
+            this.txtMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMessage.MaxLength = 200;
             this.txtMessage.MouseState = MaterialSkin.MouseState.OUT;
             this.txtMessage.Multiline = false;
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(315, 50);
+            this.txtMessage.Size = new System.Drawing.Size(420, 50);
             this.txtMessage.TabIndex = 1;
             this.txtMessage.Text = "";
             this.txtMessage.TrailingIcon = null;
@@ -74,8 +74,8 @@
             this.btnSend.Depth = 0;
             this.btnSend.HighEmphasis = true;
             this.btnSend.Icon = null;
-            this.btnSend.Location = new System.Drawing.Point(345, 358);
-            this.btnSend.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnSend.Location = new System.Drawing.Point(460, 441);
+            this.btnSend.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSend.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSend.Name = "btnSend";
             this.btnSend.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -90,21 +90,22 @@
             // Form_Chat
             // 
             this.AcceptButton = this.btnSend;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 414);
+            this.ClientSize = new System.Drawing.Size(580, 510);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.listMessages);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_Chat";
-            this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
+            this.Padding = new System.Windows.Forms.Padding(3, 64, 3, 2);
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Chat";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Chat_FormClosing);
             this.Load += new System.EventHandler(this.Form_Chat_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

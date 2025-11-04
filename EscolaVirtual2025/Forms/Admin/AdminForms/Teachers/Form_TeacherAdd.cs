@@ -200,6 +200,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                                     "Sucesso",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
+                    Program.Save();
 
                     this.Close();
                 }

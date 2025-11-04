@@ -43,6 +43,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
         {
             m_grade.p_Grade[m_per] = Convert.ToInt32(nudGrade.Value);
             m_grade.Comment[m_per] = txtComment.Text;
+            Program.Save();
             this.Close();
         }
 

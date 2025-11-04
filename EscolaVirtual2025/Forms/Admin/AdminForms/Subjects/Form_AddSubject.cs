@@ -72,7 +72,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
                     }
                 }
             }
-
+            Program.Save();
             this.Close();
         }
 

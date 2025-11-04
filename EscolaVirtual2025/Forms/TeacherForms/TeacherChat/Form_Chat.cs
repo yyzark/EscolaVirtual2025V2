@@ -63,5 +63,10 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
             if (listMessages.Items.Count > 0)
                 listMessages.SelectedIndex = listMessages.Items.Count - 1;
         }
+
+        private void Form_Chat_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.Save();
+        }
     }
 }

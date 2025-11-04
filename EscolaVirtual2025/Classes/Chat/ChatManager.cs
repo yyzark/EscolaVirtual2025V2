@@ -3,8 +3,10 @@ using EscolaVirtual2025.Classes.Users;
 using EscolaVirtual2025.Forms.Admin;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -68,5 +70,46 @@ namespace EscolaVirtual2025.Classes.Chat
             return Chats.Where(c => c.Student == student).ToList();
         }
 
+
+        private static readonly string documentsPath =
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        private static readonly string saveFolder =
+            Path.Combine(documentsPath, "EscolaData");
+
+        private static readonly string chatFile =
+            Path.Combine(saveFolder, "chats.json");
+
+
+        public static void Save()
+        {
+            Directory.CreateDirectory(saveFolder);
+            JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+
+            File.WriteAllText(chatFile, JsonSerializer.Serialize(Chats, options));
+
+        }
+
+        public static void Load()
+        {
+            try
+            {
+                if (!File.Exists(chatFile))
+                {
+                    Chats = new List<Chat>();
+                    return;
+                }
+
+                string json = File.ReadAllText(chatFile);
+                Chats = JsonSerializer.Deserialize<List<Chat>>(json) ?? new List<Chat>();
+            }
+            catch (FileNotFoundException ex)
+            {
+
+                    Chats = new List<Chat>();
+                    Load();
+                
+            }
+        }
     }
 }
