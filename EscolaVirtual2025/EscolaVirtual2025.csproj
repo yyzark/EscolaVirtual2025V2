@@ -111,6 +111,7 @@
     <Compile Include="Classes\Chat\Notification.cs" />
     <Compile Include="Classes\Chat\NotificationMessage.cs" />
     <Compile Include="Classes\Chat\Request.cs" />
+    <Compile Include="Classes\Relatorio.cs" />
     <Compile Include="Classes\Users\Student.cs" />
     <Compile Include="Classes\Users\TeacherStudent.cs" />
     <Compile Include="Classes\Users\Teacher.cs" />

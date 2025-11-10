@@ -90,7 +90,7 @@ namespace EscolaVirtual2025
             ChatManager.Save();
         }
 
-        public static void Load()
+        /*public static void Load()
         {
             if (!Directory.Exists(saveFolder))
             {
@@ -122,6 +122,6 @@ namespace EscolaVirtual2025
 
             string json = File.ReadAllText(filePath);
             return System.Text.Json.JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
-        }
+        }*/
     }
 }

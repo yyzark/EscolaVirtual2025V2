@@ -36,5 +36,7 @@ namespace EscolaVirtual2025.Classes.Users
             m_grades = new List<Grade>();
             this.SchoolCard = schoolCard;
         }
+
+        public Student() { }
     }
 }

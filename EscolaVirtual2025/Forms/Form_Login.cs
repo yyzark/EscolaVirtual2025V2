@@ -106,7 +106,7 @@ namespace EscolaVirtual2025
 
         private void Form_Login_Load(object sender, EventArgs e)
         {
-            Program.Load();
+            //Program.Load();
 
             #region inicialização das listas globais
             Program.Users = new List<User>();
