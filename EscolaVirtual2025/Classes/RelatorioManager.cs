@@ -19,21 +19,28 @@ namespace EscolaVirtual2025.Classes
         public static Relatorio GerarRelatorioTurma(Relatorio r, int periodo)
         {
             //Media Turma
-            double mediaTurma = r.ListaAlunos.SelectMany(s => s.Grades).Where(n => n.Gradesubject == r.Subject).Average(n => n.p_Grade[periodo]);
+            double mediaTurma = r.ListaAlunos
+                .Where(s => s != null)
+                .SelectMany(s => s.Grades)
+                .Where(n => n.Gradesubject == r.Subject)
+                .Average(n => n.p_Grade[periodo]);
 
             //Melhor Aluno
             int melhorNota = 0;
             Student bestStudent = new Student();
             foreach (Student st in r.ListaAlunos)
             {
-                foreach (Grade gr in st.Grades)
+                if (st != null)
                 {
-                    if (gr.Gradesubject == r.Subject)
+                    foreach (Grade gr in st.Grades)
                     {
-                        if (gr.p_Grade[periodo] > melhorNota)
+                        if (gr.Gradesubject == r.Subject)
                         {
-                            melhorNota = gr.p_Grade[periodo];
-                            bestStudent = st;
+                            if (gr.p_Grade[periodo] > melhorNota)
+                            {
+                                melhorNota = gr.p_Grade[periodo];
+                                bestStudent = st;
+                            }
                         }
                     }
                 }
@@ -45,14 +52,17 @@ namespace EscolaVirtual2025.Classes
             Student worstStudent = new Student();
             foreach (Student st in r.ListaAlunos)
             {
-                foreach (Grade gr in st.Grades)
+                if (st != null)
                 {
-                    if (gr.Gradesubject == r.Subject)
+                    foreach (Grade gr in st.Grades)
                     {
-                        if (gr.p_Grade[periodo] < piorNota)
+                        if (gr.Gradesubject == r.Subject)
                         {
-                            piorNota = gr.p_Grade[periodo];
-                            worstStudent = st;
+                            if (gr.p_Grade[periodo] < piorNota)
+                            {
+                                piorNota = gr.p_Grade[periodo];
+                                worstStudent = st;
+                            }
                         }
                     }
                 }

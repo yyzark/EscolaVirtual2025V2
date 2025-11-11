@@ -3,6 +3,7 @@ using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
 using EscolaVirtual2025.Forms.TeacherForms.TeacherAccount;
 using EscolaVirtual2025.Forms.TeacherForms.TeacherChat;
+using EscolaVirtual2025.Forms.TeacherForms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
@@ -15,13 +16,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Schema;
+using EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher;
 
 namespace EscolaVirtual2025.Forms.TeacherForms
 {
     public partial class Form_Teacher : MaterialForm
     {
-        private Teacher tchr;
-        private Relatorio rlt;
+        public Teacher tchr;
+        public Relatorio rlt;
         private bool ClosedByButton = false;
         public Form_Teacher()
         {
@@ -143,6 +145,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void cbbClassRoom_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btnReport.Enabled = true;
             lsbStudents.Items.Clear();
             foreach(Student st in Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex].Students)
             {
@@ -193,9 +196,12 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void btnReport_Click(object sender, EventArgs e)
         {
+
             rlt = new Relatorio(Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex], tchr);
-            RelatorioManager.RelatorioList.Add(rlt);
-            RelatorioManager.GerarRelatorioTurma(rlt, 1);
+            Form_Relatorio frm = new Form_Relatorio(rlt);
+            frm.ShowDialog();
+            this.Hide();
+            
         }
     }
 }

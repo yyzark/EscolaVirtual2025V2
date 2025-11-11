@@ -40,7 +40,15 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
 
         private void Form_Relatorio_Load(object sender, EventArgs e)
         {
+            txtTurma.Text = "Turma: " + relatorio.Room.Year.AnoId + "º " + relatorio.Room.Id;
+            lblDisc.Text = "Disciplina: " + relatorio.Subject.Name;
+        }
 
+        private void btnRelatório1_Click(object sender, EventArgs e)
+        {
+            lblMedia1.Text = "Média: " + RelatorioManager.GerarRelatorioTurma(relatorio, 0).MediaTurma;
+            lblBS1.Text = "Melhor Aluno: " + RelatorioManager.GerarRelatorioTurma(relatorio, 0).MelhorAluno.Name;
+            lblWS1.Text = "Pior Aluno: " + RelatorioManager.GerarRelatorioTurma(relatorio, 0).PiorAluno.Name;
         }
     }
 }
