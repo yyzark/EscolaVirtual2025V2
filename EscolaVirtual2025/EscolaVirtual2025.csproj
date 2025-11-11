@@ -112,6 +112,7 @@
     <Compile Include="Classes\Chat\NotificationMessage.cs" />
     <Compile Include="Classes\Chat\Request.cs" />
     <Compile Include="Classes\Relatorio.cs" />
+    <Compile Include="Classes\RelatorioManager.cs" />
     <Compile Include="Classes\Users\Student.cs" />
     <Compile Include="Classes\Users\TeacherStudent.cs" />
     <Compile Include="Classes\Users\Teacher.cs" />
@@ -285,6 +286,12 @@
     <Compile Include="Forms\TeacherForms\Form_Teacher.Designer.cs">
       <DependentUpon>Form_Teacher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TeacherForms\RelatorioTeacher\Form_Relatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TeacherForms\RelatorioTeacher\Form_Relatorio.Designer.cs">
+      <DependentUpon>Form_Relatorio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeacherForms\TeacherAccount\Form_EditTeacherAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -403,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\Form_Teacher.resx">
       <DependentUpon>Form_Teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeacherForms\RelatorioTeacher\Form_Relatorio.resx">
+      <DependentUpon>Form_Relatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherForms\TeacherAccount\Form_EditTeacherAccount.resx">
       <DependentUpon>Form_EditTeacherAccount.cs</DependentUpon>

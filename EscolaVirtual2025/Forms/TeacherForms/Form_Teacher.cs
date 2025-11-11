@@ -21,6 +21,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
     public partial class Form_Teacher : MaterialForm
     {
         private Teacher tchr;
+        private Relatorio rlt;
         private bool ClosedByButton = false;
         public Form_Teacher()
         {
@@ -188,6 +189,13 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void Form_Teacher_VisibleChanged(object sender, EventArgs e)
         {
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            rlt = new Relatorio(Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex], tchr);
+            RelatorioManager.RelatorioList.Add(rlt);
+            RelatorioManager.GerarRelatorioTurma(rlt, 1);
         }
     }
 }
