@@ -1,26 +1,21 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
-using EscolaVirtual2025.Forms.TeacherForms.TeacherAccount;
-using EscolaVirtual2025.Forms.TeacherForms.TeacherChat;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
 {
     public partial class Form_Relatorio : MaterialForm
     {
-        Relatorio relatorio;
-        public Form_Relatorio(Relatorio r)
+        //david campos sem nivel de acesso é crime
+        private ClassRoom classRoom;
+        private Teacher tchr;
+        public Form_Relatorio(ClassRoom classRoom, Teacher tchr)
         {
             InitializeComponent();
             #region MaterialSkin
@@ -35,20 +30,100 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
             TextShade.WHITE    // cor do texto;
             );
             #endregion
-            relatorio = r;
+
+            this.classRoom = classRoom;
+            this.tchr = tchr;
         }
 
         private void Form_Relatorio_Load(object sender, EventArgs e)
         {
-            txtTurma.Text = "Turma: " + relatorio.Room.Year.AnoId + "º " + relatorio.Room.Id;
-            lblDisc.Text = "Disciplina: " + relatorio.Subject.Name;
+            txtTurma.Text = "Turma: " + classRoom.Year.AnoId + "º " + classRoom.Id;
+            lblDisc.Text = "Disciplina: " + tchr.AssignedSubject.Name;
+
+            for (int i = 0; i < 3; i++)
+                LoadInfo(i);
         }
 
+        private void LoadInfo(int perNum)
+        {
+            Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.TeacherAtual == tchr && r.Room == classRoom && r.Period == perNum);
+            if (per != null && perNum == 0)
+            {
+                lblBS1.Text = "Melhor aluno:" + per.MelhorAluno.Name;
+                lblMedia1.Text = "Média:" + per.MediaTurma;
+                lblWS1.Text = "Pior aluno:" + per.PiorAluno.Name;
+                btnRelatório1.Text = "Exportar";
+            }
+            else if (per != null && perNum == 1)
+            {
+                lblBest2.Text = "Melhor aluno:" + per.MelhorAluno.Name;
+                lblMed2.Text = "Média:" + per.MediaTurma;
+                lblWorst2.Text = "Pior aluno:" + per.PiorAluno.Name;
+                btnRelatorio2.Text = "Exportar";
+            }
+            else if (per != null && perNum == 2)
+            {
+                lblBest3.Text = "Melhor aluno:" + per.MelhorAluno.Name;
+                lblMed3.Text = "Média:" + per.MediaTurma;
+                lblWorst3.Text = "Pior aluno:" + per.PiorAluno.Name;
+                btnRelatorio3.Text = "Exportar";
+            }
+        }
+
+        private void ExportReport(Button btn, int per)
+        {
+            if (btn.Text == "Exportar")
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+                saveFileDialog.Title = "Exportar relatório";
+
+                saveFileDialog.FileName = "Relatório_" + tchr.AssignedSubject.Name + "_" + classRoom.Year.AnoId + "º" + classRoom.Id + "_Per" + per + "_" + DateTime.Now.Date.ToString("dd_MM_yyyy");
+
+                saveFileDialog.Filter = "JSON files (*.json)|*.json|XML files (*.xml)|*.xml";
+
+                saveFileDialog.FilterIndex = 1;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    string extention = Path.GetExtension(filePath).ToLower();
+
+
+                    Relatorio rel = RelatorioManager.RelatorioList.FirstOrDefault(r => r.Room == classRoom && r.TeacherAtual == tchr && r.Period == per);
+
+                    if (extention == ".json")
+                    {
+                        RelatorioManager.ExportarRelatorioJSON(rel, filePath);
+                    }
+                    else if (extention == ".xml")
+                    {
+                        RelatorioManager.ExportarRelatorioXML(rel, filePath);
+                    }
+                    else
+                    {
+                        MaterialMessageBox.Show("Erro ao exportar o ficheiro!", "Erro");
+                    }
+                }
+            }
+            else
+            {
+                RelatorioManager.GerarRelatorioTurma(new Relatorio(classRoom, tchr, per));
+                LoadInfo(per);
+            }
+        }
         private void btnRelatório1_Click(object sender, EventArgs e)
         {
-            lblMedia1.Text = "Média: " + RelatorioManager.GerarRelatorioTurma(relatorio, 0).MediaTurma;
-            lblBS1.Text = "Melhor Aluno: " + RelatorioManager.GerarRelatorioTurma(relatorio, 0).MelhorAluno.Name;
-            lblWS1.Text = "Pior Aluno: " + RelatorioManager.GerarRelatorioTurma(relatorio, 0).PiorAluno.Name;
+            ExportReport(sender as Button, 0);
+        }
+        private void btnRelatorio2_Click(object sender, EventArgs e)
+        {
+            ExportReport(sender as Button, 1);
+        }
+
+        private void btnRelatorio3_Click(object sender, EventArgs e)
+        {
+            ExportReport(sender as Button, 2);
         }
     }
 }

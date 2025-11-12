@@ -196,9 +196,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-
-            rlt = new Relatorio(Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex], tchr);
-            Form_Relatorio frm = new Form_Relatorio(rlt);
+            Form_Relatorio frm = new Form_Relatorio(Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex], tchr);
             frm.ShowDialog();
             this.Hide();
             

@@ -1,14 +1,5 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Xml.Serialization;
-using System.IO;
-using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Classes
 {
@@ -21,18 +12,24 @@ namespace EscolaVirtual2025.Classes
         private Student piorAluno;
         private Student melhorAluno;
         private double media;
+        private int period;
 
         public ClassRoom Room { get { return room; } set { room = value; } }
         public Subject Subject { get { return subject; } set { subject = value; } }
         public Teacher TeacherAtual { get { return teacher; } set { teacher = value; } }
         public Student[] ListaAlunos { get { return students; } set { students = value; } }
 
-        public Relatorio(ClassRoom room, Teacher teacher)
+        public Relatorio(ClassRoom room, Teacher teacher, int period = 0)
         {
             Room = room;
             TeacherAtual = teacher;
             ListaAlunos = room.Students;
             Subject = teacher.AssignedSubject;
+            this.period = period;
+        }
+
+        public Relatorio()
+        {
         }
 
         public double MediaTurma
@@ -52,7 +49,8 @@ namespace EscolaVirtual2025.Classes
             set { piorAluno = value; }
             get { return piorAluno; }
         }
+
+        public int Period { get => period; set => period = value; }
     }
 }
 
-        

@@ -33,15 +33,15 @@
             this.tableLayoutPanelPeriods = new System.Windows.Forms.TableLayoutPanel();
             this.grbThirdPeriod = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblWorst3 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblBest3 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblMed3 = new MaterialSkin.Controls.MaterialLabel();
             this.btnRelatorio3 = new MaterialSkin.Controls.MaterialButton();
             this.grbSecondPeriod = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblWorst2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblBest2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblMed2 = new MaterialSkin.Controls.MaterialLabel();
             this.btnRelatorio2 = new MaterialSkin.Controls.MaterialButton();
             this.grbFirstPeriod = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanelNota1 = new System.Windows.Forms.TableLayoutPanel();
@@ -71,7 +71,7 @@
             this.panel1.Location = new System.Drawing.Point(2, 52);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.panel1.Padding = new System.Windows.Forms.Padding(20);
             this.panel1.Size = new System.Drawing.Size(707, 400);
             this.panel1.TabIndex = 1;
             // 
@@ -125,9 +125,9 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.materialLabel6, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.materialLabel7, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.materialLabel8, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblWorst3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblBest3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblMed3, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -138,47 +138,47 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(211, 239);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // materialLabel6
+            // lblWorst3
             // 
-            this.materialLabel6.AutoSize = true;
-            this.materialLabel6.Depth = 0;
-            this.materialLabel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(3, 158);
-            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(205, 81);
-            this.materialLabel6.TabIndex = 2;
-            this.materialLabel6.Text = "Pior Aluno:";
-            this.materialLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblWorst3.AutoSize = true;
+            this.lblWorst3.Depth = 0;
+            this.lblWorst3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblWorst3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblWorst3.Location = new System.Drawing.Point(3, 158);
+            this.lblWorst3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblWorst3.Name = "lblWorst3";
+            this.lblWorst3.Size = new System.Drawing.Size(205, 81);
+            this.lblWorst3.TabIndex = 2;
+            this.lblWorst3.Text = "Pior Aluno:";
+            this.lblWorst3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // materialLabel7
+            // lblBest3
             // 
-            this.materialLabel7.AutoSize = true;
-            this.materialLabel7.Depth = 0;
-            this.materialLabel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(3, 79);
-            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel7.Name = "materialLabel7";
-            this.materialLabel7.Size = new System.Drawing.Size(205, 79);
-            this.materialLabel7.TabIndex = 1;
-            this.materialLabel7.Text = "Melhor Aluno:";
-            this.materialLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBest3.AutoSize = true;
+            this.lblBest3.Depth = 0;
+            this.lblBest3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBest3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblBest3.Location = new System.Drawing.Point(3, 79);
+            this.lblBest3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblBest3.Name = "lblBest3";
+            this.lblBest3.Size = new System.Drawing.Size(205, 79);
+            this.lblBest3.TabIndex = 1;
+            this.lblBest3.Text = "Melhor Aluno:";
+            this.lblBest3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // materialLabel8
+            // lblMed3
             // 
-            this.materialLabel8.AutoSize = true;
-            this.materialLabel8.Depth = 0;
-            this.materialLabel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel8.Location = new System.Drawing.Point(3, 0);
-            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(205, 79);
-            this.materialLabel8.TabIndex = 0;
-            this.materialLabel8.Text = "Média: ";
-            this.materialLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMed3.AutoSize = true;
+            this.lblMed3.Depth = 0;
+            this.lblMed3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMed3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblMed3.Location = new System.Drawing.Point(3, 0);
+            this.lblMed3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblMed3.Name = "lblMed3";
+            this.lblMed3.Size = new System.Drawing.Size(205, 79);
+            this.lblMed3.TabIndex = 0;
+            this.lblMed3.Text = "Média: ";
+            this.lblMed3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnRelatorio3
             // 
@@ -199,6 +199,7 @@
             this.btnRelatorio3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnRelatorio3.UseAccentColor = false;
             this.btnRelatorio3.UseVisualStyleBackColor = true;
+            this.btnRelatorio3.Click += new System.EventHandler(this.btnRelatorio3_Click);
             // 
             // grbSecondPeriod
             // 
@@ -216,9 +217,9 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.materialLabel1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.materialLabel4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.materialLabel5, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblWorst2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblBest2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblMed2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -229,47 +230,47 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(210, 239);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // materialLabel1
+            // lblWorst2
             // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(3, 158);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(204, 81);
-            this.materialLabel1.TabIndex = 2;
-            this.materialLabel1.Text = "Pior Aluno:";
-            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblWorst2.AutoSize = true;
+            this.lblWorst2.Depth = 0;
+            this.lblWorst2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblWorst2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblWorst2.Location = new System.Drawing.Point(3, 158);
+            this.lblWorst2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblWorst2.Name = "lblWorst2";
+            this.lblWorst2.Size = new System.Drawing.Size(204, 81);
+            this.lblWorst2.TabIndex = 2;
+            this.lblWorst2.Text = "Pior Aluno:";
+            this.lblWorst2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // materialLabel4
+            // lblBest2
             // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(3, 79);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(204, 79);
-            this.materialLabel4.TabIndex = 1;
-            this.materialLabel4.Text = "Melhor Aluno:";
-            this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBest2.AutoSize = true;
+            this.lblBest2.Depth = 0;
+            this.lblBest2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBest2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblBest2.Location = new System.Drawing.Point(3, 79);
+            this.lblBest2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblBest2.Name = "lblBest2";
+            this.lblBest2.Size = new System.Drawing.Size(204, 79);
+            this.lblBest2.TabIndex = 1;
+            this.lblBest2.Text = "Melhor Aluno:";
+            this.lblBest2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // materialLabel5
+            // lblMed2
             // 
-            this.materialLabel5.AutoSize = true;
-            this.materialLabel5.Depth = 0;
-            this.materialLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(3, 0);
-            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(204, 79);
-            this.materialLabel5.TabIndex = 0;
-            this.materialLabel5.Text = "Média: ";
-            this.materialLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMed2.AutoSize = true;
+            this.lblMed2.Depth = 0;
+            this.lblMed2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMed2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblMed2.Location = new System.Drawing.Point(3, 0);
+            this.lblMed2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblMed2.Name = "lblMed2";
+            this.lblMed2.Size = new System.Drawing.Size(204, 79);
+            this.lblMed2.TabIndex = 0;
+            this.lblMed2.Text = "Média: ";
+            this.lblMed2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnRelatorio2
             // 
@@ -290,6 +291,7 @@
             this.btnRelatorio2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnRelatorio2.UseAccentColor = false;
             this.btnRelatorio2.UseVisualStyleBackColor = true;
+            this.btnRelatorio2.Click += new System.EventHandler(this.btnRelatorio2_Click);
             // 
             // grbFirstPeriod
             // 
@@ -433,7 +435,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(711, 454);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form_Relatorio";
             this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
             this.Text = "Relatorio";
@@ -475,15 +477,15 @@
         private MaterialSkin.Controls.MaterialLabel lblDisc;
         private System.Windows.Forms.GroupBox grbThirdPeriod;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel6;
-        private MaterialSkin.Controls.MaterialLabel materialLabel7;
-        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private MaterialSkin.Controls.MaterialLabel lblWorst3;
+        private MaterialSkin.Controls.MaterialLabel lblBest3;
+        private MaterialSkin.Controls.MaterialLabel lblMed3;
         private MaterialSkin.Controls.MaterialButton btnRelatorio3;
         private System.Windows.Forms.GroupBox grbSecondPeriod;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialLabel lblWorst2;
+        private MaterialSkin.Controls.MaterialLabel lblBest2;
+        private MaterialSkin.Controls.MaterialLabel lblMed2;
         private MaterialSkin.Controls.MaterialButton btnRelatorio2;
     }
 }

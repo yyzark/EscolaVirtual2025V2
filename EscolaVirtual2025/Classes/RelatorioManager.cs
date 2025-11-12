@@ -4,26 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-
 namespace EscolaVirtual2025.Classes
 {
     public static class RelatorioManager
     {
         public static List<Relatorio> RelatorioList = new List<Relatorio>();
 
-        public static Relatorio GerarRelatorioTurma(Relatorio r, int periodo)
+        public static Relatorio GerarRelatorioTurma(Relatorio r)
         {
             //Media Turma
             double mediaTurma = r.ListaAlunos
                 .Where(s => s != null)
                 .SelectMany(s => s.Grades)
                 .Where(n => n.Gradesubject == r.Subject)
-                .Average(n => n.p_Grade[periodo]);
+                .Average(n => n.p_Grade[r.Period]);
 
             //Melhor Aluno
             int melhorNota = 0;
@@ -36,9 +34,9 @@ namespace EscolaVirtual2025.Classes
                     {
                         if (gr.Gradesubject == r.Subject)
                         {
-                            if (gr.p_Grade[periodo] > melhorNota)
+                            if (gr.p_Grade[r.Period] > melhorNota)
                             {
-                                melhorNota = gr.p_Grade[periodo];
+                                melhorNota = gr.p_Grade[r.Period];
                                 bestStudent = st;
                             }
                         }
@@ -58,9 +56,9 @@ namespace EscolaVirtual2025.Classes
                     {
                         if (gr.Gradesubject == r.Subject)
                         {
-                            if (gr.p_Grade[periodo] < piorNota)
+                            if (gr.p_Grade[r.Period] < piorNota)
                             {
-                                piorNota = gr.p_Grade[periodo];
+                                piorNota = gr.p_Grade[r.Period];
                                 worstStudent = st;
                             }
                         }
@@ -69,13 +67,13 @@ namespace EscolaVirtual2025.Classes
 
             }
 
-            Relatorio rlt = new Relatorio(r.Room, r.TeacherAtual)
+            Relatorio rlt = new Relatorio(r.Room, r.TeacherAtual, r.Period)
             {
                 MediaTurma = mediaTurma,
                 MelhorAluno = bestStudent,
                 PiorAluno = worstStudent
             };
-
+            RelatorioList.Add(rlt);
             return rlt;
         }
 
@@ -83,7 +81,14 @@ namespace EscolaVirtual2025.Classes
         {
             try
             {
-                File.WriteAllText(caminho, JsonSerializer.Serialize(r));
+
+                File.WriteAllText(caminho, JsonSerializer.Serialize(
+                    r,
+                    new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        ReferenceHandler = ReferenceHandler.IgnoreCycles
+                    }));
                 MessageBox.Show("A exportação foi bem sucedida", "Feito", MessageBoxButtons.OK);
             }
             catch (Exception ex)

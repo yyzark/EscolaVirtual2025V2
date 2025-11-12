@@ -6,12 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.IO.Pipes;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 namespace EscolaVirtual2025
 {
@@ -67,13 +63,16 @@ namespace EscolaVirtual2025
             //objeto global do form de login
             formLogin = new Form_Login();
 
-            
+
+            //temporario para o relatorio do prof
+
+
             Application.Run(formLogin);
         }
 
         public static void Save()
         {
-            Directory.CreateDirectory(saveFolder); 
+            Directory.CreateDirectory(saveFolder);
 
             var options = new System.Text.Json.JsonSerializerOptions
             {
