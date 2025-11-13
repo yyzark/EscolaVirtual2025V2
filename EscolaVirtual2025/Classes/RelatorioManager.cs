@@ -25,8 +25,8 @@ namespace EscolaVirtual2025.Classes
 
             //Melhor Aluno
             int melhorNota = 0;
-            Student bestStudent = new Student();
-            foreach (Student st in r.ListaAlunos)
+            string bestStudent;
+            foreach(string st in r.ListaAlunos)
             {
                 if (st != null)
                 {
@@ -47,8 +47,8 @@ namespace EscolaVirtual2025.Classes
 
             //Pior Aluno
             int piorNota = 20;
-            Student worstStudent = new Student();
-            foreach (Student st in r.ListaAlunos)
+            string worstStudent;
+            foreach (string st in r.ListaAlunos)
             {
                 if (st != null)
                 {
