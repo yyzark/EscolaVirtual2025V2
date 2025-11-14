@@ -1,12 +1,14 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Classes
 {
     public class Relatorio
     {
-        private string room;
+        private int year;
+        private char room;
         private string subject;
         private string[] students;
         private string teacher;
@@ -15,14 +17,16 @@ namespace EscolaVirtual2025.Classes
         private double media;
         private int period;
 
-        public string Room { get { return room; } set { room = value; } }
+        public int Year { get { return year; } set { year = value; } }
+        public char Room { get { return room; } set { room = value; } }
         public string Subject { get { return subject; } set { subject = value; } }
         public string TeacherAtual { get { return teacher; } set { teacher = value; } }
         public string[] ListaAlunos { get { return students; } set { students = value; } }
 
-        public Relatorio(string room, Teacher teacher, int period = 0)
+        public Relatorio(ClassRoom room, Teacher teacher, int period = 0)
         {
-            Room = room;
+            Year = room.Year.AnoId;
+            Room = room.Id;
             TeacherAtual = teacher.Name;
             ListaAlunos = room.Students.Where(s => s != null).Select(s => s.Name).ToArray();
             Subject = teacher.AssignedSubject.Name;

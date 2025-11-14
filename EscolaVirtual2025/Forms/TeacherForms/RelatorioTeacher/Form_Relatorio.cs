@@ -13,6 +13,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
     public partial class Form_Relatorio : MaterialForm
     {
         //david campos sem nivel de acesso é crime
+
         private ClassRoom classRoom;
         private Teacher tchr;
         public Form_Relatorio(ClassRoom classRoom, Teacher tchr)
@@ -46,7 +47,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
 
         private void LoadInfo(int perNum)
         {
-            Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.TeacherAtual == tchr.Name && r.Room == classRoom && r.Period == perNum);
+            Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.TeacherAtual == tchr.Name && r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.Period == perNum);
             //Se não for nulo
             if (per != null && perNum == 0)
             {
@@ -114,7 +115,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
                     string extention = Path.GetExtension(filePath).ToLower();
 
 
-                    Relatorio rel = RelatorioManager.RelatorioList.FirstOrDefault(r => r.Room == classRoom && r.TeacherAtual == tchr.Name && r.Period == per);
+                    Relatorio rel = RelatorioManager.RelatorioList.FirstOrDefault(r => r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.TeacherAtual == tchr.Name && r.Period == per);
 
                     if (extention == ".json")
                     {
@@ -154,7 +155,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
         {
             for (int i = 0; i < 3; i++)
             {
-                Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.TeacherAtual == tchr.Name && r.Room == classRoom && r.Period == i);
+                Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.TeacherAtual == tchr.Name && r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.Period == i);
                 if(per != null)
                     RelatorioManager.RelatorioList.Remove(per);
             }
