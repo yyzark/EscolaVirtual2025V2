@@ -1,7 +1,9 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace EscolaVirtual2025.Classes
 {
@@ -17,6 +19,10 @@ namespace EscolaVirtual2025.Classes
         private double media;
         private int period;
 
+        [JsonIgnore]
+        [XmlIgnore]
+        private string nif;
+
         public int Year { get { return year; } set { year = value; } }
         public char Room { get { return room; } set { room = value; } }
         public string Subject { get { return subject; } set { subject = value; } }
@@ -28,6 +34,7 @@ namespace EscolaVirtual2025.Classes
             Year = room.Year.AnoId;
             Room = room.Id;
             TeacherAtual = teacher.Name;
+            NIF = teacher.NIF;
             ListaAlunos = room.Students.Where(s => s != null).Select(s => s.Name).ToArray();
             Subject = teacher.AssignedSubject.Name;
             this.period = period;
@@ -56,6 +63,10 @@ namespace EscolaVirtual2025.Classes
         }
 
         public int Period { get => period; set => period = value; }
+
+        [JsonIgnore]
+        [XmlIgnore]
+        public string NIF {  get =>  nif; set => nif = value;}
     }
 }
 

@@ -67,7 +67,7 @@ namespace EscolaVirtual2025.Classes
 
             }
 
-            Relatorio rlt = new Relatorio(Program.ClassRooms.FirstOrDefault(rl => rl.Year.AnoId == r.Year && rl.Id == r.Room), Program.Teachers.FirstOrDefault(t => t.Name == r.TeacherAtual), r.Period)
+            Relatorio rlt = new Relatorio(Program.ClassRooms.FirstOrDefault(rl => rl.Year.AnoId == r.Year && rl.Id == r.Room), Program.Teachers.FirstOrDefault(t => t.NIF == r.NIF), r.Period)
             {
                 MediaTurma = mediaTurma,
                 MelhorAluno = bestStudent,
