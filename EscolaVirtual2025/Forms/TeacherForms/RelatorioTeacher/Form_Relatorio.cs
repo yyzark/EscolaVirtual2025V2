@@ -13,6 +13,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
     public partial class Form_Relatorio : MaterialForm
     {
         //david campos sem nivel de acesso é crime
+
         private ClassRoom classRoom;
         private Teacher tchr;
         public Form_Relatorio(ClassRoom classRoom, Teacher tchr)
@@ -46,27 +47,51 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
 
         private void LoadInfo(int perNum)
         {
-            Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.TeacherAtual == tchr && r.Room == classRoom && r.Period == perNum);
+            Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.NIF == tchr.NIF && r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.Period == perNum);
+            //Se não for nulo
             if (per != null && perNum == 0)
             {
-                lblBS1.Text = "Melhor aluno:" + per.MelhorAluno.Name;
+                lblBS1.Text = "Melhor aluno:" + per.MelhorAluno;
                 lblMedia1.Text = "Média:" + per.MediaTurma;
-                lblWS1.Text = "Pior aluno:" + per.PiorAluno.Name;
+                lblWS1.Text = "Pior aluno:" + per.PiorAluno;
                 btnRelatório1.Text = "Exportar";
             }
             else if (per != null && perNum == 1)
             {
-                lblBest2.Text = "Melhor aluno:" + per.MelhorAluno.Name;
+                lblBest2.Text = "Melhor aluno:" + per.MelhorAluno;
                 lblMed2.Text = "Média:" + per.MediaTurma;
-                lblWorst2.Text = "Pior aluno:" + per.PiorAluno.Name;
+                lblWorst2.Text = "Pior aluno:" + per.PiorAluno;
                 btnRelatorio2.Text = "Exportar";
             }
             else if (per != null && perNum == 2)
             {
-                lblBest3.Text = "Melhor aluno:" + per.MelhorAluno.Name;
+                lblBest3.Text = "Melhor aluno:" + per.MelhorAluno;
                 lblMed3.Text = "Média:" + per.MediaTurma;
-                lblWorst3.Text = "Pior aluno:" + per.PiorAluno.Name;
+                lblWorst3.Text = "Pior aluno:" + per.PiorAluno;
                 btnRelatorio3.Text = "Exportar";
+            }
+
+            //Se for nulo
+            if (per == null && perNum == 0)
+            {
+                lblBS1.Text = "Melhor aluno:" ;
+                lblMedia1.Text = "Média:";
+                lblWS1.Text = "Pior aluno:";
+                btnRelatório1.Text = "Relatório";
+            }
+            else if (per == null && perNum == 1)
+            {
+                lblBest2.Text = "Melhor aluno:";
+                lblMed2.Text = "Média:";
+                lblWorst2.Text = "Pior aluno:";
+                btnRelatorio2.Text = "Relatório";
+            }
+            else if (per == null && perNum == 2)
+            {
+                lblBest3.Text = "Melhor aluno:";
+                lblMed3.Text = "Média:";
+                lblWorst3.Text = "Pior aluno:";
+                btnRelatorio3.Text = "Relatório";
             }
         }
 
@@ -90,7 +115,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
                     string extention = Path.GetExtension(filePath).ToLower();
 
 
-                    Relatorio rel = RelatorioManager.RelatorioList.FirstOrDefault(r => r.Room == classRoom && r.TeacherAtual == tchr && r.Period == per);
+                    Relatorio rel = RelatorioManager.RelatorioList.FirstOrDefault(r => r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.NIF == tchr.NIF && r.Period == per);
 
                     if (extention == ".json")
                     {
@@ -124,6 +149,19 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
         private void btnRelatorio3_Click(object sender, EventArgs e)
         {
             ExportReport(sender as Button, 2);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.NIF == tchr.NIF && r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.Period == i);
+                if(per != null)
+                    RelatorioManager.RelatorioList.Remove(per);
+            }
+
+            for (int i = 0; i < 3; i++)
+                LoadInfo(i);
         }
     }
 }
