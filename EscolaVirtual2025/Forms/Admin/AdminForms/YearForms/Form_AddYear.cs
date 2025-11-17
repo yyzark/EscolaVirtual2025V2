@@ -1,14 +1,9 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
@@ -62,7 +57,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
             MessageBox.Show($"{newYear}º ano adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             Program.Anos.Sort((a, b) => a.AnoId.CompareTo(b.AnoId));
-            Program.Save();
+            DataManager.Save();
             this.Close();
         }
     }

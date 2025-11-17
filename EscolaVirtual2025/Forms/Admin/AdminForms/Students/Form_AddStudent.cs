@@ -1,19 +1,12 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
 {
@@ -107,7 +100,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                     var selectedYear = Program.Anos[yearIndex];
                     var selectedClassRoom = selectedYear.ClassRooms[classRoomIndex];
 
-                    
+
 
                     // Criar aluno
                     Student newStudent = new Student(
@@ -116,7 +109,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                         txtName.Text,
                         txtNIF.Text,
                         selectedClassRoom,
-                        new SchoolCard(Program.SchoolCardsCounter+1)
+                        new SchoolCard(Program.SchoolCardsCounter + 1)
                         );
 
                     Program.SchoolCardsCounter++;
@@ -129,7 +122,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                     Program.Users.Add(newStudent);
 
                     MessageBox.Show("Aluno adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Program.Save();
+                    DataManager.Save();
                     this.Close();
                 }
             }
@@ -147,7 +140,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
 
         private void cbbYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbbYear.SelectedIndex != -1)
+            if (cbbYear.SelectedIndex != -1)
             {
                 cbbClassRoom.Items.Clear();
                 var selectedYear = Program.Anos[cbbYear.SelectedIndex];
@@ -187,7 +180,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            
+
             UpdateAcceptButtonState();
         }
 
@@ -198,7 +191,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
 
         private void cbbClassRoom_SelectedIndexChanged(object sender, EventArgs e)
         {
-           UpdateAcceptButtonState();
+            UpdateAcceptButtonState();
         }
 
         private void UpdateAcceptButtonState()
@@ -221,7 +214,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
 
         private void txtNIF_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!Char.IsDigit(e.KeyChar))
+            if (!Char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }

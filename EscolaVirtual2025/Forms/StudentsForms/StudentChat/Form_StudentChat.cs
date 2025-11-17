@@ -1,16 +1,9 @@
 ﻿using EscolaVirtual2025.Classes.Chat;
+using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
 {
@@ -62,7 +55,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
 
         private void Form_StudentChat_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Program.Save();
+            DataManager.Save();
         }
     }
 }

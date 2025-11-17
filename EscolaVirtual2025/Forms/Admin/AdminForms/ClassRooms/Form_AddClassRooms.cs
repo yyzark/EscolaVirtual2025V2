@@ -1,16 +1,13 @@
-﻿using MaterialSkin;
+﻿using EscolaVirtual2025.Classes;
+using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using EscolaVirtual2025.Classes.Academic;
-using EscolaVirtual2025.Classes;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 {
@@ -92,7 +89,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
                 // Cria e adiciona a turma
                 selectedYear.ClassRooms.Add(newClassRoom);
                 Program.ClassRooms.Add(newClassRoom);
-                
+
                 MessageBox.Show(
                     $"Turma \"{classLetter}\" adicionada com sucesso ao ano {selectedYear.AnoId}.",
                     "Sucesso",
@@ -100,7 +97,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
                     MessageBoxIcon.Information
                 );
 
-                Program.Save();
+                DataManager.Save();
                 this.Close();
             }
         }

@@ -1,21 +1,16 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace EscolaVirtual2025
 {
@@ -116,14 +111,14 @@ namespace EscolaVirtual2025
             Program.students = new List<Student>();
             Program.ClassRooms = new List<ClassRoom>();
             #endregion
-
+            DataManager.Load();
             #region posição e tamanho dos controlos
             //posição dos controlos no centro
             lblTitle.Location = new Point((this.Width - lblTitle.Width) / 2, 75);
 
             //login
             txtLogin.Location = new Point((this.Width - txtLogin.Width) / 2, 175);
-            
+
             lblLogin.Location = new Point(txtLogin.Location.X, txtLogin.Location.Y - 30);
             //password
             txtPassword.Location = new Point((this.Width - txtPassword.Width) / 2, 245);
@@ -135,7 +130,7 @@ namespace EscolaVirtual2025
 
 
             //add do admin
-            Program.Users.Add(new User("JC", "GOAT","Jorge Carvalho", UserType.Admin));
+            Program.Users.Add(new User("JC", "GOAT", "Jorge Carvalho", UserType.Admin));
             //id do cartão escolar inicial a 0
             Program.SchoolCardsCounter = 0;
 
@@ -147,7 +142,7 @@ namespace EscolaVirtual2025
             txtPassword.ForeColor = Color.Black;
             txtPassword.PasswordChar = '*';
             #endregion
-
+            /*
             #region anos e disciplinas default
             //criacao dos anos
             Program.Anos.Add(new Year(10));
@@ -163,7 +158,9 @@ namespace EscolaVirtual2025
             Program.Anos[0].Subjects.AddRange(Program.Subjects);
             Program.Anos[1].Subjects.AddRange(Program.Subjects);
 
-            #endregion
+            #endregion*/
+
+            DataManager.Save();
         }
 
         private void Form_Login_SizeChanged(object sender, EventArgs e)
@@ -173,8 +170,8 @@ namespace EscolaVirtual2025
             //alerta
             lblAlert.Location = new Point((this.Width - lblAlert.Width) / 2, (this.Height - 35));
             //butao
-            
-            if(this.WindowState == FormWindowState.Maximized)
+
+            if (this.WindowState == FormWindowState.Maximized)
             {
                 btnEnter.Size = new Size(btnEnter.Width, btnEnter.Height + 30);
                 btnEnter.Location = new Point((this.Width - btnEnter.Width) / 2, (this.Height - 115));
@@ -240,8 +237,8 @@ namespace EscolaVirtual2025
             {
                 Program.userAtual = user;
                 Forms.TeacherForms.Form_Teacher formTeacher = new Forms.TeacherForms.Form_Teacher();
-                this.Hide();
                 formTeacher.Show();
+                this.Hide();
                 //limpar campos
                 txtLogin.Text = "";
                 txtPassword.Text = "";
@@ -337,8 +334,8 @@ namespace EscolaVirtual2025
         {
             TextBox[] txt = { txtLogin, txtPassword };
             TextBox IsEmpty = txt.FirstOrDefault(tx => tx.Text == string.Empty);
-            if(IsEmpty != null)
-            {                   
+            if (IsEmpty != null)
+            {
                 btnEnter.Enabled = false;
             }
             else

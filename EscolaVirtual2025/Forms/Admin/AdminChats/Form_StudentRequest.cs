@@ -1,20 +1,15 @@
 ﻿using EscolaVirtual2025.Classes.Chat;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminChats
 {
-    public partial class Form_StudentRequest :  MaterialForm
+    public partial class Form_StudentRequest : MaterialForm
     {
         private Request m_notification;
         private Student newData;
@@ -43,18 +38,18 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
 
         private void Form_StudentRequest_Load(object sender, EventArgs e)
         {
-            lblClassRoom.Text += " "+ oldData.ClassRoom.Year.AnoId +"º"+oldData.ClassRoom.Id;
-            lblName.Text += " "+oldData.Name;
-            lblPassword.Text += " "+oldData.Password;
-            lblUser.Text += " "+oldData.Username;
+            lblClassRoom.Text += " " + oldData.ClassRoom.Year.AnoId + "º" + oldData.ClassRoom.Id;
+            lblName.Text += " " + oldData.Name;
+            lblPassword.Text += " " + oldData.Password;
+            lblUser.Text += " " + oldData.Username;
             lblNif.Text += " " + oldData.NIF;
 
-            lblNewClassRoom.Text += " " + newData.ClassRoom.Year.AnoId+ "º" +newData.ClassRoom.Id;
+            lblNewClassRoom.Text += " " + newData.ClassRoom.Year.AnoId + "º" + newData.ClassRoom.Id;
             lblNewLogin.Text += " " + newData.Username;
             lblNewName.Text += " " + newData.Name;
             lblNewNif.Text += " " + newData.NIF;
 
-            if(newData.Password != oldData.Password)
+            if (newData.Password != oldData.Password)
             {
                 lblPassword.Text = "Password: Mudança de password";
                 lblNewPassword.Text = "Password: Mudança de password";
@@ -68,8 +63,9 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
 
         private void btnReject_Click(object sender, EventArgs e)
         {
-            ChatManager.SendGetNotificationFromAdmin(oldData).AddMessage(Program.Users[0].Name,"Lamentamos mas a alteração de dados foi rejeitada.");
+            ChatManager.SendGetNotificationFromAdmin(oldData).AddMessage(Program.Users[0].Name, "Lamentamos mas a alteração de dados foi rejeitada.");
             Program.Users[0].Notifications.Remove(m_notification);
+            DataManager.Save();
             this.Close();
         }
 
@@ -119,7 +115,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
 
             // Remove notificação do admin
             Program.Users[0].Notifications.Remove(m_notification);
-            Program.Save();
+            DataManager.Save();
             this.Close();
         }
     }

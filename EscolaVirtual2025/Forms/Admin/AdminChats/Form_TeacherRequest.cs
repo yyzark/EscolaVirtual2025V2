@@ -1,16 +1,11 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Chat;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminChats
@@ -72,7 +67,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
         private void btnClassRooms_Click(object sender, EventArgs e)
         {
             string result = "Turmas:";
-            foreach(ClassRoom classRoom in oldData.AssignedClassRooms)
+            foreach (ClassRoom classRoom in oldData.AssignedClassRooms)
             {
                 result += "\n" + classRoom.Year.AnoId + "º" + classRoom.Id;
             }
@@ -139,7 +134,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
             }
 
             Program.Users[0].Notifications.Remove(m_notification);
-            Program.Save();
+            DataManager.Save();
             this.Close();
         }
     }

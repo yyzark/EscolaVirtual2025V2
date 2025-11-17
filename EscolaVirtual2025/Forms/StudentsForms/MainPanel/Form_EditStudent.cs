@@ -1,7 +1,7 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
-using MaterialSkin;
+using MaterialSkin;using EscolaVirtual2025.Data;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;

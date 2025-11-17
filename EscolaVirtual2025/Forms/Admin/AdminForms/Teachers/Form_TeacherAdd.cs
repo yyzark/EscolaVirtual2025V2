@@ -1,17 +1,12 @@
 ﻿using EscolaVirtual2025.Classes;
+using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using EscolaVirtual2025.Classes.Academic;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 {
@@ -80,7 +75,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         private void ver()
         {
 
-            if ( txtLogin.Text != string.Empty && txtName.Text != string.Empty && txtNIF.Text.Length == 9 && txtPassword.Text != string.Empty && form_AddTeacherClassroomChose.TeacherClassroomsChosen == true)
+            if (txtLogin.Text != string.Empty && txtName.Text != string.Empty && txtNIF.Text.Length == 9 && txtPassword.Text != string.Empty && form_AddTeacherClassroomChose.TeacherClassroomsChosen == true)
             {
                 btnAccept.Enabled = true;
             }
@@ -184,9 +179,9 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                         }
                     }
 
-                    foreach(Year yr in Program.Anos)
+                    foreach (Year yr in Program.Anos)
                     {
-                        foreach(Subject sbjct in yr.Subjects)
+                        foreach (Subject sbjct in yr.Subjects)
                         {
                             if (!sbjct.Teachers.Contains(newTeacher) && sbjct == Program.Subjects[cbbSubjects.SelectedIndex])
                                 sbjct.Teachers.Add(newTeacher);
@@ -200,7 +195,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                                     "Sucesso",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    Program.Save();
+                    DataManager.Save();
 
                     this.Close();
                 }

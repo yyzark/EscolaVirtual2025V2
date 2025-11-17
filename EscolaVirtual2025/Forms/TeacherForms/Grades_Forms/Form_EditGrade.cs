@@ -1,5 +1,5 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
-using MaterialSkin;
+using MaterialSkin;using EscolaVirtual2025.Data;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -43,7 +43,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
         {
             m_grade.p_Grade[m_per] = Convert.ToInt32(nudGrade.Value);
             m_grade.Comment[m_per] = txtComment.Text;
-            Program.Save();
+            DataManager.Save();
             this.Close();
         }
 

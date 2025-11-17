@@ -1,15 +1,10 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Data;
 using EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
@@ -72,20 +67,20 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
                     }
                 }
             }
-            Program.Save();
+            DataManager.Save();
             this.Close();
         }
 
         private void btnYears_Click(object sender, EventArgs e)
         {
             subjectYearsChose.ShowDialog();
-            if(subjectYearsChose.SubjectYearsChosen && txtAbreviation.Text != string.Empty && txtName.Text != string.Empty)
+            if (subjectYearsChose.SubjectYearsChosen && txtAbreviation.Text != string.Empty && txtName.Text != string.Empty)
             {
                 btnAccept.Enabled = true;
             }
             else
             {
-              btnAccept.Enabled = false;
+                btnAccept.Enabled = false;
             }
         }
 
@@ -115,7 +110,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar) && !Char.IsWhiteSpace(e.KeyChar))
+            if (!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar) && !Char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true;
             }

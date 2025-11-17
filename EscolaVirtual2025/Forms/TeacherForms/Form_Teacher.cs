@@ -1,22 +1,16 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher;
 using EscolaVirtual2025.Forms.TeacherForms.TeacherAccount;
 using EscolaVirtual2025.Forms.TeacherForms.TeacherChat;
-using EscolaVirtual2025.Forms.TeacherForms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Schema;
-using EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher;
 
 namespace EscolaVirtual2025.Forms.TeacherForms
 {
@@ -81,7 +75,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             Program.Anos = Program.Anos.OrderBy(yr => yr.AnoId).ToList();
             foreach (Year yr in tchr.AssignedClassRooms.Select(cr => cr.Year).Distinct())
             {
-               cbbYear.Items.Add(yr.AnoId + "º");
+                cbbYear.Items.Add(yr.AnoId + "º");
             }
         }
 
@@ -147,18 +141,18 @@ namespace EscolaVirtual2025.Forms.TeacherForms
         {
             btnReport.Enabled = true;
             lsbStudents.Items.Clear();
-            foreach(Student st in Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex].Students)
+            foreach (Student st in Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex].Students)
             {
-                if(st !=  null) 
+                if (st != null)
                     lsbStudents.Items.Add(st.Name);
             }
         }
 
         private void lsbStudents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(lsbStudents.SelectedIndex != -1)
+            if (lsbStudents.SelectedIndex != -1)
             {
-                btnCreateGrade.Enabled = true;  
+                btnCreateGrade.Enabled = true;
             }
             else
             {
@@ -199,7 +193,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             Form_Relatorio frm = new Form_Relatorio(Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex], tchr);
             frm.ShowDialog();
             this.Hide();
-            
+
         }
     }
 }
