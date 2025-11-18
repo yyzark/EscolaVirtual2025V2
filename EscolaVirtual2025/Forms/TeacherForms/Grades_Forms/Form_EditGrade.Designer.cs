@@ -61,7 +61,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnAdd, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74F));
@@ -80,7 +80,7 @@
             this.txtComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.txtComment.Hint = "Comentário";
             this.txtComment.Location = new System.Drawing.Point(4, 78);
-            this.txtComment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtComment.Margin = new System.Windows.Forms.Padding(4);
             this.txtComment.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtComment.Name = "txtComment";
             this.txtComment.Size = new System.Drawing.Size(317, 167);
@@ -108,7 +108,7 @@
             // 
             this.nudGrade.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nudGrade.Location = new System.Drawing.Point(4, 29);
-            this.nudGrade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudGrade.Margin = new System.Windows.Forms.Padding(4);
             this.nudGrade.Maximum = new decimal(new int[] {
             20,
             0,
@@ -163,7 +163,7 @@
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form_EditGrade";
             this.Padding = new System.Windows.Forms.Padding(4, 30, 4, 4);

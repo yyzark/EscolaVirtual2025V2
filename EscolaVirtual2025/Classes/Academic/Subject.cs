@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace EscolaVirtual2025.Classes.Academic
 {
+    
+    [DataContract]
     public class Subject
     {
         private string m_name;
@@ -15,23 +18,30 @@ namespace EscolaVirtual2025.Classes.Academic
         private List<Teacher> m_teachers;
         private List<Year> m_years;
 
+        
+        [DataMember]
         public List<Year> Years
-        { 
+        {
             get { return m_years; }
             set { m_years = value; }
         }
 
+        [DataMember]
         public string Abreviation
         {
             get { return m_abreviation; }
             set { m_abreviation = value; }
         }
-        public string Name 
+
+        [DataMember]
+        public string Name
         {
             get { return m_name; }
-            set{ m_name = value; } 
+            set { m_name = value; }
         }
-        public int Id 
+
+        [DataMember]
+        public int Id
         {
             get { return m_Id; }
             set { m_Id = value; }
@@ -39,7 +49,7 @@ namespace EscolaVirtual2025.Classes.Academic
 
         public Subject() { }
 
-        public Subject(string name,string abreviation ,int id)
+        public Subject(string name, string abreviation, int id)
         {
             m_name = name;
             m_Id = id;
@@ -48,6 +58,7 @@ namespace EscolaVirtual2025.Classes.Academic
             m_years = new List<Year>();
         }
 
+        [DataMember]
         public List<Teacher> Teachers
         {
             get { return m_teachers; }

@@ -1,4 +1,5 @@
-﻿using EscolaVirtual2025.Classes.Academic;
+﻿using EscolaVirtual2025.Classes;
+using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -38,9 +39,27 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            m_grade.p_Grade[m_per] = Convert.ToInt32(nudGrade.Value);
+            
+            int notaAntiga = m_grade.p_Grade[m_per];
+            int notaNova = Convert.ToInt32(nudGrade.Value);
+
+            
+            m_grade.p_Grade[m_per] = notaNova;
             m_grade.Comment[m_per] = txtComment.Text;
             m_grade.GradeCount += 1;
+
+            //  REGISTO DO HISTÓRICO
+            HistoricoAvaliacao novaEntrada = new HistoricoAvaliacao
+            {
+                AlunoId = m_grade.StudentId,
+                ProfessorId = DataManager.CurrentProfessorId,
+                Disciplina = m_grade.Gradesubject.Name,
+                NotaAntiga = notaAntiga,
+                NotaNova = notaNova,
+            };
+
+            DataManager.HistoricoManager.AdicionarEGravarAlteracao(novaEntrada);
+
             DataManager.Save();
             this.Close();
         }

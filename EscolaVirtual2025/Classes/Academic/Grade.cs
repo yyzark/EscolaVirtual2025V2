@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EscolaVirtual2025.Classes.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace EscolaVirtual2025.Classes.Academic
         private string[] m_comment;
         private Subject m_subject;
         private int m_gradeCount;
+
+        private int m_studentId;
         public int[] p_Grade
         { 
             get { return m_grade; }
@@ -33,12 +36,18 @@ namespace EscolaVirtual2025.Classes.Academic
         { 
             get { return m_subject; }
             set { m_subject = value; }
-        } 
+        }
+        public int StudentId
+        {
+            get { return m_studentId; }
+            set { m_studentId = value; }
+        }
 
         public Grade(Subject gradeSubject)
         {
             m_subject = gradeSubject;
             m_gradeCount = 0;
+            m_studentId = StudentId;
             m_grade = new int[3] { -1, -1, -1 };
             m_comment = new string[3];
         }
