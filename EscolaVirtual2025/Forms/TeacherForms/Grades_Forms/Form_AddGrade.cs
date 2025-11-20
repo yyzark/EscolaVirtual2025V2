@@ -34,14 +34,20 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms
             m_grade = grade;
             m_per = per;
 
-            // Garante que os arrays tenham tamanho mínimo de 3
+            // Garante que os arrays não são nulos e têm tamanho mínimo de 3
+            if (m_grade.P_Grade == null)
+                m_grade.P_Grade = new int[3];
+
+            if (m_grade.Comment == null)
+                m_grade.Comment = new string[3];
+
             if (m_grade.P_Grade.Length < 3)
             {
                 Array.Resize(ref m_grade.P_Grade, 3);
                 Array.Resize(ref m_grade.Comment, 3);
             }
 
-            // Define o valor inicial do NumericUpDown
+            // Define o valor inicial da nota
             if (m_grade.P_Grade[m_per] >= nudGrade.Minimum && m_grade.P_Grade[m_per] <= nudGrade.Maximum)
                 nudGrade.Value = m_grade.P_Grade[m_per];
             else
@@ -63,13 +69,16 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms
 
             if (notaNova != notaAntiga)
             {
+                var teacher = DataManager.currentUser as Teacher;
+
                 HistoricoAvaliacao novaEntrada = new HistoricoAvaliacao
                 {
-                    AlunoId = m_grade.Student.NIF,
-                    Disciplina = (DataManager.currentUser as Teacher).AssignedSubject.Name,
+                    AlunoId = m_grade.Student?.NIF,
+                    Disciplina = teacher?.AssignedSubject?.Name ?? "N/D",
                     NotaAntiga = notaAntiga,
                     NotaNova = notaNova,
                 };
+
                 HistoricoService.AdicionarEGravarAlteracao(novaEntrada);
             }
 

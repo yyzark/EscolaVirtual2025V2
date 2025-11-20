@@ -139,6 +139,12 @@
     <Compile Include="Data\ClassSubjectData.cs" />
     <Compile Include="Data\DataManager.cs" />
     <Compile Include="Data\GradeData.cs" />
+    <Compile Include="Data\Import\Dto\ClassRoomDto.cs" />
+    <Compile Include="Data\Import\Dto\ClassRoomsRootDto.cs" />
+    <Compile Include="Data\Import\Dto\StudentDto.cs" />
+    <Compile Include="Data\Import\Dto\StudentsRootDto.cs" />
+    <Compile Include="Data\Import\ImportationManager.cs" />
+    <Compile Include="Data\Import\ImportResult.cs" />
     <Compile Include="Data\SchoolCardData.cs" />
     <Compile Include="Data\SubjectData.cs" />
     <Compile Include="Data\UserData.cs" />
