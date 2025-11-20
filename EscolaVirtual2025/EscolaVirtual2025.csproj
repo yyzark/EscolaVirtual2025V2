@@ -134,15 +134,15 @@
     <Compile Include="Classes\Users\Teacher.cs" />
     <Compile Include="Classes\Users\User.cs" />
     <Compile Include="Classes\Utils.cs" />
-    <Compile Include="Data\BackupDTO%27s\ChatData.cs" />
-    <Compile Include="Data\BackupDTO%27s\ClassRoomData.cs" />
-    <Compile Include="Data\BackupDTO%27s\ClassSubjectData.cs" />
+    <Compile Include="Data\ChatData.cs" />
+    <Compile Include="Data\ClassRoomData.cs" />
+    <Compile Include="Data\ClassSubjectData.cs" />
     <Compile Include="Data\DataManager.cs" />
-    <Compile Include="Data\BackupDTO%27s\GradeData.cs" />
-    <Compile Include="Data\BackupDTO%27s\SchoolCardData.cs" />
-    <Compile Include="Data\BackupDTO%27s\SubjectData.cs" />
-    <Compile Include="Data\BackupDTO%27s\UserData.cs" />
-    <Compile Include="Data\BackupDTO%27s\YearData.cs" />
+    <Compile Include="Data\GradeData.cs" />
+    <Compile Include="Data\SchoolCardData.cs" />
+    <Compile Include="Data\SubjectData.cs" />
+    <Compile Include="Data\UserData.cs" />
+    <Compile Include="Data\YearData.cs" />
     <Compile Include="Forms\Admin\AdminChats\Form_AdminChats.cs">
       <SubType>Form</SubType>
     </Compile>
