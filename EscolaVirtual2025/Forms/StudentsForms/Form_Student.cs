@@ -1,17 +1,12 @@
-﻿using EscolaVirtual2025.Classes.Chat;
-using EscolaVirtual2025.Classes.Users;
+﻿using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using EscolaVirtual2025.Forms.StudentsForms.MainPanel;
 using EscolaVirtual2025.Forms.StudentsForms.StudentChat;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -71,7 +66,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms
             #endregion
 
             #region notificações
-            int notificationCount = Program.userAtual.Notifications.Count(n => !n.Read);
+            int notificationCount = DataManager.currentUser.Notifications.Count(n => !n.Read);
 
             if (notificationCount > 0)
             {
@@ -85,11 +80,11 @@ namespace EscolaVirtual2025.Forms.StudentsForms
             }
             #endregion
 
-            
 
-            btnUser.Text = Program.userAtual.Name + "";
 
-            stdnt = Program.userAtual as Student;
+            btnUser.Text = DataManager.currentUser.Name + "";
+
+            stdnt = DataManager.currentUser as Student;
 
             btnUser.Text = stdnt.Name;
 
@@ -104,51 +99,50 @@ namespace EscolaVirtual2025.Forms.StudentsForms
         private void UpdateUserPanel()
         {
             lblName.Text = $"Nome: {stdnt.Name}";
-            lblPassword.Text = $"Senha: {new String('*', stdnt.Password.Length)}" ;
+            lblPassword.Text = $"Senha: {new String('*', stdnt.Password.Length)}";
             lblUser.Text = $"Utilizador: {stdnt.Username}";
-            lblClassRoom.Text = $"Turma: {stdnt.ClassRoom.Year.AnoId}º{stdnt.ClassRoom.Id}";
+            lblClassRoom.Text = $"Turma: {stdnt.ClassRoom.Year.Id}º{stdnt.ClassRoom.Letter}";
         }
 
         private void UpdateSchoolCard()
         {
             lblcardNumber.Text = $"Nº: {stdnt.SchoolCard.SchoolCardId}";
-            lblSaldo.Text = $"Saldo: {stdnt.SchoolCard.Saldo/100.00}€";
+            lblSaldo.Text = $"Saldo: {stdnt.SchoolCard.Saldo / 100.00}€";
         }
 
         private void MostrarNotasAlunoPorPeriodo(int periodoIndex)
         {
-                chart1.Series.Clear();
+            chart1.Series.Clear();
 
-                stdnt.Grades.ForEach(grd => grd.OrderGradesByName());
 
-                var series = new Series
-                {
-                    Name = $"{periodoIndex + 1}ºperiodo ",
-                    IsValueShownAsLabel = true,
-                    ChartType = SeriesChartType.Column
-                };
+            var series = new Series
+            {
+                Name = $"{periodoIndex + 1}ºperiodo ",
+                IsValueShownAsLabel = true,
+                ChartType = SeriesChartType.Column
+            };
 
-                foreach (var grade in stdnt.Grades)
-                {
-                    int nota = grade.p_Grade[periodoIndex];
-                    series.Points.AddXY(grade.Gradesubject.Name, nota);
-                }
+            foreach (var grade in stdnt.Grades.Items)
+            {
+                int nota = grade.P_Grade[periodoIndex];
+                series.Points.AddXY(grade.GradeSubject.Name, nota);
+            }
 
-                chart1.Series.Add(series);
+            chart1.Series.Add(series);
 
-                chart1.ChartAreas[0].AxisY.Minimum = 0;
-                chart1.ChartAreas[0].AxisY.Maximum = 20;
-                chart1.ChartAreas[0].AxisY.Title = "Nota";
+            chart1.ChartAreas[0].AxisY.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.Maximum = 20;
+            chart1.ChartAreas[0].AxisY.Title = "Nota";
 
-                chart1.ChartAreas[0].AxisX.Title = "Disciplina";
-                chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.Title = "Disciplina";
+            chart1.ChartAreas[0].AxisX.Interval = 1;
 
-                chart1.Invalidate();
+            chart1.Invalidate();
         }
 
         private void ºPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!stdnt.Grades.Any(g => g.p_Grade[0] != -1))
+            if (!stdnt.Grades.Items.Any(g => g.P_Grade[0] != -1))
             {
                 MessageBox.Show("Não existem notas para este período.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -161,7 +155,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms
         }
         private void ºPeriodoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (!stdnt.Grades.Any(g => g.p_Grade[1] != -1))
+            if (!stdnt.Grades.Items.Any(g => g.P_Grade[1] != -1))
             {
                 MessageBox.Show("Não existem notas para este período.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -175,7 +169,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms
 
         private void ºPeriodoToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (!stdnt.Grades.Any(g => g.p_Grade[2] != -1))
+            if (!stdnt.Grades.Items.Any(g => g.P_Grade[2] != -1))
             {
                 MessageBox.Show("Não existem notas para este período.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -201,9 +195,9 @@ namespace EscolaVirtual2025.Forms.StudentsForms
         private void UpdateUserArrow()
         {
             if (menuAccount.Visible)
-                btnUser.Text = $"{Program.userAtual.Name} ▲"; // seta para cima
+                btnUser.Text = $"{DataManager.currentUser.Name} ▲"; // seta para cima
             else
-                btnUser.Text = $"{Program.userAtual.Name} ▼"; // seta para baixo
+                btnUser.Text = $"{DataManager.currentUser.Name} ▼"; // seta para baixo
         }
 
         private void menuAccount_VisibleChanged(object sender, EventArgs e)
@@ -290,7 +284,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms
                 string disciplina = series.Points[pointIndex].AxisLabel;
 
                 // Localiza o objeto "grade" correspondente
-                var grade = stdnt.Grades.FirstOrDefault(g => g.Gradesubject.Name == disciplina);
+                var grade = stdnt.Grades.Items.FirstOrDefault(g => g.GradeSubject.Name == disciplina);
                 if (grade == null) return;
 
                 // Identifica o período (exemplo: 0 = 1º, 1 = 2º, etc)

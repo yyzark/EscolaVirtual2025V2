@@ -1,28 +1,22 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
-using EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.TeacherForms
 {
-    public partial class Form_Grades :  MaterialForm
+    public partial class Form_Grades : MaterialForm
     {
         private Student m_actualStudent;
         private Subject m_actualSubject;
         public Form_Grades(Student actualStudent, Subject subject)
         {
             InitializeComponent();
-            
+
             #region MaterialSkin
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -49,7 +43,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void UpdateGrades()
         {
-            var grade = m_actualStudent.Grades.FirstOrDefault(grd => grd.Gradesubject == m_actualSubject);
+            var grade = m_actualStudent.Grades.Items.FirstOrDefault(grd => grd.GradeSubject == m_actualSubject);
 
             // Controles para notas 2 e 3
             MaterialLabel[] lblNotas = { lblNota2, lblNota3 };
@@ -81,14 +75,14 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             else
             {
                 // Preenche notas existentes
-                lblNota1.Text = "Nota: " + grade.p_Grade[0];
+                lblNota1.Text = "Nota: " + grade.P_Grade[0];
                 txtComent1.Text = grade.Comment[0];
                 btnNota1.Text = "Editar";
 
                 if (grade.GradeCount >= 2)
                 {
                     lblNotas[0].Visible = true;
-                    lblNotas[0].Text = "Nota: " + grade.p_Grade[1];
+                    lblNotas[0].Text = "Nota: " + grade.P_Grade[1];
                     txtComents[0].Visible = true;
                     txtComents[0].Text = grade.Comment[1];
                     btnNotas[0].Visible = true;
@@ -108,7 +102,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
                 if (grade.GradeCount >= 3)
                 {
                     lblNotas[1].Visible = true;
-                    lblNotas[1].Text = "Nota: " + grade.p_Grade[2];
+                    lblNotas[1].Text = "Nota: " + grade.P_Grade[2];
                     txtComents[1].Visible = true;
                     txtComents[1].Text = grade.Comment[2];
                     btnNotas[1].Visible = true;
@@ -130,9 +124,9 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void btnNota1_Click(object sender, EventArgs e)
         {
-            if(btnNota1.Text.ToLower() == "lançar nota")
+            if (btnNota1.Text.ToLower() == "lançar nota")
             {
-                var grade = m_actualStudent.Grades.FirstOrDefault(grd => grd.Gradesubject == m_actualSubject);
+                var grade = m_actualStudent.Grades.Items.FirstOrDefault(grd => grd.GradeSubject == m_actualSubject);
                 if (grade != null)
                 {
                     Form_AddGrade newForm = new Form_AddGrade(grade, 0);
@@ -141,8 +135,8 @@ namespace EscolaVirtual2025.Forms.TeacherForms
                 }
                 else
                 {
-                    Grade newGrade = new Grade(m_actualSubject);
-                    m_actualStudent.Grades.Add(newGrade);
+                    Grade newGrade = new Grade(m_actualSubject, m_actualStudent, DataManager.Grades.Count);
+                    m_actualStudent.Grades.Items.Add(newGrade);
                     Form_AddGrade newForm = new Form_AddGrade(newGrade, 0);
                     newForm.ShowDialog();
                     UpdateGrades();
@@ -150,7 +144,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             }
             else
             {
-                Form_EditGrade newForm = new Form_EditGrade(m_actualStudent.Grades.FirstOrDefault(grd => grd.Gradesubject == m_actualSubject), 0);
+                Form_EditGrade newForm = new Form_EditGrade(m_actualStudent.Grades.Items.FirstOrDefault(grd => grd.GradeSubject == m_actualSubject), 0);
                 newForm.ShowDialog();
                 UpdateGrades();
             }
@@ -160,7 +154,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
         {
             if (btnNota2.Text.ToLower() == "lançar nota")
             {
-                var grade = m_actualStudent.Grades.FirstOrDefault(grd => grd.Gradesubject == m_actualSubject);
+                var grade = m_actualStudent.Grades.Items.FirstOrDefault(grd => grd.GradeSubject == m_actualSubject);
                 if (grade != null)
                 {
                     Form_AddGrade newForm = new Form_AddGrade(grade, 1);
@@ -169,8 +163,8 @@ namespace EscolaVirtual2025.Forms.TeacherForms
                 }
                 else
                 {
-                    Grade newGrade = new Grade(m_actualSubject);
-                    m_actualStudent.Grades.Add(newGrade);
+                    Grade newGrade = new Grade(m_actualSubject, m_actualStudent, DataManager.Grades.Count);
+                    m_actualStudent.Grades.Items.Add(newGrade);
                     Form_AddGrade newForm = new Form_AddGrade(newGrade, 1);
                     newForm.ShowDialog();
                     UpdateGrades();
@@ -178,7 +172,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             }
             else
             {
-                Form_EditGrade newForm = new Form_EditGrade(m_actualStudent.Grades.FirstOrDefault(grd => grd.Gradesubject == m_actualSubject), 1);
+                Form_EditGrade newForm = new Form_EditGrade(m_actualStudent.Grades.Items.FirstOrDefault(grd => grd.GradeSubject == m_actualSubject), 1);
                 newForm.ShowDialog();
                 UpdateGrades();
             }
@@ -188,7 +182,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
         {
             if (btnNota3.Text.ToLower() == "lançar nota")
             {
-                var grade = m_actualStudent.Grades.FirstOrDefault(grd => grd.Gradesubject == m_actualSubject);
+                var grade = m_actualStudent.Grades.Items.FirstOrDefault(grd => grd.GradeSubject == m_actualSubject);
                 if (grade != null)
                 {
                     Form_AddGrade newForm = new Form_AddGrade(grade, 2);
@@ -197,8 +191,8 @@ namespace EscolaVirtual2025.Forms.TeacherForms
                 }
                 else
                 {
-                    Grade newGrade = new Grade(m_actualSubject);
-                    m_actualStudent.Grades.Add(newGrade);
+                    Grade newGrade = new Grade(m_actualSubject, m_actualStudent, DataManager.Grades.Count);
+                    m_actualStudent.Grades.Items.Add(newGrade);
                     Form_AddGrade newForm = new Form_AddGrade(newGrade, 2);
                     newForm.ShowDialog();
                     UpdateGrades();
@@ -206,7 +200,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             }
             else
             {
-                Form_EditGrade newForm = new Form_EditGrade(m_actualStudent.Grades.FirstOrDefault(grd => grd.Gradesubject == m_actualSubject), 2);
+                Form_EditGrade newForm = new Form_EditGrade(m_actualStudent.Grades.Items.FirstOrDefault(grd => grd.GradeSubject == m_actualSubject), 2);
                 newForm.ShowDialog();
                 UpdateGrades();
             }

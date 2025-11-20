@@ -1,13 +1,9 @@
-﻿using MaterialSkin;using EscolaVirtual2025.Data;
+﻿using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
@@ -43,12 +39,13 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
         private void UpdateListView()
         {
             lsvCheckClassRoom.Items.Clear();
-            for (int i = 0; i < Program.Anos.Count; i++)
+            for (int i = 0; i < DataManager.Years.Count; i++)
             {
-                foreach (char idTurma in Program.Anos[i].ClassRooms.OrderBy(clsrm => clsrm.Id).Select(clsrm => clsrm.Id))
+                DataManager.Years[i].ClassRooms.Reorder(clsrm => clsrm.Letter);
+                foreach (char idTurma in DataManager.Years[i].ClassRooms.Items.Select(clsrm => clsrm.Letter))
                 {
                     ListViewItem itemTurma = new ListViewItem();
-                    itemTurma.Text = Program.Anos[i].AnoId+ "º" + idTurma;
+                    itemTurma.Text = DataManager.Years[i].Id + "º" + idTurma;
                     lsvCheckClassRoom.Items.Add(itemTurma);
                 }
                 if (lsvCheckClassRoom.Items.Count <= 0)
@@ -60,7 +57,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             foreach (ColumnHeader col in lsvCheckClassRoom.Columns)
                 col.Width = -2; // auto resize
 
-            if( Program.Anos.Count == 0 )
+            if (DataManager.Years.Count == 0)
             {
                 btnAdd.Enabled = false;
             }
@@ -85,8 +82,8 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             int yearId = Convert.ToInt32(parts[0]);
             char selectedLetter = parts[1][0];
 
-            var selectedYear = Program.Anos.FirstOrDefault(a => a.AnoId == yearId);
-            var classRoomToRemove = selectedYear.ClassRooms.FirstOrDefault(cls => cls.Id == selectedLetter);
+            var selectedYear = DataManager.Years.FirstOrDefault(a => a.Id == yearId);
+            var classRoomToRemove = selectedYear.ClassRooms.Items.FirstOrDefault(cls => cls.Id == selectedLetter);
 
             DialogResult result = MessageBox.Show(
                 $"Tem a certeza que deseja remover a turma \"{yearId}º{selectedLetter}\"?",
@@ -94,7 +91,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
-            
+
             if (result == DialogResult.No)
                 return;
 
@@ -102,8 +99,8 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             {
                 var student = classRoomToRemove.Students[i];
 
-                Program.Users.Remove(student);
-                Program.students.Remove(student);
+                DataManager.Users.Remove(student);
+                DataManager.Students.Remove(student);
 
                 // Limpa referência na turma
                 classRoomToRemove.Students[i] = null;
@@ -111,7 +108,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
             // Remove a turma
             selectedYear.ClassRooms.Remove(classRoomToRemove);
-            Program.ClassRooms.Remove(classRoomToRemove);
+            DataManager.ClassRooms.Remove(classRoomToRemove);
 
             selectedYear.ReorderClassLetters();
 
@@ -121,8 +118,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Form_AddClassRooms form_AddClassRooms = new Form_AddClassRooms();
-            form_AddClassRooms.ShowDialog();
+            new Form_AddClassRooms().ShowDialog();
             UpdateListView();
         }
 

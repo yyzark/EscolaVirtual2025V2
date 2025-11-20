@@ -1,41 +1,30 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
-using System;
+using EscolaVirtual2025.Classes.InterFace;
+using EscolaVirtual2025.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EscolaVirtual2025.Classes.Users;
 
 namespace EscolaVirtual2025.Classes.Users
 {
     public class Teacher : TeacherStudent
     {
-        private Subject m_assignedSubject;
-        private List<ClassRoom> m_assignedClassRooms;
+        private int m_assignedSubjectId;
+        private List<int> m_assignedClassRoomIds = new List<int>();
 
-        public List <ClassRoom> AssignedClassRooms
-        {
-            get {  return m_assignedClassRooms; }
-            set { m_assignedClassRooms = value;}
-        }
         public Subject AssignedSubject
         {
-            get { return m_assignedSubject; }
-            set { m_assignedSubject = value; }
-        }
-        public Teacher(string username, string password, string name, string nif, Subject subject) :
-        base(username, password, name, UserType.Teacher, nif)
-        {
-            m_assignedSubject = subject;
-            m_assignedClassRooms = new List<ClassRoom>();
+            get => DataManager.Subjects.FirstOrDefault(s => s.Id == m_assignedSubjectId);
+            set => m_assignedSubjectId = value.Id;
         }
 
-        public Teacher(string username, string password, string name, string nif, List<ClassRoom> classRooms, Subject subject) :
-        base(username, password, name, UserType.Teacher, nif)
-        {
-            m_assignedSubject = subject;
-            m_assignedClassRooms = classRooms;
-        }
+        public EntityCollection<ClassRoom, int> AssignedClassRooms = new EntityCollection<ClassRoom, int>(DataManager.ClassRooms, cl => cl.Id);
+
         public Teacher() : base() { }
+
+        public Teacher(string username, string password, string name, int nif, Subject subject)
+            : base(username, password, name, UserType.Teacher, nif)
+        {
+            AssignedSubject = subject;
+        }
     }
 }

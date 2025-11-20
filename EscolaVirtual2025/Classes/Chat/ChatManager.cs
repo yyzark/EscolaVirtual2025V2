@@ -1,5 +1,4 @@
-﻿using EscolaVirtual2025;
-using EscolaVirtual2025.Classes;
+﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Chat;
 using EscolaVirtual2025.Classes.Users;
 using System;
@@ -25,10 +24,10 @@ internal static class ChatManager
             PreserveObjectReferences = true
         };
 
-    // ---------- MÉTODOS EXISTENTES ----------
+
     public static Chat GetOrCreateChat(Teacher teacher, Student student)
     {
-        var chat = Chats.FirstOrDefault(c => c.Teacher == teacher && c.Student == student);
+        var chat = Chats.FirstOrDefault(c => !c.HasAdmin && c.Teacher == teacher && c.Student == student);
         if (chat == null)
         {
             chat = new Chat(teacher, student);
@@ -40,25 +39,24 @@ internal static class ChatManager
     public static Chat SendGetNotificationFromAdmin(User teacherStudent)
     {
         Chat chat = null;
-        User admin = Program.Users[0];
 
         if (teacherStudent.UserType == UserType.Student)
         {
             var student = teacherStudent as Student;
-            chat = Chats.FirstOrDefault(c => c.Admin == admin && c.Student == student);
+            chat = Chats.FirstOrDefault(c => c.HasAdmin && c.Student == student);
             if (chat == null)
             {
-                chat = new Chat(admin, student);
+                chat = new Chat(student);
                 Chats.Add(chat);
             }
         }
         else if (teacherStudent.UserType == UserType.Teacher)
         {
             var teacher = teacherStudent as Teacher;
-            chat = Chats.FirstOrDefault(c => c.Admin == admin && c.Teacher == teacher);
+            chat = Chats.FirstOrDefault(c => c.HasAdmin && c.Teacher == teacher);
             if (chat == null)
             {
-                chat = new Chat(admin, teacher);
+                chat = new Chat(teacher);
                 Chats.Add(chat);
             }
         }
@@ -69,27 +67,5 @@ internal static class ChatManager
     public static List<Chat> GetChatsByStudent(Student student)
     {
         return Chats.Where(c => c.Student == student).ToList();
-    }
-
-    // ---------- NOVOS MÉTODOS XML ----------
-    public static void SaveXML()
-    {
-        Directory.CreateDirectory(saveFolder);
-        var serializer = new DataContractSerializer(typeof(List<Chat>), settings);
-        using (var stream = new FileStream(chatFile, FileMode.Create))
-            serializer.WriteObject(stream, Chats);
-    }
-
-    public static void LoadXML()
-    {
-        if (!File.Exists(chatFile))
-        {
-            Chats = new List<Chat>();
-            return;
-        }
-
-        var serializer = new DataContractSerializer(typeof(List<Chat>), settings);
-        using (var stream = new FileStream(chatFile, FileMode.Open))
-            Chats = (List<Chat>)serializer.ReadObject(stream);
     }
 }

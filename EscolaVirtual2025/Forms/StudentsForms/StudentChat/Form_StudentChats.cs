@@ -24,7 +24,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms.StudentChat
         {
             InitializeComponent();
 
-            m_student = Program.userAtual as Student;
+            m_student = DataManager.currentUser as Student;
 
             #region MaterialSkin
             var materialSkinManager = MaterialSkinManager.Instance;

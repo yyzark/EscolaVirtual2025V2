@@ -1,16 +1,10 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using EscolaVirtual2025.Classes.Users;
 
 namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
 {
@@ -34,7 +28,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
             );
             #endregion
 
-            tchr = Program.userAtual as Teacher;
+            tchr = DataManager.currentUser as Teacher;
         }
 
         private void Form_TeacherAccount_Load(object sender, EventArgs e)
@@ -54,11 +48,11 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
         private void btnClassRooms_Click(object sender, EventArgs e)
         {
             string result = "Turmas: ";
-            foreach (ClassRoom clsrm in tchr.AssignedClassRooms)
+            foreach (ClassRoom clsrm in tchr.AssignedClassRooms.Items)
             {
-                result += "\n" + $"{clsrm.Year.AnoId}º{clsrm.Id}";
+                result += "\n" + $"{clsrm.Year.Id}º{clsrm.Id}";
             }
-            MessageBox.Show(result, "Turmas", MessageBoxButtons.OK, MessageBoxIcon.Information );
+            MessageBox.Show(result, "Turmas", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnShowPassword_MouseDown(object sender, MouseEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher;
 using EscolaVirtual2025.Forms.TeacherForms.TeacherAccount;
 using EscolaVirtual2025.Forms.TeacherForms.TeacherChat;
@@ -40,7 +41,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
         private void Form_Teacher_Load(object sender, EventArgs e)
         {
 
-            btnUser.Text = Program.userAtual.Name + "";
+            btnUser.Text = DataManager.currentUser.Name + "";
 
             #region toolstrip
 
@@ -68,14 +69,14 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
             UpdateUserArrow();
 
-            tchr = Program.userAtual as Teacher;
+            tchr = DataManager.currentUser as Teacher;
 
 
 
-            Program.Anos = Program.Anos.OrderBy(yr => yr.AnoId).ToList();
-            foreach (Year yr in tchr.AssignedClassRooms.Select(cr => cr.Year).Distinct())
+            DataManager.Years = DataManager.Years.OrderBy(yr => yr.Id).ToList();
+            foreach (Year yr in tchr.AssignedClassRooms.Items.Select(cr => cr.Year).Distinct())
             {
-                cbbYear.Items.Add(yr.AnoId + "º");
+                cbbYear.Items.Add(yr.Id + "º");
             }
         }
 
@@ -102,9 +103,9 @@ namespace EscolaVirtual2025.Forms.TeacherForms
         private void UpdateUserArrow()
         {
             if (menuAccount.Visible)
-                btnUser.Text = $"{Program.userAtual.Name} ▲"; // seta para cima
+                btnUser.Text = $"{DataManager.currentUser.Name} ▲"; // seta para cima
             else
-                btnUser.Text = $"{Program.userAtual.Name} ▼"; // seta para baixo
+                btnUser.Text = $"{DataManager.currentUser.Name} ▼"; // seta para baixo
         }
 
         private void menuAccount_VisibleChanged(object sender, EventArgs e)
@@ -121,12 +122,12 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             {
                 int anoSelecionado = Convert.ToInt32(cbbYear.SelectedItem.ToString().Replace("º", ""));
 
-                if (tchr.AssignedClassRooms.Where(cr => cr.Year.AnoId == anoSelecionado).ToList().Count > 0)
+                if (tchr.AssignedClassRooms.Items.Where(cr => cr.Year.Id == anoSelecionado).ToList().Count > 0)
                 {
                     cbbClassRoom.Enabled = true;
-                    foreach (ClassRoom r in tchr.AssignedClassRooms.Where(cr => cr.Year.AnoId == anoSelecionado).ToList())
+                    foreach (ClassRoom r in tchr.AssignedClassRooms.Items.Where(cr => cr.Year.Id == anoSelecionado).ToList())
                     {
-                        cbbClassRoom.Items.Add(r.Id);
+                        cbbClassRoom.Items.Add(r.Letter);
                     }
                 }
             }
@@ -141,7 +142,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
         {
             btnReport.Enabled = true;
             lsbStudents.Items.Clear();
-            foreach (Student st in Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex].Students)
+            foreach (Student st in DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex].Students)
             {
                 if (st != null)
                     lsbStudents.Items.Add(st.Name);
@@ -162,7 +163,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void btnCreateGrade_Click(object sender, EventArgs e)
         {
-            Form_Grades form_Grades = new Form_Grades(tchr.AssignedClassRooms[cbbClassRoom.SelectedIndex].Students[lsbStudents.SelectedIndex], tchr.AssignedSubject);
+            Form_Grades form_Grades = new Form_Grades(tchr.AssignedClassRooms.Items[cbbClassRoom.SelectedIndex].Students[lsbStudents.SelectedIndex], tchr.AssignedSubject);
             this.Hide();
             form_Grades.ShowDialog();
             this.Show();
@@ -190,7 +191,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            Form_Relatorio frm = new Form_Relatorio(Program.Anos[cbbYear.SelectedIndex].ClassRooms[cbbClassRoom.SelectedIndex], tchr);
+            Form_Relatorio frm = new Form_Relatorio(DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex], tchr);
             frm.ShowDialog();
             this.Hide();
 

@@ -36,10 +36,7 @@
             treeNode2});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Admin));
             this.menuAccount = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.materialToolStripItemAccount = new MaterialSkin.Controls.MaterialToolStripMenuItem();
-            this.materialToolStripItemNotification = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.Separator = new System.Windows.Forms.ToolStripSeparator();
-            this.materialToolStripItemLeave = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.btnUser = new MaterialSkin.Controls.MaterialButton();
             this.tvwAdmin = new System.Windows.Forms.TreeView();
@@ -53,6 +50,10 @@
             this.btnTeachers = new MaterialSkin.Controls.MaterialButton();
             this.panelTreeView = new System.Windows.Forms.Panel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.materialToolStripItemAccount = new MaterialSkin.Controls.MaterialToolStripMenuItem();
+            this.materialToolStripItemNotification = new MaterialSkin.Controls.MaterialToolStripMenuItem();
+            this.materialToolStripBackup = new MaterialSkin.Controls.MaterialToolStripMenuItem();
+            this.materialToolStripItemLeave = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.menuAccount.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
@@ -67,6 +68,7 @@
             this.menuAccount.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.materialToolStripItemAccount,
             this.materialToolStripItemNotification,
+            this.materialToolStripBackup,
             this.Separator,
             this.materialToolStripItemLeave,
             this.toolStripSeparator});
@@ -74,40 +76,10 @@
             this.menuAccount.Size = new System.Drawing.Size(160, 200);
             this.menuAccount.VisibleChanged += new System.EventHandler(this.menuAccount_VisibleChanged);
             // 
-            // materialToolStripItemAccount
-            // 
-            this.materialToolStripItemAccount.AutoSize = false;
-            this.materialToolStripItemAccount.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialToolStripItemAccount.Image = global::EscolaVirtual2025.Properties.Resources.account;
-            this.materialToolStripItemAccount.Name = "materialToolStripItemAccount";
-            this.materialToolStripItemAccount.Size = new System.Drawing.Size(160, 32);
-            this.materialToolStripItemAccount.Text = "Conta";
-            this.materialToolStripItemAccount.Click += new System.EventHandler(this.materialToolStripItemAccount_Click);
-            // 
-            // materialToolStripItemNotification
-            // 
-            this.materialToolStripItemNotification.AutoSize = false;
-            this.materialToolStripItemNotification.Font = new System.Drawing.Font("Calibri", 11.25F);
-            this.materialToolStripItemNotification.Image = global::EscolaVirtual2025.Properties.Resources.notification;
-            this.materialToolStripItemNotification.Name = "materialToolStripItemNotification";
-            this.materialToolStripItemNotification.Size = new System.Drawing.Size(160, 32);
-            this.materialToolStripItemNotification.Text = "Notificações";
-            this.materialToolStripItemNotification.Click += new System.EventHandler(this.materialToolStripItemNotification_Click);
-            // 
             // Separator
             // 
             this.Separator.Name = "Separator";
             this.Separator.Size = new System.Drawing.Size(156, 6);
-            // 
-            // materialToolStripItemLeave
-            // 
-            this.materialToolStripItemLeave.AutoSize = false;
-            this.materialToolStripItemLeave.Font = new System.Drawing.Font("Calibri", 11.25F);
-            this.materialToolStripItemLeave.Image = global::EscolaVirtual2025.Properties.Resources.logout;
-            this.materialToolStripItemLeave.Name = "materialToolStripItemLeave";
-            this.materialToolStripItemLeave.Size = new System.Drawing.Size(160, 32);
-            this.materialToolStripItemLeave.Text = "Sair";
-            this.materialToolStripItemLeave.Click += new System.EventHandler(this.materialToolStripItemLeave_Click);
             // 
             // toolStripSeparator
             // 
@@ -332,6 +304,46 @@
             this.notifyIcon.Text = "YOOOOO";
             this.notifyIcon.Visible = true;
             // 
+            // materialToolStripItemAccount
+            // 
+            this.materialToolStripItemAccount.AutoSize = false;
+            this.materialToolStripItemAccount.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialToolStripItemAccount.Image = global::EscolaVirtual2025.Properties.Resources.account;
+            this.materialToolStripItemAccount.Name = "materialToolStripItemAccount";
+            this.materialToolStripItemAccount.Size = new System.Drawing.Size(160, 32);
+            this.materialToolStripItemAccount.Text = "Conta";
+            this.materialToolStripItemAccount.Click += new System.EventHandler(this.materialToolStripItemAccount_Click);
+            // 
+            // materialToolStripItemNotification
+            // 
+            this.materialToolStripItemNotification.AutoSize = false;
+            this.materialToolStripItemNotification.Font = new System.Drawing.Font("Calibri", 11.25F);
+            this.materialToolStripItemNotification.Image = global::EscolaVirtual2025.Properties.Resources.notification;
+            this.materialToolStripItemNotification.Name = "materialToolStripItemNotification";
+            this.materialToolStripItemNotification.Size = new System.Drawing.Size(160, 32);
+            this.materialToolStripItemNotification.Text = "Notificações";
+            this.materialToolStripItemNotification.Click += new System.EventHandler(this.materialToolStripItemNotification_Click);
+            // 
+            // materialToolStripBackup
+            // 
+            this.materialToolStripBackup.AutoSize = false;
+            this.materialToolStripBackup.Font = new System.Drawing.Font("Calibri", 11.25F);
+            this.materialToolStripBackup.Image = global::EscolaVirtual2025.Properties.Resources.dataBase512px;
+            this.materialToolStripBackup.Name = "materialToolStripBackup";
+            this.materialToolStripBackup.Size = new System.Drawing.Size(160, 32);
+            this.materialToolStripBackup.Text = "Backup";
+            this.materialToolStripBackup.Click += new System.EventHandler(this.materialToolStripBackup_Click);
+            // 
+            // materialToolStripItemLeave
+            // 
+            this.materialToolStripItemLeave.AutoSize = false;
+            this.materialToolStripItemLeave.Font = new System.Drawing.Font("Calibri", 11.25F);
+            this.materialToolStripItemLeave.Image = global::EscolaVirtual2025.Properties.Resources.logout;
+            this.materialToolStripItemLeave.Name = "materialToolStripItemLeave";
+            this.materialToolStripItemLeave.Size = new System.Drawing.Size(160, 32);
+            this.materialToolStripItemLeave.Text = "Sair";
+            this.materialToolStripItemLeave.Click += new System.EventHandler(this.materialToolStripItemLeave_Click);
+            // 
             // Form_Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,5 +390,6 @@
         private MaterialSkin.Controls.MaterialButton btnYears;
         private System.Windows.Forms.Panel panelTreeView;
         private MaterialSkin.Controls.MaterialButton btnSubjects;
+        private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripBackup;
     }
 }

@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EscolaVirtual2025.Classes.Users;
 using System.Runtime.Serialization;
 
 namespace EscolaVirtual2025.Classes.Academic
 {
     [DataContract]
-    public class ClassSubject
+    public class ClassSubject : Subject
     {
-        private Teacher m_teacher;
-        private Subject m_subject;
-        [DataMember]
-        public Teacher AssignedTeacher
+        private int? m_teacherNif;
+
+        public Teacher Teacher
         {
-            get { return m_teacher; }
-            set { m_teacher = value; }
+            get { return DataManager.Teachers.FirstOrDefault(tch => tch.NIF == m_teacherNif); }
+            set { m_teacherNif = value.NIF; }
         }
-        [DataMember]
-        public Subject Subject
+        public ClassSubject()
         {
-            get { return m_subject; }
-            set { m_subject = value; }
         }
 
-        public ClassSubject(Teacher teacher, Subject subject)
+        public ClassSubject(int? teacherNif, Subject subject) : base(subject.Name, subject.Abreviation, subject.Id)
         {
-            m_teacher = teacher;
-            m_subject = subject;
+            this.m_teacherNif = teacherNif;
+        }
+
+        public ClassSubject(string name, string abreviation, int id, int teacherNif) : base(name, abreviation, id)
+        {
+            m_teacherNif = teacherNif;
         }
     }
 }

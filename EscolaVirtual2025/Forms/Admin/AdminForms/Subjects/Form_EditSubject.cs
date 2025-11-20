@@ -1,6 +1,7 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Data;
 using EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
                 Id = subject.Id,
                 Name = subject.Name,
                 Abreviation = subject.Abreviation,
-                Years = subject.Years.ToList()
+                Years = subject.Years
             };
 
             subjectYearsChose = new Form_AddSubjectYearsChose(editedSubject);
@@ -80,7 +81,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
         {
             bool nameChanged = txtName.Text != originalSubject.Name;
             bool abbrChanged = txtAbreviation.Text != originalSubject.Abreviation;
-            bool yearsChanged = !subjectYearsChose.p_Subject.Years.SequenceEqual(originalSubject.Years);
+            bool yearsChanged = !subjectYearsChose.p_Subject.Years.Items.SequenceEqual(originalSubject.Years.Items);
 
             btnAccept.Enabled =
                 (nameChanged || abbrChanged || yearsChanged)
@@ -94,53 +95,53 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
             // Atualiza dados da cópia
             editedSubject.Name = txtName.Text.Trim();
             editedSubject.Abreviation = txtAbreviation.Text.Trim();
-            editedSubject.Years = subjectYearsChose.p_Subject.Years.ToList();
+            editedSubject.Years = subjectYearsChose.p_Subject.Years;
 
             // === 1️⃣ Atualiza lista global de Subjects ===
-            int idx = Program.Subjects.IndexOf(originalSubject);
+            int idx = DataManager.Subjects.IndexOf(originalSubject);
             if (idx >= 0)
-                Program.Subjects[idx] = editedSubject;
+                DataManager.Subjects[idx] = editedSubject;
             else
-                Program.Subjects.Add(editedSubject);
+                DataManager.Subjects.Add(editedSubject);
 
             // === 2️⃣ Atualiza cada Ano ===
-            foreach (var year in Program.Anos)
+            foreach (var year in DataManager.Years)
             {
                 year.Subjects.RemoveAll(s => s.Id == originalSubject.Id);
 
-                if (editedSubject.Years.Any(y => y.AnoId == year.AnoId))
+                if (editedSubject.Years.Items.Any(y => y.Id == year.Id))
                 {
-                    if (!year.Subjects.Any(s => s.Id == editedSubject.Id))
+                    if (!year.Subjects.Items.Any(s => s.Id == editedSubject.Id))
                         year.Subjects.Add(editedSubject);
                 }
 
                 // Atualiza as turmas dentro do ano
-                foreach (var cls in year.ClassRooms)
+                foreach (var cls in year.ClassRooms.Items)
                 {
-                    cls.Subjects.RemoveAll(cs => cs.Subject.Id == originalSubject.Id);
+                    cls.ClassSubjects.RemoveAll(cs => cs.Id == originalSubject.Id);
 
-                    if (editedSubject.Years.Any(y => y.AnoId == year.AnoId))
+                    if (editedSubject.Years.Items.Any(y => y.Id == year.Id))
                     {
-                        if (!cls.Subjects.Any(cs => cs.Subject.Id == editedSubject.Id))
-                            cls.Subjects.Add(new ClassSubject(null, editedSubject));
+                        if (!cls.ClassSubjects.Items.Any(cs => cs.Id == editedSubject.Id))
+                            cls.ClassSubjects.Add(new ClassSubject(null, editedSubject));
                     }
                 }
             }
 
             // === 3️⃣ Atualiza turmas globais ===
-            foreach (var cls in Program.ClassRooms)
+            foreach (var cls in DataManager.ClassRooms)
             {
-                cls.Subjects.RemoveAll(cs => cs.Subject.Id == originalSubject.Id);
+                cls.ClassSubjects.RemoveAll(cs => cs.Id == originalSubject.Id);
 
-                if (editedSubject.Years.Any(y => y.AnoId == cls.Year.AnoId))
+                if (editedSubject.Years.Items.Any(y => y.Id == cls.Year.Id))
                 {
-                    if (!cls.Subjects.Any(cs => cs.Subject.Id == editedSubject.Id))
-                        cls.Subjects.Add(new ClassSubject(null, editedSubject));
+                    if (!cls.ClassSubjects.Items.Any(cs => cs.Id == editedSubject.Id))
+                        cls.ClassSubjects.Add(new ClassSubject(null, editedSubject));
                 }
             }
 
             // === 4️⃣ Atualiza professores ===
-            foreach (var teacher in Program.Teachers)
+            foreach (var teacher in DataManager.Teachers)
             {
                 if (teacher.AssignedSubject != null && teacher.AssignedSubject.Id == originalSubject.Id)
                 {

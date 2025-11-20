@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using EscolaVirtual2025.Data;
 namespace EscolaVirtual2025.Forms.Admin
 {
     public partial class PanelAccountAdmin : UserControl
@@ -20,19 +20,19 @@ namespace EscolaVirtual2025.Forms.Admin
         }
         private void btnShowPassword_MouseDown(object sender, MouseEventArgs e)
         {
-            lblPassword.Text = $"Senha: {Program.userAtual.Password}";
+            lblPassword.Text = $"Senha: {DataManager.currentUser.Password}";
         }
 
         private void PanelAccountAdmin_Load(object sender, EventArgs e)
         {
-            lblName.Text = $"Nome: {Program.userAtual.Name}";
-            lblPassword.Text = $"Senha: {new string('*', Program.userAtual.Password.Length)}";
-            lblUser.Text = $"Utilizador: {Program.userAtual.Username}";
-            lblUserType.Text = $"Cargo: {Program.userAtual.UserType}";
+            lblName.Text = $"Nome: {DataManager.currentUser.Name}";
+            lblPassword.Text = $"Senha: {new string('*', DataManager.currentUser.Password.Length)}";
+            lblUser.Text = $"Utilizador: {DataManager.currentUser.Username}";
+            lblUserType.Text = $"Cargo: {DataManager.currentUser.UserType}";
         }
         private void btnShowPassword_MouseUp(object sender, MouseEventArgs e)
         {
-            lblPassword.Text = $"Senha: {new string('*', Program.userAtual.Password.Length)}";
+            lblPassword.Text = $"Senha: {new string('*', DataManager.currentUser.Password.Length)}";
         }
 
         private void btnEditUser_Click(object sender, EventArgs e)
@@ -41,10 +41,10 @@ namespace EscolaVirtual2025.Forms.Admin
         }
         private void PanelAccountAdmin_VisibleChanged(object sender, EventArgs e)
         {
-            lblName.Text = $"Nome: {Program.userAtual.Name}";
-            lblPassword.Text = $"Senha: {new string('*', Program.userAtual.Password.Length)}";
-            lblUser.Text = $"Utilizador: {Program.userAtual.Username}";
-            lblUserType.Text = $"Cargo: {Program.userAtual.UserType}";
+            lblName.Text = $"Nome: {DataManager.currentUser.Name}";
+            lblPassword.Text = $"Senha: {new string('*', DataManager.currentUser.Password.Length)}";
+            lblUser.Text = $"Utilizador: {DataManager.currentUser.Username}";
+            lblUserType.Text = $"Cargo: {DataManager.currentUser.UserType}";
         }
 
         private void btnShowPassword_Click(object sender, EventArgs e)

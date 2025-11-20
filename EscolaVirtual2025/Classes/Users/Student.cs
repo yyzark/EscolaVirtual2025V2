@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Classes.InterFace;
+using EscolaVirtual2025.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EscolaVirtual2025.Classes.Academic;
-using EscolaVirtual2025.Forms.TeacherForms;
+
 namespace EscolaVirtual2025.Classes.Users
 {
     public class Student : TeacherStudent
     {
-        private ClassRoom m_classRoom;
-        private List<Grade> m_grades;
         private SchoolCard m_schoolCard;
 
         public SchoolCard SchoolCard
         {
-            get { return m_schoolCard; }
-            set { m_schoolCard = value; }
+            get => m_schoolCard;
+            set => m_schoolCard = value;
         }
+
         public ClassRoom ClassRoom
         {
-            get { return m_classRoom; }
-            set { m_classRoom = value; }
-        }
-        public List<Grade> Grades
-        {
-            get { return m_grades; }
-            set { m_grades = value; }
+            get => DataManager.ClassRooms.FirstOrDefault(c => c.Students.Any(s => s.NIF == NIF));
+            set
+            {
+                var oldClass = ClassRoom;
+                if (oldClass != null)
+                    oldClass.RemoveStudent(this);
+
+                if (value != null)
+                    value.AddStudent(this);
+            }
         }
 
-        public Student(string username, string password, string name, string nif, ClassRoom classRoom, SchoolCard schoolCard) :
-        base(username, password, name, UserType.Student, nif)
-        {
-            m_classRoom = classRoom;
-            m_grades = new List<Grade>();
-            this.SchoolCard = schoolCard;
-        }
-
+        public EntityCollection<Grade, int> Grades = new EntityCollection<Grade, int>(DataManager.Grades, gd => gd.Id);
         public Student() { }
+
+        public Student(string username, string password, string name, int nif, ClassRoom classRoom, SchoolCard schoolCard)
+            : base(username, password, name, UserType.Student, nif)
+        {
+            ClassRoom = classRoom;
+            SchoolCard = schoolCard;
+        }
     }
 }

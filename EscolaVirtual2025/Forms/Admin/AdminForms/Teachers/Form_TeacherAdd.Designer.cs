@@ -47,11 +47,10 @@
             // 
             this.panelMain.Controls.Add(this.tableLayoutPanelMain);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(4, 30);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4);
+            this.panelMain.Location = new System.Drawing.Point(3, 24);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
-            this.panelMain.Size = new System.Drawing.Size(570, 453);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.panelMain.Size = new System.Drawing.Size(448, 415);
             this.panelMain.TabIndex = 2;
             // 
             // tableLayoutPanelMain
@@ -68,15 +67,15 @@
             this.tableLayoutPanelMain.Controls.Add(this.btnAccept, 0, 3);
             this.tableLayoutPanelMain.Controls.Add(this.txtName, 0, 1);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelMain.Location = new System.Drawing.Point(27, 25);
+            this.tableLayoutPanelMain.Location = new System.Drawing.Point(20, 20);
             this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 4;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(516, 403);
+            this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(408, 375);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // txtNIF
@@ -88,13 +87,12 @@
             this.txtNIF.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNIF.Hint = "NIF";
             this.txtNIF.LeadingIcon = null;
-            this.txtNIF.Location = new System.Drawing.Point(262, 115);
-            this.txtNIF.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNIF.Location = new System.Drawing.Point(207, 109);
             this.txtNIF.MaxLength = 9;
             this.txtNIF.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNIF.Multiline = false;
             this.txtNIF.Name = "txtNIF";
-            this.txtNIF.Size = new System.Drawing.Size(250, 50);
+            this.txtNIF.Size = new System.Drawing.Size(198, 50);
             this.txtNIF.TabIndex = 15;
             this.txtNIF.Text = "";
             this.txtNIF.TrailingIcon = null;
@@ -110,13 +108,12 @@
             this.txtPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtPassword.Hint = "Password";
             this.txtPassword.LeadingIcon = null;
-            this.txtPassword.Location = new System.Drawing.Point(262, 4);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.Location = new System.Drawing.Point(207, 3);
             this.txtPassword.MaxLength = 16;
             this.txtPassword.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPassword.Multiline = false;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(250, 50);
+            this.txtPassword.Size = new System.Drawing.Size(198, 50);
             this.txtPassword.TabIndex = 13;
             this.txtPassword.Text = "";
             this.txtPassword.TrailingIcon = null;
@@ -128,10 +125,10 @@
             this.cbbSubjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbbSubjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbSubjects.FormattingEnabled = true;
-            this.cbbSubjects.Location = new System.Drawing.Point(3, 224);
-            this.cbbSubjects.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbbSubjects.Location = new System.Drawing.Point(2, 214);
+            this.cbbSubjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbbSubjects.Name = "cbbSubjects";
-            this.cbbSubjects.Size = new System.Drawing.Size(252, 24);
+            this.cbbSubjects.Size = new System.Drawing.Size(200, 21);
             this.cbbSubjects.TabIndex = 15;
             this.cbbSubjects.SelectedIndexChanged += new System.EventHandler(this.cbbSubjects_SelectedIndexChanged);
             // 
@@ -144,13 +141,12 @@
             this.txtLogin.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtLogin.Hint = "Username";
             this.txtLogin.LeadingIcon = null;
-            this.txtLogin.Location = new System.Drawing.Point(4, 4);
-            this.txtLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLogin.Location = new System.Drawing.Point(3, 3);
             this.txtLogin.MaxLength = 16;
             this.txtLogin.MouseState = MaterialSkin.MouseState.OUT;
             this.txtLogin.Multiline = false;
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(250, 50);
+            this.txtLogin.Size = new System.Drawing.Size(198, 50);
             this.txtLogin.TabIndex = 12;
             this.txtLogin.Text = "";
             this.txtLogin.TrailingIcon = null;
@@ -165,12 +161,12 @@
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(263, 340);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnCancel.Location = new System.Drawing.Point(208, 324);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCancel.Size = new System.Drawing.Size(248, 56);
+            this.btnCancel.Size = new System.Drawing.Size(196, 45);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -187,12 +183,12 @@
             this.btnClassRooms.Enabled = false;
             this.btnClassRooms.HighEmphasis = true;
             this.btnClassRooms.Icon = null;
-            this.btnClassRooms.Location = new System.Drawing.Point(263, 229);
-            this.btnClassRooms.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnClassRooms.Location = new System.Drawing.Point(208, 218);
+            this.btnClassRooms.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClassRooms.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClassRooms.Name = "btnClassRooms";
             this.btnClassRooms.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClassRooms.Size = new System.Drawing.Size(248, 97);
+            this.btnClassRooms.Size = new System.Drawing.Size(196, 94);
             this.btnClassRooms.TabIndex = 11;
             this.btnClassRooms.Text = "Editar turmas";
             this.btnClassRooms.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -209,12 +205,12 @@
             this.btnAccept.Enabled = false;
             this.btnAccept.HighEmphasis = true;
             this.btnAccept.Icon = null;
-            this.btnAccept.Location = new System.Drawing.Point(5, 340);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnAccept.Location = new System.Drawing.Point(4, 324);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnAccept.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAccept.Size = new System.Drawing.Size(248, 56);
+            this.btnAccept.Size = new System.Drawing.Size(196, 45);
             this.btnAccept.TabIndex = 6;
             this.btnAccept.Text = "Aceitar";
             this.btnAccept.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -231,13 +227,12 @@
             this.txtName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtName.Hint = "Nome";
             this.txtName.LeadingIcon = null;
-            this.txtName.Location = new System.Drawing.Point(4, 115);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtName.Location = new System.Drawing.Point(3, 109);
             this.txtName.MaxLength = 32;
             this.txtName.MouseState = MaterialSkin.MouseState.OUT;
             this.txtName.Multiline = false;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(250, 50);
+            this.txtName.Size = new System.Drawing.Size(198, 50);
             this.txtName.TabIndex = 14;
             this.txtName.Text = "";
             this.txtName.TrailingIcon = null;
@@ -246,17 +241,16 @@
             // 
             // Form_TeacherAdd
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(578, 487);
+            this.ClientSize = new System.Drawing.Size(454, 442);
             this.Controls.Add(this.panelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "Form_TeacherAdd";
-            this.Padding = new System.Windows.Forms.Padding(4, 30, 4, 4);
+            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_TeacherAdd";

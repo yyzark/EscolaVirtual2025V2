@@ -1,15 +1,10 @@
-﻿using EscolaVirtual2025.Classes.Academic;
-using EscolaVirtual2025.Classes.Users;
-using MaterialSkin;using EscolaVirtual2025.Data;
+﻿using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
@@ -37,13 +32,15 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         private void Form_CheckTeachers_Load(object sender, EventArgs e)
         {
             UpdateListView();
+
+            btnAdd.Enabled = DataManager.Subjects.Count != 0 ? true : false;
         }
 
         private void UpdateListView()
         {
             lsvCheckTeachers.Items.Clear();
 
-            foreach (var teacher in Program.Teachers)
+            foreach (var teacher in DataManager.Teachers)
             {
                 // Cria o item principal com o nome
                 ListViewItem item = new ListViewItem(teacher.Name);
@@ -51,7 +48,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 // Adiciona subitens: disciplina e nif
                 string subjectName = teacher.AssignedSubject.Name;
                 item.SubItems.Add(subjectName);
-                item.SubItems.Add(teacher.NIF);
+                item.SubItems.Add(teacher.NIF.ToString());
 
                 // Guarda o objeto completo (útil p/ remover ou editar)
                 item.Tag = teacher;
@@ -64,7 +61,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             foreach (ColumnHeader col in lsvCheckTeachers.Columns)
                 col.Width = -2; // auto resize
 
-            if(Program.ClassRooms.Count == 0)
+            if (DataManager.ClassRooms.Count == 0)
             {
                 btnAdd.Enabled = false;
             }
@@ -88,17 +85,17 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             var confirm = MessageBox.Show($"Deseja remover {selectedTeacher.Name}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm == DialogResult.Yes)
             {
-                Program.Teachers.Remove(selectedTeacher);
-                Program.Users.Remove(selectedTeacher);
-                Program.Subjects.ForEach(sb => sb.Teachers.Remove(selectedTeacher));
+                DataManager.Teachers.Remove(selectedTeacher);
+                DataManager.Users.Remove(selectedTeacher);
+                DataManager.Subjects.ForEach(sb => sb.Teachers.Remove(selectedTeacher));
 
-                Program.Anos.ForEach(yr =>
+                DataManager.Years.ForEach(yr =>
                 {
-                    yr.ClassRooms.ForEach(clas =>
+                    yr.ClassRooms.Items.ForEach(clas =>
                     {
-                        clas.Subjects
-                            .Where(sb => sb.AssignedTeacher != null && sb.AssignedTeacher.NIF == selectedTeacher.NIF).ToList()
-                            .ForEach(sb => sb.AssignedTeacher = null);
+                        clas.ClassSubjects.Items
+                            .Where(sb => sb.Teacher != null && sb.Teacher.NIF == selectedTeacher.NIF).ToList()
+                            .ForEach(sb => sb.Teacher = null);
                     });
                 });
 

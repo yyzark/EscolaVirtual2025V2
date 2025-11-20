@@ -1,17 +1,10 @@
 ﻿using EscolaVirtual2025.Classes;
+using EscolaVirtual2025.Data;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-
 namespace EscolaVirtual2025.Forms.Admin.Panels
 {
     public partial class PanelAccountAdminEdit : UserControl
@@ -28,9 +21,9 @@ namespace EscolaVirtual2025.Forms.Admin.Panels
 
         private void PanelAccountAdminEdit_Load(object sender, EventArgs e)
         {
-            txtName.Text = Program.userAtual.Name;
-            txtPassword.Text = Program.userAtual.Password;
-            txtUser.Text = Program.userAtual.Username;
+            txtName.Text = DataManager.currentUser.Name;
+            txtPassword.Text = DataManager.currentUser.Password;
+            txtUser.Text = DataManager.currentUser.Username;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -53,13 +46,13 @@ namespace EscolaVirtual2025.Forms.Admin.Panels
             }
 
             if (
-            Program.userAtual.Name != txtName.Text ||
-            Program.userAtual.Password != txtPassword.Text ||
-            Program.userAtual.Username != txtUser.Text
+            DataManager.currentUser.Name != txtName.Text ||
+            DataManager.currentUser.Password != txtPassword.Text ||
+            DataManager.currentUser.Username != txtUser.Text
             )
             {
-                if (Program.Users.Any(usr => usr.Username == txtUser.Text)
-                     && Program.userAtual.Username != txtUser.Text)
+                if (DataManager.Users.Any(usr => usr.Username == txtUser.Text)
+                     && DataManager.currentUser.Username != txtUser.Text)
                 {
                     MessageBox.Show(
                     "Já existe um utilizador com este nome de utilizador!",
@@ -95,17 +88,17 @@ namespace EscolaVirtual2025.Forms.Admin.Panels
                         if (result == DialogResult.Yes)
                         {
                             //aplicar alterações
-                            Program.userAtual.Name = txtName.Text;
-                            Program.userAtual.Password = txtPassword.Text;
-                            Program.userAtual.Username = txtUser.Text;
+                            DataManager.currentUser.Name = txtName.Text;
+                            DataManager.currentUser.Password = txtPassword.Text;
+                            DataManager.currentUser.Username = txtUser.Text;
 
                             Cancel?.Invoke(this, EventArgs.Empty);
                         }
                         else
                         {
-                            txtName.Text = Program.userAtual.Name;
-                            txtPassword.Text = Program.userAtual.Password;
-                            txtUser.Text = Program.userAtual.Username;
+                            txtName.Text = DataManager.currentUser.Name;
+                            txtPassword.Text = DataManager.currentUser.Password;
+                            txtUser.Text = DataManager.currentUser.Username;
                         }
                         await Task.Delay(200);
                         AfterDialog?.Invoke(this, EventArgs.Empty);
@@ -144,9 +137,9 @@ namespace EscolaVirtual2025.Forms.Admin.Panels
 
         private void PanelAccountAdminEdit_VisibleChanged(object sender, EventArgs e)
         {
-            txtName.Text = Program.userAtual.Name;
-            txtPassword.Text = Program.userAtual.Password;
-            txtUser.Text = Program.userAtual.Username;
+            txtName.Text = DataManager.currentUser.Name;
+            txtPassword.Text = DataManager.currentUser.Password;
+            txtUser.Text = DataManager.currentUser.Username;
         }
     }
 }

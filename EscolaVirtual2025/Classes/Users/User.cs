@@ -1,9 +1,5 @@
 ﻿using EscolaVirtual2025.Classes.Chat;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EscolaVirtual2025.Classes
 {
@@ -45,9 +41,9 @@ namespace EscolaVirtual2025.Classes
         public User() { }
 
         public User(
-        string username, 
-        string password, 
-        string name, 
+        string username,
+        string password,
+        string name,
         UserType userType)
         {
             m_username = username;

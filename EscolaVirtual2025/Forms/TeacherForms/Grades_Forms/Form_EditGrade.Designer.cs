@@ -1,4 +1,4 @@
-﻿namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
+﻿namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms
 {
     partial class Form_EditGrade
     {

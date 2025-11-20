@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EscolaVirtual2025.Classes.Academic
 {
@@ -13,20 +9,20 @@ namespace EscolaVirtual2025.Classes.Academic
 
         public int Saldo
         {
-            get { return m_saldo; }
-            set { m_saldo = value; }
+            get => m_saldo;
+            set => m_saldo = value;
         }
 
         public int SchoolCardId
         {
-            get { return m_schoolCardId; }
-            set { m_schoolCardId = value; }
+            get => m_schoolCardId;
+            set => m_schoolCardId = value;
         }
 
-        public SchoolCard(int SchoolCardId)
+        public SchoolCard(int schoolCardId)
         {
-            this.m_saldo = 0;
-            this.m_schoolCardId= SchoolCardId;
+            m_schoolCardId = schoolCardId;
+            m_saldo = 0;
         }
 
         public void Deposit(decimal montanteEmEuros)

@@ -1,38 +1,55 @@
 ﻿using EscolaVirtual2025.Classes.Users;
-using System;
+using EscolaVirtual2025.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EscolaVirtual2025.Classes.Chat
 {
     public class Chat
     {
-        public Teacher Teacher { get; set; }
-        public Student Student { get; set; }
-        
-        public User Admin {  get; set; }
+        private int? m_teacherNif;
+        private int? m_studentNif;
+        private bool m_hasAdmin;
+
         public List<Message> Messages { get; set; } = new List<Message>();
 
+        public Teacher Teacher
+        {
+            get => m_teacherNif.HasValue ? DataManager.Teachers.FirstOrDefault(t => t.NIF == m_teacherNif.Value) : null;
+            set => m_teacherNif = value?.NIF;
+        }
+
+        public Student Student
+        {
+            get => m_studentNif.HasValue ? DataManager.Students.FirstOrDefault(s => s.NIF == m_studentNif.Value) : null;
+            set => m_studentNif = value?.NIF;
+        }
+
+        public bool HasAdmin => m_hasAdmin;
+
+        public User Admin => m_hasAdmin ? DataManager.Users.FirstOrDefault(u => u.UserType == UserType.Admin) : null;
+
+        // Construtores
         public Chat(Teacher teacher, Student student)
         {
             Teacher = teacher;
             Student = student;
+            m_hasAdmin = false;
         }
 
-        public Chat(User Admin, Student Student)
+        public Chat(Student student)
         {
-            this.Student = Student;
-            this.Admin = Admin;
+            Student = student;
+            m_hasAdmin = true;
         }
 
-        public Chat(User Admin, Teacher Teacher)
+        public Chat(Teacher teacher)
         {
-            this.Teacher = Teacher;
-            this.Admin = Admin;
+            Teacher = teacher;
+            m_hasAdmin = true;
         }
 
+        // Adiciona uma mensagem
         public void AddMessage(string sender, string text)
         {
             Messages.Add(new Message(sender, text));

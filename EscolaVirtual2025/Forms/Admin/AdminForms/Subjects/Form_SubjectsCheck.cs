@@ -1,24 +1,18 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
-using EscolaVirtual2025.Classes.Users;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO.Pipes;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
 {
     public partial class Form_SubjectsCheck : MaterialForm
     {
-        private List<Year> orderedYears = Program.Anos.OrderBy(y => y.AnoId).ToList();
+        private List<Year> orderedYears = DataManager.Years.OrderBy(y => y.Id).ToList();
         public Form_SubjectsCheck()
         {
             InitializeComponent();
@@ -44,16 +38,16 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
             this.clmClassRoomName.Width = 251;
             foreach (Year yr in orderedYears)
             {
-                cbbAno.Items.Add(yr.AnoId.ToString());
+                cbbAno.Items.Add(yr.Id.ToString());
             }
             cbbAno.SelectedIndex = 0;
-            UpdateListView();   
+            UpdateListView();
         }
 
         private void UpdateListView()
         {
             lsvCheckSubject.Items.Clear();
-            foreach (Subject sbjct in orderedYears[cbbAno.SelectedIndex].Subjects)
+            foreach (Subject sbjct in orderedYears[cbbAno.SelectedIndex].Subjects.Items)
             {
                 ListViewItem item = new ListViewItem(sbjct.Id.ToString());
                 item.SubItems.Add(sbjct.Name);
@@ -109,36 +103,36 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
                 // Remove de todos os anos
                 foreach (Year year in orderedYears)
                 {
-                    Subject subject = year.Subjects.FirstOrDefault(s => s.Id == subjectId);
+                    Subject subject = year.Subjects.Items.FirstOrDefault(s => s.Id == subjectId);
                     if (subject != null)
                     {
                         year.Subjects.Remove(subject);
 
-                        foreach (ClassRoom classroom in year.ClassRooms)
+                        foreach (ClassRoom classroom in year.ClassRooms.Items)
                         {
-                            classroom.Subjects.RemoveAll(cs => cs.Subject.Id == subjectId);
+                            classroom.ClassSubjects.RemoveAll(cs => cs.Id == subjectId);
                         }
                     }
                 }
 
                 // Remove da lista global
-                Subject globalSubject = Program.Subjects.FirstOrDefault(s => s.Id == subjectId);
+                Subject globalSubject = DataManager.Subjects.FirstOrDefault(s => s.Id == subjectId);
                 if (globalSubject != null)
-                    Program.Subjects.Remove(globalSubject);
+                    DataManager.Subjects.Remove(globalSubject);
 
                 MessageBox.Show($"Disciplina \"{nome}\" removida de todos os anos com sucesso.", "Removida", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 // Remove apenas do ano selecionado
-                Subject subjectToRemove = selectedYear.Subjects.FirstOrDefault(sbj => sbj.Id == subjectId);
+                Subject subjectToRemove = selectedYear.Subjects.Items.FirstOrDefault(sbj => sbj.Id == subjectId);
                 if (subjectToRemove != null)
                 {
                     selectedYear.Subjects.Remove(subjectToRemove);
 
-                    foreach (ClassRoom classroom in selectedYear.ClassRooms)
+                    foreach (ClassRoom classroom in selectedYear.ClassRooms.Items)
                     {
-                        classroom.Subjects.RemoveAll(cs => cs.Subject.Id == subjectId);
+                        classroom.ClassSubjects.RemoveAll(cs => cs.Id == subjectId);
                     }
 
                     MessageBox.Show($"Disciplina \"{nome}\" removida apenas deste ano.", "Removida", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -169,7 +163,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
                 int subjectId = (int)lsvCheckSubject.SelectedItems[0].Tag;
 
                 // Busca o Subject global
-                Subject subjectToEdit = Program.Subjects.FirstOrDefault(s => s.Id == subjectId);
+                Subject subjectToEdit = DataManager.Subjects.FirstOrDefault(s => s.Id == subjectId);
                 if (subjectToEdit == null)
                 {
                     MessageBox.Show("Disciplina não encontrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);

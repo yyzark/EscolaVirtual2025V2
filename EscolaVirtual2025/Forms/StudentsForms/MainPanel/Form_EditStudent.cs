@@ -1,18 +1,13 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Classes.Chat;
 using EscolaVirtual2025.Classes.Users;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using EscolaVirtual2025.Classes.Chat;
 
 namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
 {
@@ -42,16 +37,16 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
         private void Form_EditStudent_Load(object sender, EventArgs e)
         {
 
-            foreach (ClassRoom room in stdnt.ClassRoom.Year.ClassRooms)
+            foreach (ClassRoom room in stdnt.ClassRoom.Year.ClassRooms.Items)
             {
-                cbbClassRoom.Items.Add($"{stdnt.ClassRoom.Year.AnoId}º{room.Id}");
+                cbbClassRoom.Items.Add($"{stdnt.ClassRoom.Year.Id}º{room.Id}");
             }
-            cbbClassRoom.SelectedIndex = stdnt.ClassRoom.Year.ClassRooms.IndexOf(stdnt.ClassRoom);
+            cbbClassRoom.SelectedIndex = stdnt.ClassRoom.Year.ClassRooms.Items.IndexOf(stdnt.ClassRoom);
 
             txtLogin.Text = stdnt.Username;
             txtPassword.Text = stdnt.Password;
             txtName.Text = stdnt.Name;
-            txtNIF.Text = stdnt.NIF;
+            txtNIF.Text = stdnt.NIF.ToString();
 
             UpdateAcceptButtonState();
         }
@@ -61,8 +56,8 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
                 txtLogin.Text == stdnt.Username &&
                 txtPassword.Text == stdnt.Password &&
                 txtName.Text == stdnt.Name &&
-                txtNIF.Text == stdnt.NIF &&
-                cbbClassRoom.SelectedIndex == stdnt.ClassRoom.Year.ClassRooms.IndexOf(stdnt.ClassRoom);
+                txtNIF.Text == stdnt.NIF.ToString() &&
+                cbbClassRoom.SelectedIndex == stdnt.ClassRoom.Year.ClassRooms.Items.IndexOf(stdnt.ClassRoom);
 
             bool allFieldsFilled =
                 txtLogin.Text.Length > 0 &&
@@ -142,7 +137,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (Program.Users.Any(usr => usr.Username == txtLogin.Text.Trim() && usr.Username != stdnt.Username))
+            if (DataManager.Users.Any(usr => usr.Username == txtLogin.Text.Trim() && usr.Username != stdnt.Username))
             {
                 MessageBox.Show(
                 "Já existe um utilizador com este nome de utilizador!",
@@ -168,16 +163,16 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
                 {
                     // Verifica se o NIF tem exatamente 9 dígitos numéricos
                     string nif = txtNIF.Text;
-                    if (nif != stdnt.NIF)
+                    if (nif != stdnt.NIF.ToString())
                     {
                         // Verifica duplicações de NIF em Teachers e Students
-                        bool nifExists = Program.Users.Any(u =>
+                        bool nifExists = DataManager.Users.Any(u =>
                         {
                             if (u.UserType == UserType.Teacher && u is Teacher teacher)
-                                return teacher.NIF == nif;
+                                return teacher.NIF.ToString() == nif;
 
                             if (u.UserType == UserType.Student && u is Student student)
-                                return student.NIF == nif;
+                                return student.NIF.ToString() == nif;
 
                             return false;
                         });
@@ -193,13 +188,13 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
                         }
                     }
 
-                    foreach (Notification notification in Program.Users[0].Notifications)
+                    foreach (Notification notification in DataManager.Users[0].Notifications)
                     {
                         if (notification.Sender == stdnt)
-                            Program.Users[0].Notifications.Remove(notification);
+                            DataManager.Users[0].Notifications.Remove(notification);
                     }
 
-                    Program.Users[0].Notifications.Add(new Request(stdnt, Program.Users[0], new Student(txtLogin.Text, txtPassword.Text, txtName.Text, nif, stdnt.ClassRoom.Year.ClassRooms[cbbClassRoom.SelectedIndex], stdnt.SchoolCard)));
+                    DataManager.Users[0].Notifications.Add(new Request(stdnt, DataManager.Users[0], new Student(txtLogin.Text, txtPassword.Text, txtName.Text, Convert.ToInt32(nif), stdnt.ClassRoom.Year.ClassRooms.Items[cbbClassRoom.SelectedIndex], stdnt.SchoolCard)));
 
                     MessageBox.Show("O pedido foi enviado ao administrador!.",
                                         "Sucesso",

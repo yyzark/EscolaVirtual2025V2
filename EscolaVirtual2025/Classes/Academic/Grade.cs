@@ -1,64 +1,51 @@
 ﻿using EscolaVirtual2025.Classes.Users;
-using System;
-using System.Collections.Generic;
+using EscolaVirtual2025.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EscolaVirtual2025.Classes.Academic
 {
     public class Grade
     {
-        private int[] m_grade;
-        private string[] m_comment;
-        private Subject m_subject;
-        private int m_gradeCount;
+        public int Id { get; set; }
+
+        private int[] m_grade = new int[3] { -1, -1, -1 };
+        private string[] m_comment = new string[3];
 
         private int m_studentId;
-        public int[] p_Grade
-        { 
-            get { return m_grade; }
-            set { m_grade = value; } 
-        }
-        public string[] Comment 
-        { 
-            get { return m_comment; } 
-            set { m_comment = value; } 
+        private int m_subjectId;
+
+        public int[] P_Grade
+        {
+            get => m_grade;
+            set => m_grade = value;
         }
 
-        public int GradeCount
+        public string[] Comment
         {
-            get { return m_gradeCount; }
-            set { m_gradeCount = value; }
+            get => m_comment;
+            set => m_comment = value;
         }
 
-        public Subject Gradesubject 
-        { 
-            get { return m_subject; }
-            set { m_subject = value; }
-        }
-        public int StudentId
+        public int GradeCount { get; set; }
+
+        public Subject GradeSubject
         {
-            get { return m_studentId; }
-            set { m_studentId = value; }
+            get => DataManager.Subjects.FirstOrDefault(s => s.Id == m_subjectId);
+            set => m_subjectId = value.Id;
         }
 
-        public Grade(Subject gradeSubject)
+        public Student Student
         {
-            m_subject = gradeSubject;
-            m_gradeCount = 0;
-            m_studentId = StudentId;
-            m_grade = new int[3] { -1, -1, -1 };
-            m_comment = new string[3];
+            get => DataManager.Students.FirstOrDefault(s => s.NIF == m_studentId);
+            set => m_studentId = value.NIF;
         }
 
-        public void OrderGradesByName()
+        public Grade(Subject GradeSubject, Student student, int Id)
         {
-            if (m_grade != null && m_grade.Length > 1)
-            {
-                // Ordena o array pelo nome da disciplina e sobrescreve m_grades
-                m_grade = m_grade.OrderBy(g => m_subject).ToArray();
-            }
+            this.GradeSubject = GradeSubject;
+            Student = student;
+            GradeCount = 0;
+            this.Id = Id;
         }
     }
 }

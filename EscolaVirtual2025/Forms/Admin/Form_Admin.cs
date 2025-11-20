@@ -1,6 +1,4 @@
-﻿using EscolaVirtual2025.Classes.Academic;
-using EscolaVirtual2025.Classes.Chat;
-using EscolaVirtual2025.Classes.Users;
+﻿using EscolaVirtual2025.Data;
 using EscolaVirtual2025.Forms.Admin.AdminChats;
 using EscolaVirtual2025.Forms.Admin.AdminForms;
 using EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms;
@@ -8,25 +6,14 @@ using EscolaVirtual2025.Forms.Admin.AdminForms.Subjects;
 using EscolaVirtual2025.Forms.Admin.AdminForms.Teachers;
 using EscolaVirtual2025.Forms.Admin.AdminForms.YearForms;
 using EscolaVirtual2025.Forms.Admin.Panels;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using System.Drawing.Printing;
-using System.IO.Pipes;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Security.Principal;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 namespace EscolaVirtual2025.Forms.Admin
 {
     public partial class Form_Admin : MaterialForm
@@ -128,7 +115,7 @@ namespace EscolaVirtual2025.Forms.Admin
 
 
             #region notificações
-            int notificationCount = Program.userAtual.Notifications.Count(n => !n.Read);
+            int notificationCount = DataManager.currentUser.Notifications.Count(n => !n.Read);
 
             if (notificationCount > 0)
             {
@@ -234,9 +221,9 @@ namespace EscolaVirtual2025.Forms.Admin
         private void UpdateUserArrow()
         {
             if (menuAccount.Visible || accountPanel.Visible || editPanel.Visible)
-                btnUser.Text = $"{Program.userAtual.Name} ▲"; // seta para cima
+                btnUser.Text = $"{DataManager.currentUser.Name} ▲"; // seta para cima
             else
-                btnUser.Text = $"{Program.userAtual.Name} ▼"; // seta para baixo
+                btnUser.Text = $"{DataManager.currentUser.Name} ▼"; // seta para baixo
         }
 
         private void menuAccount_VisibleChanged(object sender, EventArgs e)
@@ -270,56 +257,56 @@ namespace EscolaVirtual2025.Forms.Admin
         {
             tvwAdmin.Nodes[0].Nodes[0].Nodes.Clear();
             tvwAdmin.Nodes[0].Nodes[1].Nodes.Clear();
-            for (int i = 0; i < Program.Anos.Count; i++)
+            for (int i = 0; i < DataManager.Years.Count; i++)
             {
                 TreeNode tree = new TreeNode();
-                tree.Text = Program.Anos.OrderBy(yr => yr.AnoId).ToList()[i].AnoId.ToString();
+                tree.Text = DataManager.Years.OrderBy(yr => yr.Id).ToList()[i].Id.ToString();
                 tree.Nodes.Add("Turmas");
                 tree.Nodes.Add("Disciplinas");
                 //adicionar turmas
-                List<ClassRoom> orderedClassRooms = Program.Anos[i].ClassRooms.OrderBy(clsrm => clsrm.Id).ToList();
-                for (int j = 0; j < Program.Anos[i].ClassRooms.Count; j++)
+                DataManager.Years[i].ClassRooms.Reorder(clsrm => clsrm.Letter);
+                for (int j = 0; j < DataManager.Years[i].ClassRooms.Items.Count; j++)
                 {
                     TreeNode clas = new TreeNode();
-                    clas.Text = $"{Program.Anos.OrderBy(yr => yr.AnoId).ToList()[i].AnoId}º{orderedClassRooms[j].Id}";
+                    clas.Text = $"{DataManager.Years.OrderBy(yr => yr.Id).ToList()[i].Id}º{DataManager.Years[i].ClassRooms.Items[j].Letter}";
                     //adicionar alunos
                     clas.Nodes.Add("Alunos");
                     clas.Nodes.Add("Disciplinas");
-                    for (int h = 0; h < Program.Anos[i].ClassRooms[j].StudentsCount; h++)
+                    for (int h = 0; h < DataManager.Years[i].ClassRooms.Items[j].StudentsCount; h++)
                     {
                         TreeNode student = new TreeNode();
-                        student.Text = Program.Anos[i].ClassRooms[j].Students[h].Name;
+                        student.Text = DataManager.Years[i].ClassRooms.Items[j].Students[h].Name;
                         clas.Nodes[0].Nodes.Add(student);
                     }
                     //adicionar disciplinas nas turmas
-                    for (int h = 0; h < Program.Anos[i].ClassRooms[j].Subjects.Count; h++)
+                    for (int h = 0; h < DataManager.Years[i].ClassRooms.Items[j].ClassSubjects.Items.Count; h++)
                     {
                         TreeNode subject = new TreeNode();
-                        subject.Text = Program.Anos[i].ClassRooms[j].Subjects[h].Subject.Name;
-                        if(Program.Anos[i].ClassRooms[j].Subjects[h].AssignedTeacher != null)
-                            {
-                            subject.Nodes.Add($"Professor: {Program.Anos[i].ClassRooms[j].Subjects[h].AssignedTeacher.Name}");
+                        subject.Text = DataManager.Years[i].ClassRooms.Items[j].ClassSubjects.Items[h].Name;
+                        if (DataManager.Years[i].ClassRooms.Items[j].ClassSubjects.Items[h].Teacher != null)
+                        {
+                            subject.Nodes.Add($"Professor: {DataManager.Years[i].ClassRooms.Items[j].ClassSubjects.Items[h].Teacher.Name}");
                         }
                         else
                         {
                             subject.Nodes.Add($"Professor: ND");
                         }
-                            clas.Nodes[1].Nodes.Add(subject);
+                        clas.Nodes[1].Nodes.Add(subject);
                     }
 
                     tree.Nodes[0].Nodes.Add(clas);
                 }
 
                 //adicionar disciplinas
-                for (int j = 0; j < Program.Anos[i].Subjects.Count; j++)
+                for (int j = 0; j < DataManager.Years[i].Subjects.Items.Count; j++)
                 {
                     TreeNode subject = new TreeNode();
-                    subject.Text = $"{Program.Anos[i].Subjects[j].Name}";
+                    subject.Text = $"{DataManager.Years[i].Subjects.Items[j].Name}";
                     //adicionar professores
-                    for (int h = 0; h < Program.Anos[i].Subjects[j].Teachers.Count; h++)
+                    for (int h = 0; h < DataManager.Years[i].Subjects.Items[j].Teachers.Items.Count; h++)
                     {
                         TreeNode teacher = new TreeNode();
-                        teacher.Text = Program.Anos[i].Subjects[j].Teachers[h].Name;
+                        teacher.Text = DataManager.Years[i].Subjects.Items[j].Teachers.Items[h].Name;
                         subject.Nodes.Add(teacher);
                     }
                     tree.Nodes[1].Nodes.Add(subject);
@@ -328,17 +315,17 @@ namespace EscolaVirtual2025.Forms.Admin
             }
 
             //adicionar professores
-            for (int i = 0; i < Program.Teachers.Count; i++)
+            for (int i = 0; i < DataManager.Teachers.Count; i++)
             {
                 TreeNode teacher = new TreeNode();
-                teacher.Text = Program.Teachers[i].Name;
+                teacher.Text = DataManager.Teachers[i].Name;
                 tvwAdmin.Nodes[0].Nodes[1].Nodes.Add(teacher);
             }
         }
 
         private void btnYears_Click(object sender, EventArgs e)
         {
-           Form_CheckYears form_CheckYears = new Form_CheckYears();
+            Form_CheckYears form_CheckYears = new Form_CheckYears();
             form_CheckYears.ShowDialog();
             UpdateTreeView();
         }
@@ -366,7 +353,7 @@ namespace EscolaVirtual2025.Forms.Admin
 
         private void materialToolStripItemNotification_Click(object sender, EventArgs e)
         {
-            if (Program.Users[0].Notifications.Count == 0)
+            if (DataManager.Users[0].Notifications.Count == 0)
             {
                 MessageBox.Show("Não há pedidos pendentes", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -379,7 +366,7 @@ namespace EscolaVirtual2025.Forms.Admin
             UpdateTreeView();
 
             #region notificações
-            int notificationCount = Program.userAtual.Notifications.Count(n => !n.Read);
+            int notificationCount = DataManager.currentUser.Notifications.Count(n => !n.Read);
 
             if (notificationCount > 0)
             {
@@ -399,6 +386,14 @@ namespace EscolaVirtual2025.Forms.Admin
             }
             #endregion
             this.Show();
+        }
+
+        private void materialToolStripBackup_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Form_Backup().ShowDialog();
+            this.Show();
+            UpdateTreeView();
         }
     }
 }

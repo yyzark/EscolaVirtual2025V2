@@ -1,98 +1,97 @@
-﻿using EscolaVirtual2025.Classes.Users;
+﻿using EscolaVirtual2025.Classes.InterFace;
+using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EscolaVirtual2025.Classes.Academic
 {
     public class ClassRoom
     {
-        private Student[] m_students;
-        private char m_id;
-        private List<ClassSubject> m_subjects;
-        private Year m_year;
-        private int m_studentsCount;
-        public char Id
-        {
-            get { return m_id; }
-            set { m_id = value; }
-        }
+        public int Id { get; set; }
+        public char Letter { get; set; }
+
+        private int[] m_studentsNif = new int[20];
+        private int m_yearId;
+
+        private int m_studentsCount = 0;
+        public int StudentsCount => m_studentsCount;
+
         public Student[] Students
         {
-            get { return m_students; }
-            set { m_students = value; }
-        }
-
-        public ClassRoom() {}
-
-        public ClassRoom(char id, Year year)
-        {
-            m_id = id;
-            Subjects = new List<ClassSubject>();
-            m_students = new Student[20];
-            m_year = year;
-            m_studentsCount = 0;
-            foreach(Subject sbjct in Year.Subjects)
+            get => m_studentsNif
+                .Take(m_studentsCount)
+                .Select(nif => DataManager.Students.FirstOrDefault(s => s.NIF == nif))
+                .Where(s => s != null)
+                .ToArray();
+            set
             {
-                Subjects.Add(new ClassSubject(null, sbjct));
+                if (value.Length > 20)
+                    throw new InvalidOperationException("Cannot assign more than 20 students.");
+
+                m_studentsCount = value.Length;
+                for (int i = 0; i < m_studentsCount; i++)
+                    m_studentsNif[i] = value[i].NIF;
             }
         }
-        public List<ClassSubject> Subjects
+
+        public EntityCollection<ClassSubject, int> ClassSubjects = new EntityCollection<ClassSubject, int>(DataManager.ClassSubjects, cls => cls.Id);
+        public Year Year
         {
-            get { return m_subjects; }
-            set { m_subjects = value; }
+            get { return DataManager.Years.FirstOrDefault(yr => yr.Id == m_yearId); }
+            set { m_yearId = value.Id; }
+        }
+        public ClassRoom() { }
+
+        public ClassRoom(char letter, Year year, int id)
+        {
+            Letter = letter;
+            m_yearId = year.Id;
+            m_studentsCount = 0;
+            Id = id;
+
+            foreach (var sbj in DataManager.Subjects.Where(s => s.Years.Items.Any(y => y.Id == m_yearId)))
+                ClassSubjects.Add(new ClassSubject(null, sbj));
         }
 
-        public Year Year   
+        public void AddStudent(Student student)
         {
-            get { return m_year; }
-            set { m_year = value; }
-        }
+            if (m_studentsCount >= m_studentsNif.Length)
+                throw new InvalidOperationException("A turma está cheia.");
 
-        public int StudentsCount
-        {
-            get { return m_studentsCount; }
-            set { m_studentsCount = value; }
+            if (m_studentsNif.Take(m_studentsCount).Contains(student.NIF))
+                throw new InvalidOperationException("O aluno já está nesta turma.");
+
+            m_studentsNif[m_studentsCount] = student.NIF;
+            m_studentsCount++;
         }
 
         public void RemoveStudent(Student student)
         {
-            for (int i = 0; i < m_studentsCount; i++)
-            {
-                if(m_students[i].NIF == student.NIF)
-                {
-                    // "shift-left" para tapar o buraco no array
-                    for (int j = i; j < m_studentsCount - 1; j++)
-                    {
-                        m_students[j] = m_students[j + 1];
-                    }
+            int index = Array.IndexOf(m_studentsNif, student.NIF, 0, m_studentsCount);
+            if (index == -1)
+                throw new InvalidOperationException("O aluno não está nesta turma.");
 
-                    // limpar última posição
-                    m_students[m_studentsCount - 1] = null;
-                    m_studentsCount--;
-                }
-            }
+            for (int i = index; i < m_studentsCount - 1; i++)
+                m_studentsNif[i] = m_studentsNif[i + 1];
+
+            m_studentsNif[m_studentsCount - 1] = 0;
+            m_studentsCount--;
         }
 
         public void OrderStudentsByName()
         {
-            if (m_studentsCount <= 1) return; 
+            if (m_studentsCount <= 1) return;
 
-            List<Student> alunosExistentes = m_students
+            var sorted = m_studentsNif
                 .Take(m_studentsCount)
-                .ToList();
-
-            alunosExistentes = alunosExistentes
+                .Select(nif => DataManager.Students.FirstOrDefault(s => s.NIF == nif))
+                .Where(s => s != null)
                 .OrderBy(s => s.Name)
-                .ToList();
+                .ToArray();
 
-            for (int i = 0; i < m_studentsCount; i++)
-            {
-                m_students[i] = alunosExistentes[i];
-            }
+            for (int i = 0; i < sorted.Length; i++)
+                m_studentsNif[i] = sorted[i].NIF;
         }
-
     }
 }

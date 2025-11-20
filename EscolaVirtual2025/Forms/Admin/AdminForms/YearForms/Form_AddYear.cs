@@ -42,8 +42,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
         {
             int newYear = (int)numericUpDownYear.Value;
 
-            // Verifica se o ano já existe
-            bool exists = Program.Anos.Any(a => a.AnoId == newYear);
+            bool exists = DataManager.Years.Any(a => a.Id == newYear);
 
             if (exists)
             {
@@ -51,13 +50,12 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
                 return;
             }
 
-            // Adiciona o novo ano
-            Program.Anos.Add(new Year(newYear));
+            DataManager.Years.Add(new Year(newYear));
 
             MessageBox.Show($"{newYear}º ano adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            Program.Anos.Sort((a, b) => a.AnoId.CompareTo(b.AnoId));
-            DataManager.Save();
+            DataManager.Years.Sort((a, b) => a.Id.CompareTo(b.Id));
+            //DataManager.Save();
             this.Close();
         }
     }

@@ -42,7 +42,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
         private void UpdateListView()
         {
             lsvCheckAno.Items.Clear();
-            foreach (int idAno in Program.Anos.OrderBy(yr => yr.AnoId).Select(yr => yr.AnoId))
+            foreach (int idAno in DataManager.Years.OrderBy(yr => yr.Id).Select(yr => yr.Id))
             {
                 lsvCheckAno.Items.Add(new ListViewItem(idAno.ToString()));
             }
@@ -64,10 +64,10 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
 
             
             var selectedItem = lsvCheckAno.SelectedItems[0];
-            int anoId = Convert.ToInt32(selectedItem.Text);
+            int Id = Convert.ToInt32(selectedItem.Text);
 
             // Confirmação
-            var confirm = MessageBox.Show($"Tem certeza que deseja remover o ano {anoId}?",
+            var confirm = MessageBox.Show($"Tem certeza que deseja remover o ano {Id}?",
                                           "Confirmação",
                                           MessageBoxButtons.YesNo,
                                           MessageBoxIcon.Question);
@@ -75,13 +75,13 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.YearForms
             if (confirm == DialogResult.Yes)
             {
                 // Remove da lista global
-                var anoToRemove = Program.Anos.FirstOrDefault(a => a.AnoId == anoId);
+                var anoToRemove = DataManager.Years.FirstOrDefault(a => a.Id == Id);
                 if (anoToRemove != null)
                 {
-                    Program.Anos.Remove(anoToRemove);
+                    DataManager.Years.Remove(anoToRemove);
                 }
 
-                MessageBox.Show($"Ano {anoId} removido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Ano {Id} removido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             UpdateListView();

@@ -1,18 +1,15 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Chat;
+using EscolaVirtual2025.Classes.InterFace;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using EscolaVirtual2025.Forms.Admin.AdminForms.Teachers;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
 {
@@ -46,24 +43,24 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
                 Name = tchr.Name,
                 Password = tchr.Password,
                 NIF = tchr.NIF,
-                AssignedClassRooms = tchr.AssignedClassRooms
-                .Select(c => new ClassRoom
-                {
-                    Id = c.Id,
-                    Year = new Year
-                    {
-                        AnoId = c.Year.AnoId,
-                    }
-                })
-                .ToList(),
+                AssignedClassRooms = new EntityCollection<ClassRoom, int>(DataManager.ClassRooms, cl => cl.Id),
                 AssignedSubject = tchr.AssignedSubject
             };
+
+            foreach (var classroom in tchr.AssignedClassRooms.Items)
+            {
+                newTeacher.AssignedClassRooms.Add(new ClassRoom
+                {
+                    Id = classroom.Id,
+                    Year = new Year(classroom.Year.Id)
+                });
+            }
             classroomChose = new Form_AddTeacherClassroomChose(newTeacher, true);
         }
 
         private void Form_EditTeacherAccount_Load(object sender, EventArgs e)
         {
-            cbbSubjects.Items.AddRange(Program.Subjects.Select(sbjct => sbjct.Name).ToArray());
+            cbbSubjects.Items.AddRange(DataManager.Subjects.Select(sbjct => sbjct.Name).ToArray());
 
             foreach (string item in cbbSubjects.Items)
             {
@@ -76,7 +73,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
             txtLogin.Text = tchr.Username;
             txtName.Text = tchr.Name;
             txtPassword.Text = tchr.Password;
-            txtNIF.Text = tchr.NIF;
+            txtNIF.Text = tchr.NIF.ToString();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -104,7 +101,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
             bool semAlteracoes =
                 txtLogin.Text == tchr.Username &&
                 txtName.Text == tchr.Name &&
-                txtNIF.Text == tchr.NIF &&
+                txtNIF.Text == tchr.NIF.ToString() &&
                 txtPassword.Text == tchr.Password &&
                 cbbSubjects.SelectedItem.ToString() == tchr.AssignedSubject.Name;
 
@@ -118,57 +115,57 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-                if (txtPassword.Text.Length < 6)
+            if (txtPassword.Text.Length < 6)
+            {
+                MessageBox.Show(
+                "A senha deve ter pelo menos 6 caracteres!",
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
+                return;
+            }
+            else
+            {
+                // Verifica se o NIF tem exatamente 9 dígitos numéricos
+                string nif = txtNIF.Text;
+
+                // Verifica duplicações de NIF em Teachers e Students
+                bool nifExists = DataManager.Users.Any(u =>
                 {
-                    MessageBox.Show(
-                    "A senha deve ter pelo menos 6 caracteres!",
-                    "Erro",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                    );
-                    return;
-                }
-                else
+                    if (u.UserType == UserType.Teacher && u is Teacher teacher)
+                        return teacher.NIF.ToString() == nif && nif != tchr.NIF.ToString();
+
+                    if (u.UserType == UserType.Student && u is Student student)
+                        return student.NIF == int.Parse(nif);
+
+                    return false;
+                });
+
+                newTeacher.NIF = int.Parse(txtNIF.Text);
+                newTeacher.Password = txtPassword.Text;
+                newTeacher.Name = txtName.Text;
+                newTeacher.Username = txtLogin.Text;
+                foreach (Notification notification in DataManager.Users[0].Notifications)
                 {
-                    // Verifica se o NIF tem exatamente 9 dígitos numéricos
-                    string nif = txtNIF.Text;
-
-                    // Verifica duplicações de NIF em Teachers e Students
-                    bool nifExists = Program.Users.Any(u =>
-                    {
-                        if (u.UserType == UserType.Teacher && u is Teacher teacher)
-                            return teacher.NIF == nif && nif != tchr.NIF;
-
-                        if (u.UserType == UserType.Student && u is Student student)
-                            return student.NIF == nif;
-
-                        return false;
-                    });
-
-                    newTeacher.NIF = txtNIF.Text;
-                    newTeacher.Password = txtPassword.Text;
-                    newTeacher.Name = txtName.Text;
-                    newTeacher.Username = txtLogin.Text;
-                    foreach(Notification notification in Program.Users[0].Notifications)
-                    {
-                        if (notification.Sender == tchr)
-                        Program.Users[0].Notifications.Remove(notification);
-                    }
-                    Program.Users[0].Notifications.Add(new Request(tchr, Program.Users[0], newTeacher));
-
-                    MessageBox.Show(
-                    "O pedido foi enviado ao administrador!.",
-                    "Sucesso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                    this.Close();
+                    if (notification.Sender == tchr)
+                        DataManager.Users[0].Notifications.Remove(notification);
                 }
+                DataManager.Users[0].Notifications.Add(new Request(tchr, DataManager.Users[0], newTeacher));
+
+                MessageBox.Show(
+                "O pedido foi enviado ao administrador!.",
+                "Sucesso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+                this.Close();
+            }
         }
 
         private void cbbSubjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            newTeacher.AssignedSubject = Program.Subjects[cbbSubjects.SelectedIndex];
+            newTeacher.AssignedSubject = DataManager.Subjects[cbbSubjects.SelectedIndex];
             ver();
         }
 

@@ -1,16 +1,14 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Chat;
+using EscolaVirtual2025.Classes.InterFace;
 using EscolaVirtual2025.Classes.Users;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
@@ -19,7 +17,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
     {
         private List<Chat> m_currentChats = new List<Chat>();
         private Teacher m_teacher;
-        private List<ClassRoom> m_classRooms = new List<ClassRoom>();
+        private EntityCollection<ClassRoom, int> m_classRooms;
         public Form_TeacherChat(Teacher teacher)
         {
             InitializeComponent();
@@ -45,11 +43,11 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
             this.ActiveControl = null;
 
             // Carregar as turmas atribuídas ao professor
-            m_classRooms = m_teacher.AssignedClassRooms ?? new List<ClassRoom>();
+            m_classRooms = m_teacher.AssignedClassRooms ?? new EntityCollection<ClassRoom, int>(DataManager.ClassRooms, cl => cl.Id);
 
             // Popular anos (exemplo: 7º, 8º, 9º)
-            var anos = m_classRooms
-                .Select(c => c.Year.AnoId)
+            var anos = m_classRooms.Items
+                .Select(c => c.Year.Id)
                 .Distinct()
                 .OrderBy(a => a)
                 .ToList();
@@ -72,8 +70,8 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
             {
                 string selectedYear = cbbAnos.SelectedItem.ToString();
 
-                var turmasDoAno = m_classRooms
-                    .Where(c => c.Year.AnoId.ToString() == selectedYear)
+                var turmasDoAno = m_classRooms.Items
+                    .Where(c => c.Year.Id.ToString() == selectedYear)
                     .Select(c => c.Id)
                     .Distinct()
                     .ToList();
@@ -102,13 +100,13 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
             string selectedYear = cbbAnos.SelectedItem.ToString();
             string selectedClass = cbbTurmas.SelectedItem.ToString();
 
-            var turma = m_classRooms.FirstOrDefault(c => c.Year.AnoId.ToString() == selectedYear && c.Id.ToString() == selectedClass);
+            var turma = m_classRooms.Items.FirstOrDefault(c => c.Year.Id.ToString() == selectedYear && c.Id.ToString() == selectedClass);
             if (turma == null || turma.Students == null) return;
 
             // Mostra alunos dessa turma
             foreach (var student in turma.Students)
             {
-                if(student == null) continue;
+                if (student == null) continue;
                 // Cria ou obtém o chat
                 Chat chat = ChatManager.GetOrCreateChat(m_teacher, student);
                 m_currentChats.Add(chat);
@@ -127,9 +125,9 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
 
         private void Form_TeacherChat_FormClosed(object sender, FormClosedEventArgs e)
         {
-            foreach(Chat chat in ChatManager.Chats)
+            foreach (Chat chat in ChatManager.Chats)
             {
-                if(chat.Messages.Count == 0)
+                if (chat.Messages.Count == 0)
                 {
                     ChatManager.Chats.Remove(chat);
                 }

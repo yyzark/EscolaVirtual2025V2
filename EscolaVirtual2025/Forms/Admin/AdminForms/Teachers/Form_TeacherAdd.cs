@@ -30,14 +30,13 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 TextShade.WHITE
             );
             #endregion
-
-            newTeacher = new Teacher(null, null, null, null, null);
+            newTeacher = new Teacher();
             form_AddTeacherClassroomChose = new Form_AddTeacherClassroomChose(newTeacher, false);
         }
 
         private void Form_TeacherAdd_Load(object sender, EventArgs e)
         {
-            foreach (Subject sbjct in Program.Subjects)
+            foreach (Subject sbjct in DataManager.Subjects)
             {
                 cbbSubjects.Items.Add(sbjct.Id + "-" + sbjct.Name);
             }
@@ -48,9 +47,9 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             if (cbbSubjects.SelectedIndex != -1)
             {
                 btnClassRooms.Enabled = true;
-                if (Program.Subjects[cbbSubjects.SelectedIndex] != newTeacher.AssignedSubject)
+                if (DataManager.Subjects[cbbSubjects.SelectedIndex] != newTeacher.AssignedSubject)
                 {
-                    newTeacher.AssignedSubject = Program.Subjects[cbbSubjects.SelectedIndex];
+                    newTeacher.AssignedSubject = DataManager.Subjects[cbbSubjects.SelectedIndex];
                     form_AddTeacherClassroomChose.ResetListView();
                 }
             }
@@ -62,7 +61,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void btnClassRooms_Click(object sender, EventArgs e)
         {
-            form_AddTeacherClassroomChose.p_Subject = Program.Subjects[cbbSubjects.SelectedIndex];
+            form_AddTeacherClassroomChose.p_Subject = DataManager.Subjects[cbbSubjects.SelectedIndex];
             form_AddTeacherClassroomChose.ShowDialog();
             ver();
         }
@@ -102,7 +101,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (Program.Users.Any(usr => usr.Username == txtLogin.Text.Trim()))
+            if (DataManager.Users.Any(usr => usr.Username == txtLogin.Text.Trim()))
             {
                 MessageBox.Show(
                 "Já existe um utilizador com este nome de utilizador!",
@@ -130,13 +129,13 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                     string nif = txtNIF.Text;
 
                     // Verifica duplicações de NIF em Teachers e Students
-                    bool nifExists = Program.Users.Any(u =>
+                    bool nifExists = DataManager.Users.Any(u =>
                     {
                         if (u.UserType == UserType.Teacher && u is Teacher teacher)
-                            return teacher.NIF == nif;
+                            return teacher.NIF == int.Parse(nif);
 
                         if (u.UserType == UserType.Student && u is Student student)
-                            return student.NIF == nif;
+                            return student.NIF == int.Parse(nif);
 
                         return false;
                     });
@@ -153,37 +152,37 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
                     // Cria o professor com os dados inseridos
                     newTeacher.Name = txtName.Text.Trim();
-                    newTeacher.NIF = nif;
+                    newTeacher.NIF = int.Parse(nif);
                     newTeacher.Username = txtLogin.Text;
                     newTeacher.Password = txtPassword.Text.Trim();
                     // A disciplina foi definida no combo box
 
                     // Adiciona às listas globais
-                    if (!Program.Teachers.Contains(newTeacher))
-                        Program.Teachers.Add(newTeacher);
+                    if (!DataManager.Teachers.Contains(newTeacher))
+                        DataManager.Teachers.Add(newTeacher);
 
-                    if (!Program.Users.Contains(newTeacher))
-                        Program.Users.Add(newTeacher);
+                    if (!DataManager.Users.Contains(newTeacher))
+                        DataManager.Users.Add(newTeacher);
 
                     // Atualiza as turmas associadas
-                    foreach (ClassRoom classroom in Program.ClassRooms)
+                    foreach (ClassRoom classroom in DataManager.ClassRooms)
                     {
-                        foreach (ClassSubject classSubject in classroom.Subjects)
+                        foreach (ClassSubject classSubject in classroom.ClassSubjects.Items)
                         {
-                            if (classSubject.Subject.Id == newTeacher.AssignedSubject.Id &&
-                                classSubject.AssignedTeacher == newTeacher)
+                            if (classSubject.Id == newTeacher.AssignedSubject.Id &&
+                                classSubject.Teacher == newTeacher)
                             {
-                                if (!newTeacher.AssignedClassRooms.Contains(classroom))
+                                if (!newTeacher.AssignedClassRooms.Items.Contains(classroom))
                                     newTeacher.AssignedClassRooms.Add(classroom);
                             }
                         }
                     }
 
-                    foreach (Year yr in Program.Anos)
+                    foreach (Year yr in DataManager.Years)
                     {
-                        foreach (Subject sbjct in yr.Subjects)
+                        foreach (Subject sbjct in yr.Subjects.Items)
                         {
-                            if (!sbjct.Teachers.Contains(newTeacher) && sbjct == Program.Subjects[cbbSubjects.SelectedIndex])
+                            if (!sbjct.Teachers.Items.Contains(newTeacher) && sbjct == DataManager.Subjects[cbbSubjects.SelectedIndex])
                                 sbjct.Teachers.Add(newTeacher);
                         }
                     }
@@ -195,7 +194,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                                     "Sucesso",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    DataManager.Save();
+                    //DataManager.Save();
 
                     this.Close();
                 }

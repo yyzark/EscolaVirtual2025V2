@@ -1,5 +1,6 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,26 +18,26 @@ namespace EscolaVirtual2025.Classes
         public static Relatorio GerarRelatorioTurma(Relatorio r)
         {
             //Media Turma
-            double mediaTurma = Program.ClassRooms.FirstOrDefault(rl => rl.Year.AnoId == r.Year && rl.Id == r.Room).Students
+            double mediaTurma = DataManager.ClassRooms.FirstOrDefault(rl => rl.Year.Id == r.Year && rl.Id == r.Room).Students
                 .Where(s => s != null)
-                .SelectMany(s => s.Grades)
-                .Where(n => n.Gradesubject.Name == r.Subject)
-                .Average(n => n.p_Grade[r.Period]);
+                .SelectMany(s => s.Grades.Items)
+                .Where(n => n.GradeSubject.Name == r.Subject)
+                .Average(n => n.P_Grade[r.Period]);
 
             //Melhor Aluno
             int melhorNota = 0;
             string bestStudent = "";
-            foreach(Student st in Program.ClassRooms.FirstOrDefault(rl => rl.Year.AnoId == r.Year && rl.Id == r.Room).Students)
+            foreach (Student st in DataManager.ClassRooms.FirstOrDefault(rl => rl.Year.Id == r.Year && rl.Id == r.Room).Students)
             {
                 if (st != null)
                 {
-                    foreach (Grade gr in st.Grades)
+                    foreach (Grade gr in st.Grades.Items)
                     {
-                        if (gr.Gradesubject.Name == r.Subject)
+                        if (gr.GradeSubject.Name == r.Subject)
                         {
-                            if (gr.p_Grade[r.Period] > melhorNota)
+                            if (gr.P_Grade[r.Period] > melhorNota)
                             {
-                                melhorNota = gr.p_Grade[r.Period];
+                                melhorNota = gr.P_Grade[r.Period];
                                 bestStudent = st.Name;
                             }
                         }
@@ -48,17 +49,17 @@ namespace EscolaVirtual2025.Classes
             //Pior Aluno
             int piorNota = 20;
             string worstStudent = "";
-            foreach (Student st in Program.ClassRooms.FirstOrDefault(rl => rl.Year.AnoId == r.Year && rl.Id == r.Room).Students)
+            foreach (Student st in DataManager.ClassRooms.FirstOrDefault(rl => rl.Year.Id == r.Year && rl.Id == r.Room).Students)
             {
                 if (st != null)
                 {
-                    foreach (Grade gr in st.Grades)
+                    foreach (Grade gr in st.Grades.Items)
                     {
-                        if (gr.Gradesubject.Name == r.Subject)
+                        if (gr.GradeSubject.Name == r.Subject)
                         {
-                            if (gr.p_Grade[r.Period] < piorNota)
+                            if (gr.P_Grade[r.Period] < piorNota)
                             {
-                                piorNota = gr.p_Grade[r.Period];
+                                piorNota = gr.P_Grade[r.Period];
                                 worstStudent = st.Name;
                             }
                         }
@@ -67,7 +68,7 @@ namespace EscolaVirtual2025.Classes
 
             }
 
-            Relatorio rlt = new Relatorio(Program.ClassRooms.FirstOrDefault(rl => rl.Year.AnoId == r.Year && rl.Id == r.Room), Program.Teachers.FirstOrDefault(t => t.NIF == r.NIF), r.Period)
+            Relatorio rlt = new Relatorio(DataManager.ClassRooms.FirstOrDefault(rl => rl.Year.Id == r.Year && rl.Id == r.Room), DataManager.Teachers.FirstOrDefault(t => t.NIF.ToString() == r.NIF.ToString()), r.Period)
             {
                 MediaTurma = mediaTurma,
                 MelhorAluno = bestStudent,

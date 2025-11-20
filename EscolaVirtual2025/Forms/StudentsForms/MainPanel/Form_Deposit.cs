@@ -42,7 +42,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
         private void materialButton1_Click(object sender, EventArgs e)
         {
             student.SchoolCard.Deposit(numericUpDown1.Value);
-            DataManager.Save();
+            //DataManager.Save();
             this.Close();
         }
     }

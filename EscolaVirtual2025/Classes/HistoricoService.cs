@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
-using EscolaVirtual2025.Classes;
 
 namespace EscolaVirtual2025.Classes
 {
-    public class HistoricoService
+    public static class HistoricoService
     {
         private const string NOME_FICHEIRO = "HistoricoNotas.json";
 
 
-        private List<HistoricoAvaliacao> _historico = new List<HistoricoAvaliacao>();
+        static private List<HistoricoAvaliacao> _historico = new List<HistoricoAvaliacao>();
 
 
 
-        private readonly JsonSerializerOptions _opcoes = new JsonSerializerOptions { WriteIndented = true };
+        private static readonly JsonSerializerOptions _opcoes = new JsonSerializerOptions { WriteIndented = true };
 
-        public HistoricoService()
-        {
-            CarregarHistorico();
-        }
-
-        private void CarregarHistorico()
+        private static void CarregarHistorico()
         {
             if (File.Exists(NOME_FICHEIRO))
             {
@@ -43,7 +34,7 @@ namespace EscolaVirtual2025.Classes
             }
         }
 
-        public void AdicionarEGravarAlteracao(HistoricoAvaliacao novaEntrada)
+        public static void AdicionarEGravarAlteracao(HistoricoAvaliacao novaEntrada)
         {
 
             _historico.Add(novaEntrada);

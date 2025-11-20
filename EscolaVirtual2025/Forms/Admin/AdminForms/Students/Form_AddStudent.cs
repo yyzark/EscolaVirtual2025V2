@@ -35,17 +35,17 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
 
         private void Form_AddStudent_Load(object sender, EventArgs e)
         {
-            foreach (Year year in Program.Anos)
+            foreach (Year year in DataManager.Years)
             {
-                cbbYear.Items.Add(year.AnoId);
+                cbbYear.Items.Add(year.Id);
             }
 
-            Program.Anos.Sort((y1, y2) => y1.AnoId.CompareTo(y2.AnoId));
+            DataManager.Years.Sort((y1, y2) => y1.Id.CompareTo(y2.Id));
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (Program.Users.Any(usr => usr.Username == txtLogin.Text.Trim()))
+            if (DataManager.Users.Any(usr => usr.Username == txtLogin.Text.Trim()))
             {
                 MessageBox.Show(
                 "Já existe um utilizador com este nome de utilizador!",
@@ -73,13 +73,13 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                     string nif = txtNIF.Text;
 
                     // Verifica duplicações de NIF em Teachers e Students
-                    bool nifExists = Program.Users.Any(u =>
+                    bool nifExists = DataManager.Users.Any(u =>
                     {
                         if (u.UserType == UserType.Teacher && u is Teacher teacher)
-                            return teacher.NIF == nif;
+                            return teacher.NIF.ToString() == nif;
 
                         if (u.UserType == UserType.Student && u is Student student)
-                            return student.NIF == nif;
+                            return student.NIF.ToString() == nif;
 
                         return false;
                     });
@@ -97,8 +97,8 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                     int yearIndex = cbbYear.SelectedIndex;
                     int classRoomIndex = cbbClassRoom.SelectedIndex;
 
-                    var selectedYear = Program.Anos[yearIndex];
-                    var selectedClassRoom = selectedYear.ClassRooms[classRoomIndex];
+                    var selectedYear = DataManager.Years[yearIndex];
+                    var selectedClassRoom = selectedYear.ClassRooms.Items[classRoomIndex];
 
 
 
@@ -107,22 +107,18 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                         txtLogin.Text,
                         txtPassword.Text,
                         txtName.Text,
-                        txtNIF.Text,
+                        int.Parse(txtNIF.Text),
                         selectedClassRoom,
-                        new SchoolCard(Program.SchoolCardsCounter + 1)
+                        new SchoolCard(DataManager.SchoolCards.Count + 1)
                         );
 
-                    Program.SchoolCardsCounter++;
-
                     // Adicionar o aluno na turma
-                    Program.students.Add(newStudent);
-                    selectedClassRoom.Students[selectedClassRoom.StudentsCount] = newStudent;
-                    selectedClassRoom.StudentsCount++;
+                    DataManager.Students.Add(newStudent);
                     selectedClassRoom.OrderStudentsByName();
-                    Program.Users.Add(newStudent);
+                    DataManager.Users.Add(newStudent);
 
                     MessageBox.Show("Aluno adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    DataManager.Save();
+                    //DataManager.Save();
                     this.Close();
                 }
             }
@@ -143,12 +139,12 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
             if (cbbYear.SelectedIndex != -1)
             {
                 cbbClassRoom.Items.Clear();
-                var selectedYear = Program.Anos[cbbYear.SelectedIndex];
-                if (selectedYear.ClassRooms.Count > 0)
+                var selectedYear = DataManager.Years[cbbYear.SelectedIndex];
+                if (selectedYear.ClassRooms.Items.Count > 0)
                 {
-                    foreach (var classRoom in selectedYear.ClassRooms)
+                    foreach (var classRoom in selectedYear.ClassRooms.Items)
                     {
-                        cbbClassRoom.Items.Add(classRoom.Id);
+                        cbbClassRoom.Items.Add(classRoom.Letter);
                     }
                     cbbClassRoom.Enabled = true;
                     cbbClassRoom.Focus();

@@ -38,13 +38,13 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
 
         private void Form_StudentRequest_Load(object sender, EventArgs e)
         {
-            lblClassRoom.Text += " " + oldData.ClassRoom.Year.AnoId + "º" + oldData.ClassRoom.Id;
+            lblClassRoom.Text += " " + oldData.ClassRoom.Year.Id + "º" + oldData.ClassRoom.Id;
             lblName.Text += " " + oldData.Name;
             lblPassword.Text += " " + oldData.Password;
             lblUser.Text += " " + oldData.Username;
             lblNif.Text += " " + oldData.NIF;
 
-            lblNewClassRoom.Text += " " + newData.ClassRoom.Year.AnoId + "º" + newData.ClassRoom.Id;
+            lblNewClassRoom.Text += " " + newData.ClassRoom.Year.Id + "º" + newData.ClassRoom.Id;
             lblNewLogin.Text += " " + newData.Username;
             lblNewName.Text += " " + newData.Name;
             lblNewNif.Text += " " + newData.NIF;
@@ -63,15 +63,15 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
 
         private void btnReject_Click(object sender, EventArgs e)
         {
-            ChatManager.SendGetNotificationFromAdmin(oldData).AddMessage(Program.Users[0].Name, "Lamentamos mas a alteração de dados foi rejeitada.");
-            Program.Users[0].Notifications.Remove(m_notification);
-            DataManager.Save();
+            ChatManager.SendGetNotificationFromAdmin(oldData).AddMessage(DataManager.Users[0].Name, "Lamentamos mas a alteração de dados foi rejeitada.");
+            DataManager.Users[0].Notifications.Remove(m_notification);
+            ////DataManager.Save();
             this.Close();
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (Program.Users.Any(usr => usr.Username == newData.Username.Trim()))
+            if (DataManager.Users.Any(usr => usr.Username == newData.Username.Trim()))
             {
                 MessageBox.Show(
                 "Já existe um utilizador com este nome de utilizador!",
@@ -83,7 +83,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
             }
             // Envia mensagem via chat
             ChatManager.SendGetNotificationFromAdmin(oldData)
-                       .AddMessage(Program.Users[0].Name, "A alteração de dados foi aprovada!");
+                       .AddMessage(DataManager.Users[0].Name, "A alteração de dados foi aprovada!");
 
             // Atualiza dados básicos
             oldData.Username = newData.Username;
@@ -92,30 +92,22 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
             oldData.NIF = newData.NIF;
 
             // Remove das turmas antigas
-            foreach (var cls in Program.ClassRooms)
+            foreach (var cls in DataManager.ClassRooms)
             {
                 cls.RemoveStudent(oldData);
             }
 
             // Adiciona na nova turma
             var newClass = newData.ClassRoom;
-            for (int i = 0; i < newClass.StudentsCount; i++)
-            {
-                if (newClass.Students[i] == null)
-                {
-                    newClass.Students[i] = oldData;
-                    newClass.StudentsCount++;
-                    break;
-                }
-            }
+            newClass.AddStudent(newData);
             oldData.ClassRoom = newClass;
 
             // Notificação
-            oldData.Notifications.Add(new Notification(NotificationType.message, Program.Users[0], oldData));
+            oldData.Notifications.Add(new Notification(NotificationType.message, DataManager.Users[0], oldData));
 
             // Remove notificação do admin
-            Program.Users[0].Notifications.Remove(m_notification);
-            DataManager.Save();
+            DataManager.Users[0].Notifications.Remove(m_notification);
+            //DataManager.Save();
             this.Close();
         }
     }

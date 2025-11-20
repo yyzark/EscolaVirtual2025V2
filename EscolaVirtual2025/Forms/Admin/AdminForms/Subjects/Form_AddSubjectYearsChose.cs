@@ -1,21 +1,17 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 {
     public partial class Form_AddSubjectYearsChose : MaterialForm
     {
-        private  bool m_subjectYearsChosen;
+        private bool m_subjectYearsChosen;
         private Subject m_subject;
         public bool SubjectYearsChosen
         {
@@ -34,7 +30,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             get { return m_subject; }
             set { m_subject = value; }
         }
-            
+
         public Form_AddSubjectYearsChose(Subject subject)
         {
             InitializeComponent();
@@ -52,15 +48,15 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             );
             #endregion
 
-            p_Subject= subject;
+            p_Subject = subject;
             SubjectYearsChosen = false;
         }
 
         private void Form_AddSubjectYearsChose_Load(object sender, EventArgs e)
         {
-            foreach (Year yr in Program.Anos.OrderBy(y => y.AnoId).ToList())
+            foreach (Year yr in DataManager.Years.OrderBy(y => y.Id).ToList())
             {
-                lsvCheckYears.Items.Add(yr.AnoId.ToString() + "º");
+                lsvCheckYears.Items.Add(yr.Id.ToString() + "º");
             }
         }
 
@@ -77,7 +73,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             }
             else
             {
-                btnAdd.Enabled=false;
+                btnAdd.Enabled = false;
             }
         }
 
@@ -86,8 +82,8 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             p_Subject.Years.Clear();
             foreach (ListViewItem item in lsvCheckYears.CheckedItems)
             {
-                int anoId = Convert.ToInt32(item.Text.Replace("º", ""));
-                var year = Program.Anos.FirstOrDefault(y => y.AnoId == anoId);
+                int Id = Convert.ToInt32(item.Text.Replace("º", ""));
+                var year = DataManager.Years.FirstOrDefault(y => y.Id == Id);
                 p_Subject.Years.Add(year);
             }
             SubjectYearsChosen = true;
@@ -97,17 +93,17 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
         private void Form_AddSubjectYearsChose_VisibleChanged(object sender, EventArgs e)
         {
             lsvCheckYears.Items.Clear();
-            foreach (Year yr in Program.Anos.OrderBy(y => y.AnoId).ToList())
+            foreach (Year yr in DataManager.Years.OrderBy(y => y.Id).ToList())
             {
-                lsvCheckYears.Items.Add(yr.AnoId.ToString() + "º");
+                lsvCheckYears.Items.Add(yr.Id.ToString() + "º");
             }
 
-            for (int i = 0; i < p_Subject.Years.Count; i++)
+            for (int i = 0; i < p_Subject.Years.Items.Count; i++)
             {
                 for (int j = 0; j < lsvCheckYears.Items.Count; j++)
                 {
-                    int itemAnoId = int.Parse(lsvCheckYears.Items[j].Text.Replace("º", ""));
-                    if (p_Subject.Years[i].AnoId == itemAnoId)
+                    int itemId = int.Parse(lsvCheckYears.Items[j].Text.Replace("º", ""));
+                    if (p_Subject.Years.Items[i].Id == itemId)
                     {
                         lsvCheckYears.Items[j].Checked = true;
                     }

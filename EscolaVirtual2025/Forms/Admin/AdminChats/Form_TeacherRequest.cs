@@ -67,9 +67,9 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
         private void btnClassRooms_Click(object sender, EventArgs e)
         {
             string result = "Turmas:";
-            foreach (ClassRoom classRoom in oldData.AssignedClassRooms)
+            foreach (ClassRoom classRoom in oldData.AssignedClassRooms.Items)
             {
-                result += "\n" + classRoom.Year.AnoId + "º" + classRoom.Id;
+                result += "\n" + classRoom.Year.Id + "º" + classRoom.Id;
             }
             MessageBox.Show(result, "De turmas", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -77,23 +77,23 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
         private void btnNewClassRooms_Click(object sender, EventArgs e)
         {
             string result = "Turmas:";
-            foreach (ClassRoom classRoom in newData.AssignedClassRooms)
+            foreach (ClassRoom classRoom in newData.AssignedClassRooms.Items)
             {
-                result += "\n" + classRoom.Year.AnoId + "º" + classRoom.Id;
+                result += "\n" + classRoom.Year.Id + "º" + classRoom.Id;
             }
             MessageBox.Show(result, "De turmas", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnReject_Click(object sender, EventArgs e)
         {
-            ChatManager.SendGetNotificationFromAdmin(oldData).AddMessage(Program.Users[0].Name, "Lamentamos mas a alteração de dados foi rejeitada.");
-            Program.Users[0].Notifications.Remove(m_notification);
+            ChatManager.SendGetNotificationFromAdmin(oldData).AddMessage(DataManager.Users[0].Name, "Lamentamos mas a alteração de dados foi rejeitada.");
+            DataManager.Users[0].Notifications.Remove(m_notification);
             this.Close();
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (Program.Users.Any(usr => usr.Username == newData.Username.Trim()))
+            if (DataManager.Users.Any(usr => usr.Username == newData.Username.Trim()))
             {
                 MessageBox.Show(
                 "Já existe um utilizador com este nome de utilizador!",
@@ -104,7 +104,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
                 return;
             }
             ChatManager.SendGetNotificationFromAdmin(oldData)
-               .AddMessage(Program.Users[0].Name, "A alteração de dados foi aprovada!");
+               .AddMessage(DataManager.Users[0].Name, "A alteração de dados foi aprovada!");
 
             // Atualiza dados básicos
             oldData.Username = newData.Username;
@@ -114,27 +114,27 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
             oldData.AssignedSubject = newData.AssignedSubject;
 
             // Remove teacher das turmas antigas
-            foreach (var cls in Program.ClassRooms)
+            foreach (var cls in DataManager.ClassRooms)
             {
-                foreach (var clsSubj in cls.Subjects)
+                foreach (var clsSubj in cls.ClassSubjects.Items)
                 {
-                    if (clsSubj.AssignedTeacher == oldData && clsSubj.Subject != oldData.AssignedSubject)
-                        clsSubj.AssignedTeacher = null;
+                    if (clsSubj.Teacher == oldData && clsSubj.Id != oldData.AssignedSubject.Id)
+                        clsSubj.Teacher = null;
                 }
             }
 
             // Adiciona teacher nas novas turmas
-            foreach (var cls in oldData.AssignedClassRooms)
+            foreach (var cls in oldData.AssignedClassRooms.Items)
             {
-                foreach (var clsSubj in cls.Subjects)
+                foreach (var clsSubj in cls.ClassSubjects.Items)
                 {
-                    if (clsSubj.Subject == oldData.AssignedSubject)
-                        clsSubj.AssignedTeacher = oldData;
+                    if (clsSubj.Id == oldData.AssignedSubject.Id)
+                        clsSubj.Teacher = oldData;
                 }
             }
 
-            Program.Users[0].Notifications.Remove(m_notification);
-            DataManager.Save();
+            DataManager.Users[0].Notifications.Remove(m_notification);
+            //DataManager.Save();
             this.Close();
         }
     }

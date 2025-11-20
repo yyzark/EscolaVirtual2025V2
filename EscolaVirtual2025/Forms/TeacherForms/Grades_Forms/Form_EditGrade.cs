@@ -1,19 +1,12 @@
 ﻿using EscolaVirtual2025.Classes;
 using EscolaVirtual2025.Classes.Academic;
+using EscolaVirtual2025.Classes.Users;
 using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
+namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms
 {
     public partial class Form_EditGrade : MaterialForm
     {
@@ -25,7 +18,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
 
 
             #region MaterialSkin
-                var materialSkinManager = MaterialSkinManager.Instance;
+            var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(
@@ -43,10 +36,10 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            int notaAntiga = m_grade.p_Grade[m_per];
+            int notaAntiga = m_grade.P_Grade[m_per];
             int notaNova = Convert.ToInt32(nudGrade.Value);
 
-            m_grade.p_Grade[m_per] = notaNova;
+            m_grade.P_Grade[m_per] = notaNova;
             m_grade.Comment[m_per] = txtComment.Text;
 
             //  REGISTO DO HISTÓRICO 
@@ -54,17 +47,17 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
             {
                 HistoricoAvaliacao novaEntrada = new HistoricoAvaliacao
                 {
-                    AlunoId = m_grade.StudentId,
-                    ProfessorId = DataManager.CurrentProfessorId,
-                    Disciplina = m_grade.Gradesubject.Name,
+                    AlunoId = m_grade.Student.NIF,
+                    ProfessorId = (DataManager.currentUser as Teacher).NIF,
+                    Disciplina = m_grade.GradeSubject.Name,
                     NotaAntiga = notaAntiga,
                     NotaNova = notaNova,
                 };
 
-                DataManager.HistoricoManager.AdicionarEGravarAlteracao(novaEntrada);
+                HistoricoService.AdicionarEGravarAlteracao(novaEntrada);
             }
 
-            DataManager.Save();
+            //DataManager.Save();
             this.Close();
         }
 
@@ -83,7 +76,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades_Forms
         private void Form_EditGrade_Load(object sender, EventArgs e)
         {
             txtComment.Text = m_grade.Comment[m_per];
-            nudGrade.Value = m_grade.p_Grade[m_per];
+            nudGrade.Value = m_grade.P_Grade[m_per];
         }
     }
 }

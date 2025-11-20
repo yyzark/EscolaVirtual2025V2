@@ -38,7 +38,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
 
         private void Form_Relatorio_Load(object sender, EventArgs e)
         {
-            txtTurma.Text = "Turma: " + classRoom.Year.AnoId + "º " + classRoom.Id;
+            txtTurma.Text = "Turma: " + classRoom.Year.Id + "º " + classRoom.Id;
             lblDisc.Text = "Disciplina: " + tchr.AssignedSubject.Name;
 
             for (int i = 0; i < 3; i++)
@@ -47,7 +47,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
 
         private void LoadInfo(int perNum)
         {
-            Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.NIF == tchr.NIF && r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.Period == perNum);
+            Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.NIF == tchr.NIF.ToString() && r.Year == classRoom.Year.Id && r.Room == classRoom.Id && r.Period == perNum);
             //Se não for nulo
             if (per != null && perNum == 0)
             {
@@ -74,7 +74,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
             //Se for nulo
             if (per == null && perNum == 0)
             {
-                lblBS1.Text = "Melhor aluno:" ;
+                lblBS1.Text = "Melhor aluno:";
                 lblMedia1.Text = "Média:";
                 lblWS1.Text = "Pior aluno:";
                 btnRelatório1.Text = "Relatório";
@@ -103,7 +103,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
 
                 saveFileDialog.Title = "Exportar relatório";
 
-                saveFileDialog.FileName = "Relatório_" + tchr.AssignedSubject.Name + "_" + classRoom.Year.AnoId + "º" + classRoom.Id + "_Per" + per + "_" + DateTime.Now.Date.ToString("dd_MM_yyyy");
+                saveFileDialog.FileName = "Relatório_" + tchr.AssignedSubject.Name + "_" + classRoom.Year.Id + "º" + classRoom.Id + "_Per" + per + "_" + DateTime.Now.Date.ToString("dd_MM_yyyy");
 
                 saveFileDialog.Filter = "JSON files (*.json)|*.json|XML files (*.xml)|*.xml";
 
@@ -115,7 +115,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
                     string extention = Path.GetExtension(filePath).ToLower();
 
 
-                    Relatorio rel = RelatorioManager.RelatorioList.FirstOrDefault(r => r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.NIF == tchr.NIF && r.Period == per);
+                    Relatorio rel = RelatorioManager.RelatorioList.FirstOrDefault(r => r.Year == classRoom.Year.Id && r.Room == classRoom.Id && r.NIF == tchr.NIF.ToString() && r.Period == per);
 
                     if (extention == ".json")
                     {
@@ -155,8 +155,8 @@ namespace EscolaVirtual2025.Forms.TeacherForms.RelatorioTeacher
         {
             for (int i = 0; i < 3; i++)
             {
-                Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.NIF == tchr.NIF && r.Year == classRoom.Year.AnoId && r.Room == classRoom.Id && r.Period == i);
-                if(per != null)
+                Relatorio per = RelatorioManager.RelatorioList.FirstOrDefault(r => r.NIF == tchr.NIF.ToString() && r.Year == classRoom.Year.Id && r.Room == classRoom.Id && r.Period == i);
+                if (per != null)
                     RelatorioManager.RelatorioList.Remove(per);
             }
 

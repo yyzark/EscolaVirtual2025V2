@@ -49,25 +49,25 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
             newSubject.Abreviation = txtAbreviation.Text;
             newSubject.Name = txtName.Text;
             newSubject.Years = subjectYearsChose.p_Subject.Years;
-            newSubject.Id = Program.Subjects.Count + 1;
+            newSubject.Id = DataManager.Subjects.Count + 1;
 
-            Program.Subjects.Add(newSubject);
-            Program.Anos.Sort((x, y) => x.AnoId.CompareTo(y.AnoId));
+            DataManager.Subjects.Add(newSubject);
+            DataManager.Years.Sort((x, y) => x.Id.CompareTo(y.Id));
 
-            foreach (var year in newSubject.Years)
+            foreach (var year in newSubject.Years.Items)
             {
-                var targetYear = Program.Anos.FirstOrDefault(a => a.AnoId == year.AnoId);
+                var targetYear = DataManager.Years.FirstOrDefault(a => a.Id == year.Id);
                 if (targetYear != null)
                 {
                     targetYear.Subjects.Add(newSubject);
 
-                    foreach (var cls in targetYear.ClassRooms)
+                    foreach (var cls in targetYear.ClassRooms.Items)
                     {
-                        cls.Subjects.Add(new ClassSubject(null, newSubject));
+                        cls.ClassSubjects.Add(new ClassSubject(null, newSubject));
                     }
                 }
             }
-            DataManager.Save();
+            //DataManager.Save();
             this.Close();
         }
 

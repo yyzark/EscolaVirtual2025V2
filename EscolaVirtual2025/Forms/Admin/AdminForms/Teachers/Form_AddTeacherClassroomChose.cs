@@ -1,15 +1,10 @@
 ﻿using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
@@ -68,20 +63,20 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         public void UpdateListView()
         {
             lsvCheckClassRooms.Items.Clear();
-            foreach (var classroom in Program.ClassRooms)
+            foreach (var classroom in DataManager.ClassRooms)
             {
                 // Check if this classroom has the selected subject
-                bool hasSubject = classroom.Subjects.Any(s => s.Subject.Id == p_Subject.Id && s.AssignedTeacher == null || s.AssignedTeacher != m_teacher);
+                bool hasSubject = classroom.ClassSubjects.Items.Any(s => s.Id == p_Subject.Id && s.Teacher == null || s.Teacher != m_teacher);
                 if (!hasSubject)
                     continue;
 
                 // Create ListViewItem
-                var item = new ListViewItem(classroom.Year.AnoId + "º" + classroom.Id.ToString());
+                var item = new ListViewItem(classroom.Year.Id + "º" + classroom.Letter);
 
                 if (p_Teacher.AssignedClassRooms != null)
                 {
                     // Optionally mark if the teacher already teaches in this classroom
-                    bool alreadyAssigned = p_Teacher.AssignedClassRooms.Any(c => c.Id == classroom.Id);
+                    bool alreadyAssigned = p_Teacher.AssignedClassRooms.Items.Any(c => c.Id == classroom.Id);
                     if (alreadyAssigned)
                     {
                         item.Checked = true;
@@ -104,14 +99,14 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         private void btnAdd_Click(object sender, EventArgs e)
         {
             // Limpa qualquer ligação anterior desse professor à disciplina em outras turmas (opcional)
-            foreach (var classroom in Program.ClassRooms)
+            foreach (var classroom in DataManager.ClassRooms)
             {
-                foreach (var classSubject in classroom.Subjects)
+                foreach (var classSubject in classroom.ClassSubjects.Items)
                 {
                     // Se a disciplina for a mesma, e o professor for este, limpa
-                    if (classSubject.Subject.Id == p_Subject.Id && classSubject.AssignedTeacher == p_Teacher)
+                    if (classSubject.Id == p_Subject.Id && classSubject.Teacher == p_Teacher)
                     {
-                        classSubject.AssignedTeacher = null;
+                        classSubject.Teacher = null;
                     }
                 }
             }
@@ -121,7 +116,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             {
                 // Extrai o ID da turma a partir do texto (supondo que o texto contém o ID)
                 string itemText = item.Text;
-                var classroom = Program.ClassRooms.FirstOrDefault(c => itemText.Contains(c.Id.ToString()));
+                var classroom = DataManager.ClassRooms.FirstOrDefault(c => itemText.Contains(c.Id.ToString()));
 
                 if (classroom == null)
                     continue;
@@ -129,23 +124,23 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 // Se a turma está marcada (checked), liga o professor à disciplina
                 if (item.Checked)
                 {
-                    var classSubject = classroom.Subjects.FirstOrDefault(s => s.Subject.Id == p_Subject.Id);
+                    var classSubject = classroom.ClassSubjects.Items.FirstOrDefault(s => s.Id == p_Subject.Id);
                     if (classSubject != null)
                     {
-                        classSubject.AssignedTeacher = p_Teacher;
+                        classSubject.Teacher = p_Teacher;
 
                         // Garante que o professor saiba onde ensina (caso uses esta lista em algum lugar)
-                        if (!p_Teacher.AssignedClassRooms.Contains(classroom))
+                        if (!p_Teacher.AssignedClassRooms.Items.Contains(classroom))
                             p_Teacher.AssignedClassRooms.Add(classroom);
                     }
                 }
                 else
                 {
                     // Se desmarcada, remove a ligação (se existir)
-                    var classSubject = classroom.Subjects.FirstOrDefault(s => s.Subject.Id == p_Subject.Id);
-                    if (classSubject != null && classSubject.AssignedTeacher == p_Teacher)
+                    var classSubject = classroom.ClassSubjects.Items.FirstOrDefault(s => s.Id == p_Subject.Id);
+                    if (classSubject != null && classSubject.Teacher == p_Teacher)
                     {
-                        classSubject.AssignedTeacher = null;
+                        classSubject.Teacher = null;
                     }
 
                     p_Teacher.AssignedClassRooms.RemoveAll(c => c.Id == classroom.Id);
@@ -164,11 +159,11 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 foreach (ListViewItem lsvItem in lsvCheckClassRooms.CheckedItems)
                 {
                     string[] parts = lsvItem.Text.Split('º');
-                    int anoId = Convert.ToInt32(parts[0].Trim());
+                    int Id = Convert.ToInt32(parts[0].Trim());
                     string turmaNome = parts[1].Trim();
 
-                    bool jaAtribuida = m_teacher.AssignedClassRooms.Any(clsrm =>
-                        clsrm.Year.AnoId == anoId &&
+                    bool jaAtribuida = m_teacher.AssignedClassRooms.Items.Any(clsrm =>
+                        clsrm.Year.Id == Id &&
                         clsrm.Id.ToString().Equals(turmaNome));
 
                     if (!jaAtribuida)

@@ -2,7 +2,6 @@
 using EscolaVirtual2025.Classes.Users;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace EscolaVirtual2025.Classes
@@ -31,10 +30,10 @@ namespace EscolaVirtual2025.Classes
 
         public Relatorio(ClassRoom room, Teacher teacher, int period = 0)
         {
-            Year = room.Year.AnoId;
-            Room = room.Id;
+            Year = room.Year.Id;
+            Room = room.Letter;
             TeacherAtual = teacher.Name;
-            NIF = teacher.NIF;
+            NIF = teacher.NIF.ToString();
             ListaAlunos = room.Students.Where(s => s != null).Select(s => s.Name).ToArray();
             Subject = teacher.AssignedSubject.Name;
             this.period = period;
@@ -66,7 +65,7 @@ namespace EscolaVirtual2025.Classes
 
         [JsonIgnore]
         [XmlIgnore]
-        public string NIF {  get =>  nif; set => nif = value;}
+        public string NIF { get => nif; set => nif = value; }
     }
 }
 

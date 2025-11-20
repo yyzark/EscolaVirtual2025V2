@@ -104,14 +104,14 @@ namespace EscolaVirtual2025
             //Program.Load();
 
             #region inicialização das listas globais
-            Program.Users = new List<User>();
-            Program.Anos = new List<Year>();
-            Program.Subjects = new List<Subject>();
-            Program.Teachers = new List<Teacher>();
-            Program.students = new List<Student>();
-            Program.ClassRooms = new List<ClassRoom>();
+            DataManager.Users = new List<User>();
+            DataManager.Years = new List<Year>();
+            DataManager.Subjects = new List<Subject>();
+            DataManager.Teachers = new List<Teacher>();
+            DataManager.Students = new List<Student>();
+            DataManager.ClassRooms = new List<ClassRoom>();
             #endregion
-            DataManager.Load();
+            //DataManager.Load();
             #region posição e tamanho dos controlos
             //posição dos controlos no centro
             lblTitle.Location = new Point((this.Width - lblTitle.Width) / 2, 75);
@@ -130,9 +130,7 @@ namespace EscolaVirtual2025
 
 
             //add do admin
-            Program.Users.Add(new User("JC", "GOAT", "Jorge Carvalho", UserType.Admin));
-            //id do cartão escolar inicial a 0
-            Program.SchoolCardsCounter = 0;
+            DataManager.Users.Add(new User("JC", "GOAT", "Jorge Carvalho", UserType.Admin));
 
             #region Credenciais Iniciais (probably apagar depois)  
             string cred = File.ReadLines("Credenciais_Admin\\Admin.txt").First();
@@ -146,22 +144,22 @@ namespace EscolaVirtual2025
              * 
             #region anos e disciplinas default
             //criacao dos anos
-            Program.Anos.Add(new Year(10));
-            Program.Anos.Add(new Year(11));
+            DataManager.Years.Add(new Year(10));
+            DataManager.Years.Add(new Year(11));
 
             //criacao das disciplinas
-            Program.Subjects.Add(new Subject("Matemática", "MAT", 1));
-            Program.Subjects.Add(new Subject("Português", "POR", 2));
-            Program.Subjects.Add(new Subject("Inglês", "ING", 3));
-            Program.Subjects.Add(new Subject("Física e Química", "FQ", 4));
-            Program.Subjects.Add(new Subject("História", "HST", 5));
+            DataManager.Subjects.Add(new Subject("Matemática", "MAT", 1));
+            DataManager.Subjects.Add(new Subject("Português", "POR", 2));
+            DataManager.Subjects.Add(new Subject("Inglês", "ING", 3));
+            DataManager.Subjects.Add(new Subject("Física e Química", "FQ", 4));
+            DataManager.Subjects.Add(new Subject("História", "HST", 5));
 
-            Program.Anos[0].Subjects.AddRange(Program.Subjects);
-            Program.Anos[1].Subjects.AddRange(Program.Subjects);
+            DataManager.Years[0].Subjects.AddRange(DataManager.Subjects);
+            DataManager.Years[1].Subjects.AddRange(DataManager.Subjects);
 
             #endregion*/
 
-            DataManager.Save();
+            //DataManager.Save();
         }
 
         private void Form_Login_SizeChanged(object sender, EventArgs e)
@@ -190,7 +188,7 @@ namespace EscolaVirtual2025
         private async void btnEnter_Click(object sender, EventArgs e)
         {
             //verificar se o user existe
-            User user = Program.Users.FirstOrDefault(usr => usr.Username == txtLogin.Text && usr.Password == txtPassword.Text);
+            User user = DataManager.Users.FirstOrDefault(usr => usr.Username == txtLogin.Text && usr.Password == txtPassword.Text);
 
             if (user == null) //password ou login incorretos
             {
@@ -225,7 +223,7 @@ namespace EscolaVirtual2025
             else if (user.UserType == Classes.UserType.Admin)
             {
                 //abrir form admin
-                Program.userAtual = user;
+                DataManager.currentUser = user;
                 Forms.Admin.Form_Admin formAdmin = new Forms.Admin.Form_Admin();
                 this.Hide();
                 formAdmin.Show();
@@ -236,7 +234,7 @@ namespace EscolaVirtual2025
             }
             else if (user.UserType == Classes.UserType.Teacher)
             {
-                Program.userAtual = user;
+                DataManager.currentUser = user;
                 Forms.TeacherForms.Form_Teacher formTeacher = new Forms.TeacherForms.Form_Teacher();
                 formTeacher.Show();
                 this.Hide();
@@ -246,7 +244,7 @@ namespace EscolaVirtual2025
             }
             else if (user.UserType == Classes.UserType.Student)
             {
-                Program.userAtual = user;
+                DataManager.currentUser = user;
                 Forms.StudentsForms.Form_Student formStudent = new Forms.StudentsForms.Form_Student();
                 this.Hide();
                 formStudent.Show();

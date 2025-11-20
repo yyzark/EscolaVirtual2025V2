@@ -4,7 +4,6 @@ using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -30,14 +29,6 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             );
             #endregion
 
-        }
-
-        private void Form_AddClassRooms_Load(object sender, EventArgs e)
-        {
-            Program.Anos.Sort((a, b) => a.AnoId.CompareTo(b.AnoId));
-            cbbYear.Items.AddRange(Program.Anos.Select(yr => yr.AnoId.ToString()).ToArray());
-            cbbYear.Text = "Ano";
-            cbbYear.ForeColor = Color.Gray;
         }
 
         private void cbbYear_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,12 +62,12 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
                 return;
             }
 
-            Year selectedYear = Program.Anos[cbbYear.SelectedIndex];
-            char classLetter = Utils.alphabet[selectedYear.ClassRooms.Count];
+            Year selectedYear = DataManager.Years[cbbYear.SelectedIndex];
+            char classLetter = Utils.alphabet[selectedYear.ClassRooms.Items.Count];
 
             // Mostra a caixa de confirmação
             DialogResult result = MessageBox.Show(
-                $"Tem a certeza que deseja adicionar a turma \"{classLetter}\" ao ano {selectedYear.AnoId}?",
+                $"Tem a certeza que deseja adicionar a turma \"{classLetter}\" ao ano {selectedYear.Id}?",
                 "Confirmação",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
@@ -84,22 +75,29 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
 
             if (result == DialogResult.Yes)
             {
-                ClassRoom newClassRoom = new ClassRoom(classLetter, selectedYear);
+                ClassRoom newClassRoom = new ClassRoom(classLetter, selectedYear, DataManager.ClassRooms.Count);
 
                 // Cria e adiciona a turma
                 selectedYear.ClassRooms.Add(newClassRoom);
-                Program.ClassRooms.Add(newClassRoom);
 
                 MessageBox.Show(
-                    $"Turma \"{classLetter}\" adicionada com sucesso ao ano {selectedYear.AnoId}.",
+                    $"Turma \"{classLetter}\" adicionada com sucesso ao ano {selectedYear.Id}.",
                     "Sucesso",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
 
-                DataManager.Save();
+                //DataManager.Save();
                 this.Close();
             }
+        }
+
+        private void Form_AddClassRooms_Shown(object sender, EventArgs e)
+        {
+            DataManager.Years.OrderBy(yr => yr.Id);
+            cbbYear.Items.AddRange(DataManager.Years.Select(yr => yr.Id.ToString()).ToArray());
+            cbbYear.Text = "Ano";
+            cbbYear.ForeColor = Color.Gray;
         }
     }
 }

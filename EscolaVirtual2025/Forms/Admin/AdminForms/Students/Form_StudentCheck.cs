@@ -1,16 +1,10 @@
-﻿using EscolaVirtual2025.Classes.Academic;
-using EscolaVirtual2025.Classes.Users;
+﻿using EscolaVirtual2025.Classes.Users;
+using EscolaVirtual2025.Data;
 using EscolaVirtual2025.Forms.Admin.AdminForms.Students;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms
@@ -56,16 +50,16 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms
                     ListViewItem selectedItem = lsvStudents.SelectedItems[0];
                     string NIFToRemove = selectedItem.SubItems[2].Text;
                     // Encontrar o aluno na lista global
-                    Student studentToRemove = Program.students.FirstOrDefault(s => s.NIF == NIFToRemove);
+                    Student studentToRemove = DataManager.Students.FirstOrDefault(s => s.NIF.ToString() == NIFToRemove);
 
                     // Remover o aluno da lista global de alunos
-                    Program.students.Remove(studentToRemove);
-                    var year = Program.Anos.FirstOrDefault(y => y.AnoId == studentToRemove.ClassRoom.Year.AnoId);
-                    var classRoom = year.ClassRooms.FirstOrDefault(cr => cr.Id == studentToRemove.ClassRoom.Id);
+                    DataManager.Students.Remove(studentToRemove);
+                    var year = DataManager.Years.FirstOrDefault(y => y.Id == studentToRemove.ClassRoom.Year.Id);
+                    var classRoom = year.ClassRooms.Items.FirstOrDefault(cr => cr.Id == studentToRemove.ClassRoom.Letter);
                     classRoom.RemoveStudent(studentToRemove);
                     classRoom.OrderStudentsByName();
                     // Remover o aluno da lista global de users
-                    Program.Users.Remove(studentToRemove);
+                    DataManager.Users.Remove(studentToRemove);
                     // Remover o item da ListView
                     lsvStudents.Items.Remove(selectedItem);
                     MessageBox.Show("Aluno removido com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -81,12 +75,12 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms
         private void lsvUpdate()
         {
             lsvStudents.Items.Clear();
-            foreach (Student student in Program.students)
+            foreach (Student student in DataManager.Students)
             {
                 var item = new ListViewItem(student.Username);
                 item.SubItems.Add(student.Name);
-                item.SubItems.Add(student.NIF);
-                item.SubItems.Add($"{student.ClassRoom.Year.AnoId}º{student.ClassRoom.Id}");
+                item.SubItems.Add(student.NIF.ToString());
+                item.SubItems.Add($"{student.ClassRoom.Year.Id}º{student.ClassRoom.Id}");
 
                 lsvStudents.Items.Add(item);
             }
@@ -103,9 +97,10 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms
             if (lsvStudents.SelectedItems.Count <= 0)
             {
                 btnRemove.Enabled = false;
-            }else
+            }
+            else
             {
-                btnRemove.Enabled=true;
+                btnRemove.Enabled = true;
             }
         }
     }

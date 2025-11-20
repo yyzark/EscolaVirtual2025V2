@@ -1,16 +1,8 @@
 ﻿using EscolaVirtual2025.Classes.Chat;
-using MaterialSkin;using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminChats
 {
@@ -37,7 +29,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
         private void Form_AdminChats_Load(object sender, EventArgs e)
         {
             lsbChats.Items.Clear();
-            foreach (Notification notification in Program.Users[0].Notifications) 
+            foreach (Notification notification in DataManager.Users[0].Notifications)
             {
                 string prefix = notification.Read ? "" : "[NÃO LIDO] ";
                 lsbChats.Items.Add(new MaterialListBoxItem(prefix + "User: " + notification.Sender.Username + " Nome: " + notification.Sender.Name));
@@ -47,24 +39,24 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
         private void lsbChats_DoubleClick(object sender, EventArgs e)
         {
             int index = lsbChats.SelectedIndex;
-            if (index < 0 || index >= Program.Users[0].Notifications.Count) return;
-            Program.Users[0].Notifications[index].Read = true;
-            if (Program.Users[0].Notifications[index].Sender.UserType == Classes.UserType.Student)
+            if (index < 0 || index >= DataManager.Users[0].Notifications.Count) return;
+            DataManager.Users[0].Notifications[index].Read = true;
+            if (DataManager.Users[0].Notifications[index].Sender.UserType == Classes.UserType.Student)
             {
-                Form_StudentRequest form_StudentRequest = new Form_StudentRequest(Program.userAtual.Notifications[lsbChats.SelectedIndex] as Request);
+                Form_StudentRequest form_StudentRequest = new Form_StudentRequest(DataManager.currentUser.Notifications[lsbChats.SelectedIndex] as Request);
                 this.Hide();
                 form_StudentRequest.ShowDialog();
-                if (Program.Users[0].Notifications.Count == 0)
+                if (DataManager.Users[0].Notifications.Count == 0)
                     this.Close();
 
                 this.Show();
             }
             else
             {
-                Form_TeacherRequest form_teacherRequest = new Form_TeacherRequest(Program.userAtual.Notifications[lsbChats.SelectedIndex] as Request);
+                Form_TeacherRequest form_teacherRequest = new Form_TeacherRequest(DataManager.currentUser.Notifications[lsbChats.SelectedIndex] as Request);
                 this.Hide();
                 form_teacherRequest.ShowDialog();
-                if (Program.Users[0].Notifications.Count == 0)
+                if (DataManager.Users[0].Notifications.Count == 0)
                     this.Close();
 
                 this.Show();
@@ -74,7 +66,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminChats
         private void Form_AdminChats_VisibleChanged(object sender, EventArgs e)
         {
             lsbChats.Items.Clear();
-            foreach (Notification notification in Program.Users[0].Notifications)
+            foreach (Notification notification in DataManager.Users[0].Notifications)
             {
                 string prefix = notification.Read ? "" : "[NÃO LIDO] ";
                 lsbChats.Items.Add(new MaterialListBoxItem(prefix + "User: " + notification.Sender.Username + " Nome: " + notification.Sender.Name));

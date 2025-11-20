@@ -66,7 +66,7 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherChat
 
         private void Form_Chat_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataManager.Save();
+            //DataManager.Save();
         }
     }
 }
