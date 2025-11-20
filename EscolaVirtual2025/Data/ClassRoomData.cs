@@ -1,11 +1,12 @@
-﻿namespace EscolaVirtual2025.Classes.Data
+﻿using System.Collections.Generic;
+namespace EscolaVirtual2025.Classes.Data
 {
     public class ClassRoomData
     {
         public int Id;
         public char Letter;
         public int YearId;
-        public List<int> StudentNIFs = new List<int>();
+        public List<string> StudentNIFs = new List<string>();
         public List<int> ClassSubjectIds = new List<int>();
     }
 }

@@ -30,9 +30,9 @@ namespace EscolaVirtual2025.Classes.Users
         }
 
         public EntityCollection<Grade, int> Grades = new EntityCollection<Grade, int>(DataManager.Grades, gd => gd.Id);
-        public Student() { }
+        public Student() : base(UserType.Student){  }
 
-        public Student(string username, string password, string name, int nif, ClassRoom classRoom, SchoolCard schoolCard)
+        public Student(string username, string password, string name, string nif, ClassRoom classRoom, SchoolCard schoolCard)
             : base(username, password, name, UserType.Student, nif)
         {
             ClassRoom = classRoom;

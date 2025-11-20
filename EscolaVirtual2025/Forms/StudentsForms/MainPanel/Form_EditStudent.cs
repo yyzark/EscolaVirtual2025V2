@@ -194,7 +194,7 @@ namespace EscolaVirtual2025.Forms.StudentsForms.MainPanel
                             DataManager.Users[0].Notifications.Remove(notification);
                     }
 
-                    DataManager.Users[0].Notifications.Add(new Request(stdnt, DataManager.Users[0], new Student(txtLogin.Text, txtPassword.Text, txtName.Text, Convert.ToInt32(nif), stdnt.ClassRoom.Year.ClassRooms.Items[cbbClassRoom.SelectedIndex], stdnt.SchoolCard)));
+                    DataManager.Users[0].Notifications.Add(new Request(stdnt, DataManager.Users[0], new Student(txtLogin.Text, txtPassword.Text, txtName.Text, nif, stdnt.ClassRoom.Year.ClassRooms.Items[cbbClassRoom.SelectedIndex], stdnt.SchoolCard)));
 
                     MessageBox.Show("O pedido foi enviado ao administrador!.",
                                         "Sucesso",

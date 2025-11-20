@@ -137,12 +137,12 @@ namespace EscolaVirtual2025.Forms.TeacherForms.TeacherAccount
                         return teacher.NIF.ToString() == nif && nif != tchr.NIF.ToString();
 
                     if (u.UserType == UserType.Student && u is Student student)
-                        return student.NIF == int.Parse(nif);
+                        return student.NIF == nif;
 
                     return false;
                 });
 
-                newTeacher.NIF = int.Parse(txtNIF.Text);
+                newTeacher.NIF = txtNIF.Text;
                 newTeacher.Password = txtPassword.Text;
                 newTeacher.Name = txtName.Text;
                 newTeacher.Username = txtLogin.Text;

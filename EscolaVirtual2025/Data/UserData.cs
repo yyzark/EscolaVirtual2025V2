@@ -1,4 +1,5 @@
-﻿namespace EscolaVirtual2025.Classes.Data
+﻿using System.Collections.Generic;
+namespace EscolaVirtual2025.Classes.Data
 {
     public class UserData
     {
@@ -6,7 +7,7 @@
         public string Password;
         public string Name;
         public UserType UserType;
-        public int NIF;
+        public string NIF;
         public int ClassRoomId;
         public int SchoolCardId;
         public List<int> AssignedClassRoomIds = new List<int>();

@@ -11,7 +11,7 @@ namespace EscolaVirtual2025.Classes.Academic
         public int Id { get; set; }
         public char Letter { get; set; }
 
-        private int[] m_studentsNif = new int[20];
+        private string[] m_studentsNif = new string[20];
         private int m_yearId;
 
         private int m_studentsCount = 0;
@@ -75,7 +75,7 @@ namespace EscolaVirtual2025.Classes.Academic
             for (int i = index; i < m_studentsCount - 1; i++)
                 m_studentsNif[i] = m_studentsNif[i + 1];
 
-            m_studentsNif[m_studentsCount - 1] = 0;
+            m_studentsNif[m_studentsCount - 1] = string.Empty;
             m_studentsCount--;
         }
 

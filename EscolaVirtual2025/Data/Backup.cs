@@ -1,4 +1,9 @@
-﻿using EscolaVirtual2025.Classes.Academic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using EscolaVirtual2025.Classes.Academic;
 using EscolaVirtual2025.Classes.Users;
 using EscolaVirtual2025.Data;
 
@@ -40,7 +45,7 @@ namespace EscolaVirtual2025.Classes.Data
 
                 if (u is TeacherStudent ts)
                 {
-                    ud.NIF = ts.NIF;
+                    ud.NIF = ts.NIF ?? string.Empty;
                     if (u is Student s)
                     {
                         ud.ClassRoomId = s.ClassRoom?.Id ?? 0;
@@ -74,7 +79,7 @@ namespace EscolaVirtual2025.Classes.Data
                     Name = s.Name,
                     Abreviation = s.Abreviation,
                     YearIds = s.Years.Items.Select(y => y.Id).ToList(),
-                    TeacherNIFs = s.Teachers.Items.Select(t => t.NIF).ToList()
+                    TeacherNIFs = s.Teachers.Items.Select(t => t.NIF ?? string.Empty).ToList()
                 });
             }
 
@@ -85,7 +90,7 @@ namespace EscolaVirtual2025.Classes.Data
                     Id = cs.Id,
                     Name = cs.Name,
                     Abreviation = cs.Abreviation,
-                    TeacherNIF = cs.Teacher?.NIF ?? 0
+                    TeacherNIF = cs.Teacher?.NIF ?? string.Empty
                 });
             }
 
@@ -96,7 +101,7 @@ namespace EscolaVirtual2025.Classes.Data
                     Id = cr.Id,
                     Letter = cr.Letter,
                     YearId = cr.Year.Id,
-                    StudentNIFs = cr.Students.Select(s => s.NIF).ToList(),
+                    StudentNIFs = cr.Students.Select(s => s.NIF ?? string.Empty).ToList(),
                     ClassSubjectIds = cr.ClassSubjects.Items.Select(cs => cs.Id).ToList()
                 });
             }
@@ -106,7 +111,7 @@ namespace EscolaVirtual2025.Classes.Data
                 GradesData.Add(new GradeData
                 {
                     Id = g.Id,
-                    StudentNIF = g.Student?.NIF ?? 0,
+                    StudentNIF = g.Student?.NIF ?? string.Empty,
                     SubjectId = g.GradeSubject?.Id ?? 0,
                     P_Grade = g.P_Grade,
                     Comment = g.Comment
@@ -126,8 +131,8 @@ namespace EscolaVirtual2025.Classes.Data
             {
                 var chat = new ChatData
                 {
-                    TeacherNIF = ch.Teacher?.NIF ?? 0,
-                    StudentNIF = ch.Student?.NIF ?? 0,
+                    TeacherNIF = ch.Teacher?.NIF ?? string.Empty,
+                    StudentNIF = ch.Student?.NIF ?? string.Empty,
                     HasAdmin = ch.HasAdmin,
                     Messages = ch.Messages.Select(m => (m.Sender, m.Text)).ToList()
                 };
@@ -135,85 +140,85 @@ namespace EscolaVirtual2025.Classes.Data
             }
 
             var xml = new XElement("Backup",
-    new XElement("Users", UsersData.Select(u =>
-        new XElement("User",
-            new XAttribute("Username", u.Username),
-            new XAttribute("Password", u.Password),
-            new XAttribute("Name", u.Name),
-            new XAttribute("UserType", u.UserType),
-            new XAttribute("NIF", u.NIF),
-            new XAttribute("ClassRoomId", u.ClassRoomId),
-            new XAttribute("SchoolCardId", u.SchoolCardId),
-            new XElement("AssignedClassRooms", u.AssignedClassRoomIds.Select(id => new XElement("ClassRoomId", id))),
-            new XAttribute("AssignedSubjectId", u.AssignedSubjectId),
-            new XElement("Grades", u.GradeIds.Select(id => new XElement("GradeId", id)))
-        )
-    )),
-    new XElement("Years", YearsData.Select(y =>
-        new XElement("Year",
-            new XAttribute("Id", y.Id),
-            new XElement("ClassRooms", y.ClassRoomIds.Select(id => new XElement("ClassRoomId", id))),
-            new XElement("Subjects", y.SubjectIds.Select(id => new XElement("SubjectId", id)))
-        )
-    )),
-    new XElement("Subjects", SubjectsData.Select(s =>
-        new XElement("Subject",
-            new XAttribute("Id", s.Id),
-            new XAttribute("Name", s.Name),
-            new XAttribute("Abreviation", s.Abreviation),
-            new XElement("Years", s.YearIds.Select(id => new XElement("YearId", id))),
-            new XElement("Teachers", s.TeacherNIFs.Select(nif => new XElement("TeacherNIF", nif)))
-        )
-    )),
-    new XElement("ClassSubjects", ClassSubjectsData
-    .GroupBy(cs => cs.Id)
-    .Select(g => g.First())    //so o primeiro id pq havia problemas de repetiçao 
-    .Select(cs =>
-        new XElement("ClassSubject",
-            new XAttribute("Id", cs.Id),
-            new XAttribute("Name", cs.Name),
-            new XAttribute("Abreviation", cs.Abreviation),
-            new XAttribute("TeacherNIF", cs.TeacherNIF)
-        )
-        )),
-    new XElement("ClassRooms", ClassRoomsData.Select(cr =>
-        new XElement("ClassRoom",
-            new XAttribute("Id", cr.Id),
-            new XAttribute("Letter", cr.Letter),
-            new XAttribute("YearId", cr.YearId),
-            new XElement("Students", cr.StudentNIFs.Select(nif => new XElement("StudentNIF", nif))),
-            new XElement("ClassSubjects", cr.ClassSubjectIds.Distinct().Select(id => new XElement("ClassSubjectId", id)))
-        )
-    )),
-    new XElement("Grades", GradesData.Select(g =>
-        new XElement("Grade",
-            new XAttribute("Id", g.Id),
-            new XAttribute("StudentNIF", g.StudentNIF),
-            new XAttribute("SubjectId", g.SubjectId),
-            new XElement("P_Grade", g.P_Grade.Select(v => new XElement("Value", v))),
-            new XElement("Comment", g.Comment.Select(c => new XElement("Text", c ?? "")))
-        )
-    )),
-    new XElement("SchoolCards", SchoolCardsData.Select(sc =>
-        new XElement("SchoolCard",
-            new XAttribute("Id", sc.Id),
-            new XAttribute("Saldo", sc.Saldo)
-        )
-    )),
-    new XElement("Chats", ChatsData.Select(ch =>
-        new XElement("Chat",
-            new XAttribute("TeacherNIF", ch.TeacherNIF),
-            new XAttribute("StudentNIF", ch.StudentNIF),
-            new XAttribute("HasAdmin", ch.HasAdmin),
-            new XElement("Messages", ch.Messages.Select(m =>
-                new XElement("Message",
-                    new XAttribute("Sender", m.Sender),
-                    new XAttribute("Text", m.Text)
-                )
-            ))
-        )
-    ))
-);
+                new XElement("Users", UsersData.Select(u =>
+                    new XElement("User",
+                        new XAttribute("Username", u.Username),
+                        new XAttribute("Password", u.Password),
+                        new XAttribute("Name", u.Name),
+                        new XAttribute("UserType", u.UserType),
+                        new XAttribute("NIF", u.NIF ?? string.Empty),
+                        new XAttribute("ClassRoomId", u.ClassRoomId),
+                        new XAttribute("SchoolCardId", u.SchoolCardId),
+                        new XElement("AssignedClassRooms", u.AssignedClassRoomIds.Select(id => new XElement("ClassRoomId", id))),
+                        new XAttribute("AssignedSubjectId", u.AssignedSubjectId),
+                        new XElement("Grades", u.GradeIds.Select(id => new XElement("GradeId", id)))
+                    )
+                )),
+                new XElement("Years", YearsData.Select(y =>
+                    new XElement("Year",
+                        new XAttribute("Id", y.Id),
+                        new XElement("ClassRooms", y.ClassRoomIds.Select(id => new XElement("ClassRoomId", id))),
+                        new XElement("Subjects", y.SubjectIds.Select(id => new XElement("SubjectId", id)))
+                    )
+                )),
+                new XElement("Subjects", SubjectsData.Select(s =>
+                    new XElement("Subject",
+                        new XAttribute("Id", s.Id),
+                        new XAttribute("Name", s.Name),
+                        new XAttribute("Abreviation", s.Abreviation),
+                        new XElement("Years", s.YearIds.Select(id => new XElement("YearId", id))),
+                        new XElement("Teachers", s.TeacherNIFs.Select(nif => new XElement("TeacherNIF", nif ?? string.Empty)))
+                    )
+                )),
+                new XElement("ClassSubjects", ClassSubjectsData
+                    .GroupBy(cs => cs.Id)
+                    .Select(g => g.First())
+                    .Select(cs =>
+                        new XElement("ClassSubject",
+                            new XAttribute("Id", cs.Id),
+                            new XAttribute("Name", cs.Name),
+                            new XAttribute("Abreviation", cs.Abreviation),
+                            new XAttribute("TeacherNIF", cs.TeacherNIF ?? string.Empty)
+                        )
+                )),
+                new XElement("ClassRooms", ClassRoomsData.Select(cr =>
+                    new XElement("ClassRoom",
+                        new XAttribute("Id", cr.Id),
+                        new XAttribute("Letter", cr.Letter),
+                        new XAttribute("YearId", cr.YearId),
+                        new XElement("Students", cr.StudentNIFs.Select(nif => new XElement("StudentNIF", nif ?? string.Empty))),
+                        new XElement("ClassSubjects", cr.ClassSubjectIds.Distinct().Select(id => new XElement("ClassSubjectId", id)))
+                    )
+                )),
+                new XElement("Grades", GradesData.Select(g =>
+                    new XElement("Grade",
+                        new XAttribute("Id", g.Id),
+                        new XAttribute("StudentNIF", g.StudentNIF ?? string.Empty),
+                        new XAttribute("SubjectId", g.SubjectId),
+                        new XElement("P_Grade", g.P_Grade.Select(v => new XElement("Value", v))),
+                        new XElement("Comment", g.Comment.Select(c => new XElement("Text", c ?? string.Empty)))
+                    )
+                )),
+                new XElement("SchoolCards", SchoolCardsData.Select(sc =>
+                    new XElement("SchoolCard",
+                        new XAttribute("Id", sc.Id),
+                        new XAttribute("Saldo", sc.Saldo)
+                    )
+                )),
+                new XElement("Chats", ChatsData.Select(ch =>
+                    new XElement("Chat",
+                        new XAttribute("TeacherNIF", ch.TeacherNIF ?? string.Empty),
+                        new XAttribute("StudentNIF", ch.StudentNIF ?? string.Empty),
+                        new XAttribute("HasAdmin", ch.HasAdmin),
+                        new XElement("Messages", ch.Messages.Select(m =>
+                            new XElement("Message",
+                                new XAttribute("Sender", m.Sender),
+                                new XAttribute("Text", m.Text)
+                            )
+                        ))
+                    )
+                ))
+            );
 
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             xml.Save(path);
@@ -298,7 +303,7 @@ namespace EscolaVirtual2025.Classes.Data
                         xu.Attribute("Username").Value,
                         xu.Attribute("Password").Value,
                         xu.Attribute("Name").Value,
-                        int.Parse(xu.Attribute("NIF").Value),
+                        xu.Attribute("NIF").Value,
                         DataManager.Subjects.FirstOrDefault(s => s.Id == int.Parse(xu.Attribute("AssignedSubjectId").Value))
                     );
 
@@ -317,7 +322,7 @@ namespace EscolaVirtual2025.Classes.Data
                         xu.Attribute("Username").Value,
                         xu.Attribute("Password").Value,
                         xu.Attribute("Name").Value,
-                        int.Parse(xu.Attribute("NIF").Value),
+                        xu.Attribute("NIF").Value,
                         DataManager.ClassRooms.FirstOrDefault(cr => cr.Id == int.Parse(xu.Attribute("ClassRoomId").Value)),
                         DataManager.SchoolCards.FirstOrDefault(sc => sc.SchoolCardId == int.Parse(xu.Attribute("SchoolCardId").Value))
                     );
@@ -344,7 +349,6 @@ namespace EscolaVirtual2025.Classes.Data
                 DataManager.Users.Add(user);
             }
 
-            // Métodos para associar entidades entre si (Years ↔ ClassRooms/Subjects, Subjects ↔ Years/Teachers, Alunos ↔ Turmas)
             foreach (var cr in DataManager.ClassRooms)
             {
                 var studentIds = backup.Element("ClassRooms")
@@ -352,7 +356,7 @@ namespace EscolaVirtual2025.Classes.Data
                                        .First(x => int.Parse(x.Attribute("Id").Value) == cr.Id)
                                        .Element("Students")
                                        .Elements("StudentNIF")
-                                       .Select(x => int.Parse(x.Value))
+                                       .Select(x => x.Value)
                                        .ToList();
 
                 foreach (var nif in studentIds)
@@ -396,7 +400,7 @@ namespace EscolaVirtual2025.Classes.Data
                 s.Teachers.Clear();
                 foreach (var nif in xs.Element("Teachers").Elements("TeacherNIF"))
                 {
-                    var t = DataManager.Teachers.FirstOrDefault(tc => tc.NIF == int.Parse(nif.Value));
+                    var t = DataManager.Teachers.FirstOrDefault(tc => tc.NIF == nif.Value);
                     if (t != null) s.Teachers.Add(t);
                 }
             }
@@ -404,8 +408,8 @@ namespace EscolaVirtual2025.Classes.Data
             foreach (var xch in backup.Element("Chats").Elements("Chat"))
             {
                 Chat.Chat chat;
-                var tch = DataManager.Teachers.FirstOrDefault(t => t.NIF == int.Parse(xch.Attribute("TeacherNIF").Value));
-                var st = DataManager.Students.FirstOrDefault(s => s.NIF == int.Parse(xch.Attribute("StudentNIF").Value));
+                var tch = DataManager.Teachers.FirstOrDefault(t => t.NIF == xch.Attribute("TeacherNIF").Value);
+                var st = DataManager.Students.FirstOrDefault(su => su.NIF == xch.Attribute("StudentNIF").Value);
                 bool hasAdmin = bool.Parse(xch.Attribute("HasAdmin").Value);
 
                 if (hasAdmin)

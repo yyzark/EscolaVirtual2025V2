@@ -125,17 +125,16 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                 }
                 else
                 {
-                    // Verifica se o NIF tem exatamente 9 dígitos numéricos
-                    string nif = txtNIF.Text;
+                   // Verifica duplicações de NIF em Teachers e Students
+                    string nif = txtNIF.Text.Trim();
 
-                    // Verifica duplicações de NIF em Teachers e Students
                     bool nifExists = DataManager.Users.Any(u =>
                     {
                         if (u.UserType == UserType.Teacher && u is Teacher teacher)
-                            return teacher.NIF == int.Parse(nif);
+                            return teacher.NIF.Trim() == nif;
 
                         if (u.UserType == UserType.Student && u is Student student)
-                            return student.NIF == int.Parse(nif);
+                            return student.NIF.Trim() == nif;
 
                         return false;
                     });
@@ -150,9 +149,10 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
                         return;
                     }
 
+
                     // Cria o professor com os dados inseridos
                     newTeacher.Name = txtName.Text.Trim();
-                    newTeacher.NIF = int.Parse(nif);
+                    newTeacher.NIF = nif;
                     newTeacher.Username = txtLogin.Text;
                     newTeacher.Password = txtPassword.Text.Trim();
                     // A disciplina foi definida no combo box

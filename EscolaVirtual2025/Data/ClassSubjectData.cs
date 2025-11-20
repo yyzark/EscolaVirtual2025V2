@@ -5,6 +5,6 @@
         public int Id;
         public string Name;
         public string Abreviation;
-        public int TeacherNIF;
+        public string TeacherNIF;
     }
 }

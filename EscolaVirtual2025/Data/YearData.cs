@@ -1,4 +1,5 @@
-﻿namespace EscolaVirtual2025.Classes.Data
+﻿using System.Collections.Generic;
+namespace EscolaVirtual2025.Classes.Data
 {
     public class YearData
     {

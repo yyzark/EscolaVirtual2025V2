@@ -38,7 +38,9 @@ namespace EscolaVirtual2025.Classes
             get { return m_userType; }
         }
 
-        public User() { }
+
+
+        public User(UserType userType) { m_userType = userType; }
 
         public User(
         string username,
@@ -50,6 +52,10 @@ namespace EscolaVirtual2025.Classes
             m_password = password;
             m_name = name;
             m_userType = userType;
+        }
+
+        public User()
+        {
         }
 
         private List<Notification> m_notifications = new List<Notification>();

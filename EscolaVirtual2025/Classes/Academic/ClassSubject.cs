@@ -8,7 +8,7 @@ namespace EscolaVirtual2025.Classes.Academic
     [DataContract]
     public class ClassSubject : Subject
     {
-        private int? m_teacherNif;
+        private string m_teacherNif;
 
         public Teacher Teacher
         {
@@ -19,12 +19,12 @@ namespace EscolaVirtual2025.Classes.Academic
         {
         }
 
-        public ClassSubject(int? teacherNif, Subject subject) : base(subject.Name, subject.Abreviation, subject.Id)
+        public ClassSubject(string teacherNif, Subject subject) : base(subject.Name, subject.Abreviation, subject.Id)
         {
             this.m_teacherNif = teacherNif;
         }
 
-        public ClassSubject(string name, string abreviation, int id, int teacherNif) : base(name, abreviation, id)
+        public ClassSubject(string name, string abreviation, int id, string teacherNif) : base(name, abreviation, id)
         {
             m_teacherNif = teacherNif;
         }

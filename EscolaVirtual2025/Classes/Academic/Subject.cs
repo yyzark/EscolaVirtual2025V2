@@ -30,7 +30,7 @@ namespace EscolaVirtual2025.Classes.Academic
 
         public EntityCollection<Year, int> Years = new EntityCollection<Year, int>(DataManager.Years, yr => yr.Id);
 
-        public EntityCollection<Teacher, int> Teachers = new EntityCollection<Teacher, int>(DataManager.Teachers, tc => tc.NIF);
+        public EntityCollection<Teacher, string> Teachers = new EntityCollection<Teacher, string>(DataManager.Teachers, tc => tc.NIF);
 
         public Subject() { }
 

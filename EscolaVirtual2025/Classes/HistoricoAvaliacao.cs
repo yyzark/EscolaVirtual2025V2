@@ -6,10 +6,10 @@ namespace EscolaVirtual2025.Classes
     {
 
 
-        public int AlunoId { get; set; }
+        public string AlunoId { get; set; }
 
 
-        public int ProfessorId { get; set; }
+        public string ProfessorId { get; set; }
 
 
         public string Disciplina { get; set; } = string.Empty;

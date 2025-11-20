@@ -1,9 +1,10 @@
-﻿namespace EscolaVirtual2025.Classes.Data
+﻿using System.Collections.Generic;
+namespace EscolaVirtual2025.Classes.Data
 {
     public class ChatData
     {
-        public int TeacherNIF;
-        public int StudentNIF;
+        public string TeacherNIF;
+        public string StudentNIF;
         public bool HasAdmin;
         public List<(string Sender, string Text)> Messages = new List<(string Sender, string Text)>();
     }

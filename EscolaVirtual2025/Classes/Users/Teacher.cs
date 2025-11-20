@@ -19,9 +19,9 @@ namespace EscolaVirtual2025.Classes.Users
 
         public EntityCollection<ClassRoom, int> AssignedClassRooms = new EntityCollection<ClassRoom, int>(DataManager.ClassRooms, cl => cl.Id);
 
-        public Teacher() : base() { }
+        public Teacher() : base(UserType.Teacher) { }
 
-        public Teacher(string username, string password, string name, int nif, Subject subject)
+        public Teacher(string username, string password, string name, string nif, Subject subject)
             : base(username, password, name, UserType.Teacher, nif)
         {
             AssignedSubject = subject;

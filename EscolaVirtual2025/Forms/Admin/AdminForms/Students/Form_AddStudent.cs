@@ -107,7 +107,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Students
                         txtLogin.Text,
                         txtPassword.Text,
                         txtName.Text,
-                        int.Parse(txtNIF.Text),
+                        txtNIF.Text,
                         selectedClassRoom,
                         new SchoolCard(DataManager.SchoolCards.Count + 1)
                         );

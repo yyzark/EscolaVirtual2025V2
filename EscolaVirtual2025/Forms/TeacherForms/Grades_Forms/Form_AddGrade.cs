@@ -5,6 +5,7 @@ using EscolaVirtual2025.Data;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
+using System.Linq;
 
 namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms
 {
@@ -12,11 +13,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms
     {
         private Grade m_grade;
         private int m_per;
-        public Grade P_Grade
-        {
-            get { return m_grade; }
-            set { m_grade = value; }
-        }
+
         public Form_AddGrade(Grade grade, int per)
         {
             InitializeComponent();
@@ -26,54 +23,62 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers.Grades.Items_Forms
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(
-            Primary.Red300,    // cor principal clara
-            Primary.Red700,    // cor principal escura
-            Primary.Red100,    // cor de fundo ou destaque
-            Accent.Orange200,  // acento laranja suave
-            TextShade.WHITE    // cor do texto;
+                Primary.Red300,
+                Primary.Red700,
+                Primary.Red100,
+                Accent.Orange200,
+                TextShade.WHITE
             );
             #endregion
 
             m_grade = grade;
             m_per = per;
+
+            // Garante que os arrays tenham tamanho mínimo de 3
+            if (m_grade.P_Grade.Length < 3)
+            {
+                Array.Resize(ref m_grade.P_Grade, 3);
+                Array.Resize(ref m_grade.Comment, 3);
+            }
+
+            // Define o valor inicial do NumericUpDown
+            if (m_grade.P_Grade[m_per] >= nudGrade.Minimum && m_grade.P_Grade[m_per] <= nudGrade.Maximum)
+                nudGrade.Value = m_grade.P_Grade[m_per];
+            else
+                nudGrade.Value = nudGrade.Minimum;
+
+            txtComment.Text = m_grade.Comment[m_per] ?? "";
+            btnAdd.Enabled = !string.IsNullOrEmpty(txtComment.Text);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
             int notaAntiga = m_grade.P_Grade[m_per];
             int notaNova = Convert.ToInt32(nudGrade.Value);
 
-
             m_grade.P_Grade[m_per] = notaNova;
             m_grade.Comment[m_per] = txtComment.Text;
-            m_grade.GradeCount += 1;
 
-            //  REGISTO DO HISTÓRICO
-            HistoricoAvaliacao novaEntrada = new HistoricoAvaliacao
+            m_grade.GradeCount = m_grade.P_Grade.Count(n => n > 0);
+
+            if (notaNova != notaAntiga)
             {
-                AlunoId = m_grade.Student.NIF,
-                Disciplina = (DataManager.currentUser as Teacher).AssignedSubject.Name,
-                NotaAntiga = notaAntiga,
-                NotaNova = notaNova,
-            };
+                HistoricoAvaliacao novaEntrada = new HistoricoAvaliacao
+                {
+                    AlunoId = m_grade.Student.NIF,
+                    Disciplina = (DataManager.currentUser as Teacher).AssignedSubject.Name,
+                    NotaAntiga = notaAntiga,
+                    NotaNova = notaNova,
+                };
+                HistoricoService.AdicionarEGravarAlteracao(novaEntrada);
+            }
 
-            HistoricoService.AdicionarEGravarAlteracao(novaEntrada);
-
-            //DataManager.Save();
             this.Close();
         }
 
         private void txtComment_TextChanged(object sender, EventArgs e)
         {
-            if (txtComment.Text.Length > 0)
-            {
-                btnAdd.Enabled = true;
-            }
-            else
-            {
-                btnAdd.Enabled = false;
-            }
+            btnAdd.Enabled = txtComment.Text.Length > 0;
         }
     }
 }

@@ -8,23 +8,13 @@ namespace EscolaVirtual2025.Classes.Academic
     {
         public int Id { get; set; }
 
-        private int[] m_grade = new int[3] { -1, -1, -1 };
-        private string[] m_comment = new string[3];
+        public int[] P_Grade = new int[3] { -1, -1, -1 };
+        public string[] Comment = new string[3];
 
-        private int m_studentId;
+        private string m_studentId;
         private int m_subjectId;
 
-        public int[] P_Grade
-        {
-            get => m_grade;
-            set => m_grade = value;
-        }
 
-        public string[] Comment
-        {
-            get => m_comment;
-            set => m_comment = value;
-        }
 
         public int GradeCount { get; set; }
 

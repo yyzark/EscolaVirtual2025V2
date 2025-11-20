@@ -7,21 +7,21 @@ namespace EscolaVirtual2025.Classes.Chat
 {
     public class Chat
     {
-        private int? m_teacherNif;
-        private int? m_studentNif;
+        private string m_teacherNif;
+        private string m_studentNif;
         private bool m_hasAdmin;
 
         public List<Message> Messages { get; set; } = new List<Message>();
 
         public Teacher Teacher
         {
-            get => m_teacherNif.HasValue ? DataManager.Teachers.FirstOrDefault(t => t.NIF == m_teacherNif.Value) : null;
+            get => m_teacherNif != null ? DataManager.Teachers.FirstOrDefault(t => t.NIF == m_teacherNif) : null;
             set => m_teacherNif = value?.NIF;
         }
 
         public Student Student
         {
-            get => m_studentNif.HasValue ? DataManager.Students.FirstOrDefault(s => s.NIF == m_studentNif.Value) : null;
+            get => m_studentNif != null? DataManager.Students.FirstOrDefault(s => s.NIF == m_studentNif) : null;
             set => m_studentNif = value?.NIF;
         }
 

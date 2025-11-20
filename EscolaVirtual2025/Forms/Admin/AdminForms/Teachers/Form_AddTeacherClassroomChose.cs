@@ -49,7 +49,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             );
             #endregion
 
-            p_Teacher = teacher;
+            p_Teacher = teacher; 
             TeacherClassroomsChosen = false;
             m_edit = edit;
             m_subject = teacher.AssignedSubject;
@@ -63,31 +63,34 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
         public void UpdateListView()
         {
             lsvCheckClassRooms.Items.Clear();
+
             foreach (var classroom in DataManager.ClassRooms)
             {
-                // Check if this classroom has the selected subject
-                bool hasSubject = classroom.ClassSubjects.Items.Any(s => s.Id == p_Subject.Id && s.Teacher == null || s.Teacher != m_teacher);
-                if (!hasSubject)
-                    continue;
+                // Verifica se esta turma contém a disciplina escolhida
+                var classSubject = classroom
+                    .ClassSubjects
+                    .Items
+                    .FirstOrDefault(s => s.Id == p_Subject.Id);
 
-                // Create ListViewItem
-                var item = new ListViewItem(classroom.Year.Id + "º" + classroom.Letter);
+                if (classSubject == null)
+                    continue; // Turma não tem esta disciplina → não mostrar
 
+                // Criar item da turma
+                var item = new ListViewItem($"{classroom.Year.Id}º{classroom.Letter}");
+                item.Tag = classroom;
+                // Marcar se o professor já leciona nesta turma
                 if (p_Teacher.AssignedClassRooms != null)
                 {
-                    // Optionally mark if the teacher already teaches in this classroom
-                    bool alreadyAssigned = p_Teacher.AssignedClassRooms.Items.Any(c => c.Id == classroom.Id);
+                    bool alreadyAssigned = p_Teacher.AssignedClassRooms.Items
+                        .Any(c => c.Id == classroom.Id);
+
                     if (alreadyAssigned)
-                    {
                         item.Checked = true;
-                    }
                 }
 
-                // Add item to list view
                 lsvCheckClassRooms.Items.Add(item);
             }
 
-            // Optional: auto-resize columns for better display
             lsvCheckClassRooms.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
@@ -98,50 +101,40 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // Limpa qualquer ligação anterior desse professor à disciplina em outras turmas (opcional)
+            // Limpa atribuições antigas deste professor a esta disciplina
             foreach (var classroom in DataManager.ClassRooms)
             {
                 foreach (var classSubject in classroom.ClassSubjects.Items)
                 {
-                    // Se a disciplina for a mesma, e o professor for este, limpa
                     if (classSubject.Id == p_Subject.Id && classSubject.Teacher == p_Teacher)
-                    {
                         classSubject.Teacher = null;
-                    }
                 }
             }
 
-            // Agora atribui o professor às turmas selecionadas
+            // Agora processa a seleção
             foreach (ListViewItem item in lsvCheckClassRooms.Items)
             {
-                // Extrai o ID da turma a partir do texto (supondo que o texto contém o ID)
-                string itemText = item.Text;
-                var classroom = DataManager.ClassRooms.FirstOrDefault(c => itemText.Contains(c.Id.ToString()));
-
+                var classroom = item.Tag as ClassRoom;
                 if (classroom == null)
                     continue;
 
-                // Se a turma está marcada (checked), liga o professor à disciplina
+                var classSubject = classroom.ClassSubjects.Items
+                    .FirstOrDefault(s => s.Id == p_Subject.Id);
+
+                if (classSubject == null)
+                    continue;
+
                 if (item.Checked)
                 {
-                    var classSubject = classroom.ClassSubjects.Items.FirstOrDefault(s => s.Id == p_Subject.Id);
-                    if (classSubject != null)
-                    {
-                        classSubject.Teacher = p_Teacher;
+                    classSubject.Teacher = p_Teacher;
 
-                        // Garante que o professor saiba onde ensina (caso uses esta lista em algum lugar)
-                        if (!p_Teacher.AssignedClassRooms.Items.Contains(classroom))
-                            p_Teacher.AssignedClassRooms.Add(classroom);
-                    }
+                    if (!p_Teacher.AssignedClassRooms.Items.Contains(classroom))
+                        p_Teacher.AssignedClassRooms.Add(classroom);
                 }
                 else
                 {
-                    // Se desmarcada, remove a ligação (se existir)
-                    var classSubject = classroom.ClassSubjects.Items.FirstOrDefault(s => s.Id == p_Subject.Id);
-                    if (classSubject != null && classSubject.Teacher == p_Teacher)
-                    {
+                    if (classSubject.Teacher == p_Teacher)
                         classSubject.Teacher = null;
-                    }
 
                     p_Teacher.AssignedClassRooms.RemoveAll(c => c.Id == classroom.Id);
                 }
@@ -150,6 +143,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Teachers
             TeacherClassroomsChosen = true;
             this.Close();
         }
+
         private void lsvCheckClassRooms_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             if (m_edit)
