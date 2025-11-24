@@ -123,6 +123,7 @@
     <Compile Include="Classes\Chat\Notification.cs" />
     <Compile Include="Classes\Chat\NotificationMessage.cs" />
     <Compile Include="Classes\Chat\Request.cs" />
+    <Compile Include="Classes\ExportStudentReport.cs" />
     <Compile Include="Data\Backup.cs" />
     <Compile Include="Classes\HistoricoAvaliacao.cs" />
     <Compile Include="Classes\HistoricoService.cs" />
