@@ -40,21 +40,21 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCreateGrade = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbbClassRoom = new MaterialSkin.Controls.MaterialComboBox();
             this.cbbYear = new MaterialSkin.Controls.MaterialComboBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnReport = new MaterialSkin.Controls.MaterialButton();
+            this.btnCreateGrade = new MaterialSkin.Controls.MaterialButton();
             this.panelTreeView = new System.Windows.Forms.Panel();
             this.lsbStudents = new System.Windows.Forms.ListBox();
-            this.btnReport = new MaterialSkin.Controls.MaterialButton();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.menuAccount.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panelTreeView.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panelTreeView.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnUser
@@ -177,29 +177,6 @@
             this.tableLayoutPanelButtons.Size = new System.Drawing.Size(409, 249);
             this.tableLayoutPanelButtons.TabIndex = 3;
             // 
-            // btnCreateGrade
-            // 
-            this.btnCreateGrade.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateGrade.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCreateGrade.Depth = 0;
-            this.btnCreateGrade.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCreateGrade.Enabled = false;
-            this.btnCreateGrade.Font = new System.Drawing.Font("Calibri", 36F);
-            this.btnCreateGrade.HighEmphasis = true;
-            this.btnCreateGrade.Icon = null;
-            this.btnCreateGrade.Location = new System.Drawing.Point(5, 7);
-            this.btnCreateGrade.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.btnCreateGrade.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCreateGrade.Name = "btnCreateGrade";
-            this.btnCreateGrade.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCreateGrade.Size = new System.Drawing.Size(194, 109);
-            this.btnCreateGrade.TabIndex = 0;
-            this.btnCreateGrade.Text = "Notas";
-            this.btnCreateGrade.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnCreateGrade.UseAccentColor = false;
-            this.btnCreateGrade.UseVisualStyleBackColor = true;
-            this.btnCreateGrade.Click += new System.EventHandler(this.btnCreateGrade_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -268,6 +245,68 @@
             this.cbbYear.TabIndex = 4;
             this.cbbYear.SelectedIndexChanged += new System.EventHandler(this.cbbYear_SelectedIndexChanged);
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.btnReport, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnCreateGrade, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 126);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(409, 123);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // btnReport
+            // 
+            this.btnReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReport.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnReport.Depth = 0;
+            this.btnReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReport.Enabled = false;
+            this.btnReport.Font = new System.Drawing.Font("Calibri", 36F);
+            this.btnReport.HighEmphasis = true;
+            this.btnReport.Icon = null;
+            this.btnReport.Location = new System.Drawing.Point(209, 7);
+            this.btnReport.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnReport.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnReport.Name = "btnReport";
+            this.btnReport.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnReport.Size = new System.Drawing.Size(195, 109);
+            this.btnReport.TabIndex = 5;
+            this.btnReport.Text = "Relatório de turma";
+            this.btnReport.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnReport.UseAccentColor = false;
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // btnCreateGrade
+            // 
+            this.btnCreateGrade.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCreateGrade.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCreateGrade.Depth = 0;
+            this.btnCreateGrade.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCreateGrade.Enabled = false;
+            this.btnCreateGrade.Font = new System.Drawing.Font("Calibri", 36F);
+            this.btnCreateGrade.HighEmphasis = true;
+            this.btnCreateGrade.Icon = null;
+            this.btnCreateGrade.Location = new System.Drawing.Point(5, 7);
+            this.btnCreateGrade.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnCreateGrade.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCreateGrade.Name = "btnCreateGrade";
+            this.btnCreateGrade.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCreateGrade.Size = new System.Drawing.Size(194, 109);
+            this.btnCreateGrade.TabIndex = 0;
+            this.btnCreateGrade.Text = "Notas";
+            this.btnCreateGrade.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCreateGrade.UseAccentColor = false;
+            this.btnCreateGrade.UseVisualStyleBackColor = true;
+            this.btnCreateGrade.Click += new System.EventHandler(this.btnCreateGrade_Click);
+            // 
             // panelTreeView
             // 
             this.panelTreeView.Controls.Add(this.lsbStudents);
@@ -290,45 +329,6 @@
             this.lsbStudents.Size = new System.Drawing.Size(435, 261);
             this.lsbStudents.TabIndex = 0;
             this.lsbStudents.SelectedIndexChanged += new System.EventHandler(this.lsbStudents_SelectedIndexChanged);
-            // 
-            // btnReport
-            // 
-            this.btnReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnReport.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnReport.Depth = 0;
-            this.btnReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReport.Enabled = false;
-            this.btnReport.Font = new System.Drawing.Font("Calibri", 36F);
-            this.btnReport.HighEmphasis = true;
-            this.btnReport.Icon = null;
-            this.btnReport.Location = new System.Drawing.Point(209, 7);
-            this.btnReport.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.btnReport.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnReport.Name = "btnReport";
-            this.btnReport.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnReport.Size = new System.Drawing.Size(195, 109);
-            this.btnReport.TabIndex = 5;
-            this.btnReport.Text = "Relatório";
-            this.btnReport.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnReport.UseAccentColor = false;
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.btnReport, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnCreateGrade, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 126);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(409, 123);
-            this.tableLayoutPanel2.TabIndex = 2;
             // 
             // Form_Teacher
             // 
@@ -353,9 +353,9 @@
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.tableLayoutPanelButtons.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panelTreeView.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.panelTreeView.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

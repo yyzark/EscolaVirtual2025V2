@@ -154,10 +154,12 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             if (lsbStudents.SelectedIndex != -1)
             {
                 btnCreateGrade.Enabled = true;
+                btnReport.Text = "Relatório de Aluno";
             }
             else
             {
                 btnCreateGrade.Enabled = false;
+                btnReport.Text = "Relatório de Turma";
             }
         }
 
@@ -191,9 +193,16 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            Form_Relatorio frm = new Form_Relatorio(DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex], tchr);
-            frm.ShowDialog();
-            this.Hide();
+            if (btnReport.Text == "Relatório de Aluno")
+            {
+
+            }
+            else if (btnReport.Text == "Relatório de Turma")
+            {
+                Form_Relatorio frm = new Form_Relatorio(DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex], tchr);
+                frm.ShowDialog();
+                this.Hide();
+            }
 
         }
     }
