@@ -106,9 +106,13 @@ namespace EscolaVirtual2025.Forms.StudentsForms
 
         private void UpdateSchoolCard()
         {
-            lblcardNumber.Text = $"Nº: {stdnt.SchoolCard.SchoolCardId}";
-            lblSaldo.Text = $"Saldo: {stdnt.SchoolCard.Saldo / 100.00}€";
+            lblcardNumber.Text = "Nº: " + (stdnt?.SchoolCard?.SchoolCardId.ToString() ?? "N/D");
+
+            double saldo = (stdnt?.SchoolCard?.Saldo ?? 0) / 100.0;
+
+            lblSaldo.Text = $"Saldo: {saldo}€";
         }
+
 
         private void MostrarNotasAlunoPorPeriodo(int periodoIndex)
         {

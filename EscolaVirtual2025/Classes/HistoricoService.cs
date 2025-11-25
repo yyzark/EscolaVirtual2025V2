@@ -1,57 +1,32 @@
-﻿using System;
+﻿using EscolaVirtual2025.Classes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace EscolaVirtual2025.Classes
+public static class HistoricoService
 {
-    public static class HistoricoService
+    private static string Caminho = "historico.json"; 
+
+    public static void AdicionarEGravarAlteracao(HistoricoAvaliacao entrada)
     {
-        private const string NOME_FICHEIRO = "HistoricoNotas.json";
+        List<HistoricoAvaliacao> lista = new List<HistoricoAvaliacao>();
 
-
-        static private List<HistoricoAvaliacao> _historico = new List<HistoricoAvaliacao>();
-
-
-
-        private static readonly JsonSerializerOptions _opcoes = new JsonSerializerOptions { WriteIndented = true };
-
-        private static void CarregarHistorico()
+        // caso exista, vsai carregar
+        if (File.Exists(Caminho))
         {
-            if (File.Exists(NOME_FICHEIRO))
+            string jsonExistente = File.ReadAllText(Caminho);
+            if (!string.IsNullOrWhiteSpace(jsonExistente))
             {
-                try
-                {
-                    string jsonString = File.ReadAllText(NOME_FICHEIRO);
-
-                    var listaCarregada = JsonSerializer.Deserialize<List<HistoricoAvaliacao>>(jsonString);
-                    _historico = listaCarregada ?? new List<HistoricoAvaliacao>();
-                }
-                catch (Exception ex) when (ex is JsonException || ex is IOException)
-                {
-                    Console.WriteLine($"Erro ao carregar histórico: {ex.Message}");
-                }
+                lista = JsonSerializer.Deserialize<List<HistoricoAvaliacao>>(jsonExistente);
             }
         }
 
-        public static void AdicionarEGravarAlteracao(HistoricoAvaliacao novaEntrada)
-        {
+        
+        lista.Add(entrada);
 
-            _historico.Add(novaEntrada);
-
-
-            string jsonString = JsonSerializer.Serialize(_historico, _opcoes);
-
-
-            try
-            {
-                File.WriteAllText(NOME_FICHEIRO, jsonString);
-
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"Erro ao guardar histórico: {ex.Message}");
-            }
-        }
+        
+        string json = JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(Caminho, json); 
     }
 }
