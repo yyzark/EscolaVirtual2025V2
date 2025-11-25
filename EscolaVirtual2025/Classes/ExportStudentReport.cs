@@ -25,7 +25,7 @@ namespace EscolaVirtual2025.Classes
         {
 
 
-            if (tipo == "Json")
+            if (tipo == "json")
             {
                 var jsonObj = new JsonObject
                 {
@@ -107,7 +107,7 @@ namespace EscolaVirtual2025.Classes
                 File.WriteAllText(caminho, jsonObj.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
 
             }
-            if (tipo == "Xml")
+            if (tipo == "xml")
             {
                 /*var periodo1Notas = new List<int>();
                 var periodo2Notas = new List<int>();

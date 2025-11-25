@@ -195,7 +195,29 @@ namespace EscolaVirtual2025.Forms.TeacherForms
         {
             if (btnReport.Text == "Relatório de Aluno")
             {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Title = "Salvar arquivo";
+                saveFileDialog.Filter = "Arquivos XML (*.xml)|*.xml|Arquivos JSON (*.json)|*.json|Todos os arquivos (*.*)|*.*";
+                saveFileDialog.AddExtension = true;
 
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    string extension = System.IO.Path.GetExtension(filePath).ToLower();
+                    Student selectedStudent = DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex].Students[lsbStudents.SelectedIndex];
+                    if (extension == ".xml")
+                    {
+                        ExportStudentReportClass.ExportStudentReport(selectedStudent, "xml", filePath);
+                    }
+                    else if (extension == ".json")
+                    {
+                        ExportStudentReportClass.ExportStudentReport(selectedStudent, "json", filePath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Extensão de arquivo não suportada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             else if (btnReport.Text == "Relatório de Turma")
             {
