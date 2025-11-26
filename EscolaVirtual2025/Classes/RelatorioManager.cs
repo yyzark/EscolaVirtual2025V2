@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+
 namespace EscolaVirtual2025.Classes
 {
     public static class RelatorioManager

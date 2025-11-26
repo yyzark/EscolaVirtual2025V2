@@ -154,10 +154,12 @@ namespace EscolaVirtual2025.Forms.TeacherForms
             if (lsbStudents.SelectedIndex != -1)
             {
                 btnCreateGrade.Enabled = true;
+                btnReport.Text = "Relatório de Aluno";
             }
             else
             {
                 btnCreateGrade.Enabled = false;
+                btnReport.Text = "Relatório de Turma";
             }
         }
 
@@ -191,9 +193,38 @@ namespace EscolaVirtual2025.Forms.TeacherForms
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            Form_Relatorio frm = new Form_Relatorio(DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex], tchr);
-            frm.ShowDialog();
-            this.Hide();
+            if (btnReport.Text == "Relatório de Aluno")
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Title = "Salvar arquivo";
+                saveFileDialog.Filter = "Arquivos XML (*.xml)|*.xml|Arquivos JSON (*.json)|*.json|Todos os arquivos (*.*)|*.*";
+                saveFileDialog.AddExtension = true;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    string extension = System.IO.Path.GetExtension(filePath).ToLower();
+                    Student selectedStudent = DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex].Students[lsbStudents.SelectedIndex];
+                    if (extension == ".xml")
+                    {
+                        ExportStudentReportClass.ExportStudentReport(selectedStudent, "xml", filePath);
+                    }
+                    else if (extension == ".json")
+                    {
+                        ExportStudentReportClass.ExportStudentReport(selectedStudent, "json", filePath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Extensão de arquivo não suportada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else if (btnReport.Text == "Relatório de Turma")
+            {
+                Form_Relatorio frm = new Form_Relatorio(DataManager.Years[cbbYear.SelectedIndex].ClassRooms.Items[cbbClassRoom.SelectedIndex], tchr);
+                frm.ShowDialog();
+                this.Hide();
+            }
 
         }
     }
