@@ -35,12 +35,14 @@
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdd = new MaterialSkin.Controls.MaterialButton();
             this.btnRemove = new MaterialSkin.Controls.MaterialButton();
+            this.btnImport = new MaterialSkin.Controls.MaterialButton();
             this.panel1.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnImport);
             this.panel1.Controls.Add(this.lsvCheckClassRoom);
             this.panel1.Controls.Add(this.tableLayoutPanelButtons);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -55,14 +57,13 @@
             // 
             this.lsvCheckClassRoom.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmClassRoom});
-            this.lsvCheckClassRoom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvCheckClassRoom.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCheckClassRoom.FullRowSelect = true;
             this.lsvCheckClassRoom.HideSelection = false;
-            this.lsvCheckClassRoom.Location = new System.Drawing.Point(20, 20);
+            this.lsvCheckClassRoom.Location = new System.Drawing.Point(20, 63);
             this.lsvCheckClassRoom.Name = "lsvCheckClassRoom";
             this.lsvCheckClassRoom.Scrollable = false;
-            this.lsvCheckClassRoom.Size = new System.Drawing.Size(356, 248);
+            this.lsvCheckClassRoom.Size = new System.Drawing.Size(356, 202);
             this.lsvCheckClassRoom.TabIndex = 3;
             this.lsvCheckClassRoom.UseCompatibleStateImageBehavior = false;
             this.lsvCheckClassRoom.View = System.Windows.Forms.View.Details;
@@ -132,6 +133,27 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
+            // btnImport
+            // 
+            this.btnImport.AutoSize = false;
+            this.btnImport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImport.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnImport.Depth = 0;
+            this.btnImport.HighEmphasis = true;
+            this.btnImport.Icon = null;
+            this.btnImport.Location = new System.Drawing.Point(20, 26);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnImport.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnImport.Name = "btnImport";
+            this.btnImport.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnImport.Size = new System.Drawing.Size(356, 28);
+            this.btnImport.TabIndex = 4;
+            this.btnImport.Text = "Importar";
+            this.btnImport.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnImport.UseAccentColor = false;
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // Form_CheckClassRooms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,5 +185,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButtons;
         private MaterialSkin.Controls.MaterialButton btnAdd;
         private MaterialSkin.Controls.MaterialButton btnRemove;
+        private MaterialSkin.Controls.MaterialButton btnImport;
     }
 }

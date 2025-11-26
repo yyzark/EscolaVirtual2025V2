@@ -1,4 +1,5 @@
 ﻿using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data.Import;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
@@ -132,6 +133,41 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
             {
                 btnRemove.Enabled = false;
             }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "JSON Files (*.json)|*.json|XML Files (*.xml)|*.xml";
+                dialog.Title = "Escolher ficheiro de turmas";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var importManager = new ImportManager();
+                    ImportResult result;
+
+                    if (dialog.FileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                        result = importManager.ImportarTurmasJSON(dialog.FileName);
+                    else
+                        result = importManager.ImportarTurmasXML(dialog.FileName);
+
+                    // Mostrar resultado
+                    MessageBox.Show(
+                        $"Turmas importadas: {result.ImportedCount}\nErros: {result.Errors.Count}",
+                        "Resultado da Importação",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    if (result.Errors.Count > 0)
+                    {
+                        var erros = string.Join("\n", result.Errors);
+                        MessageBox.Show(erros, "Erros Detalhados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+
         }
     }
 }

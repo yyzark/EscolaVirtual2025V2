@@ -40,7 +40,8 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.Subjects
             {
                 cbbAno.Items.Add(yr.Id.ToString());
             }
-            cbbAno.SelectedIndex = 0;
+            if (orderedYears.Count > 0)
+                cbbAno.SelectedIndex = 0;
             UpdateListView();
         }
 

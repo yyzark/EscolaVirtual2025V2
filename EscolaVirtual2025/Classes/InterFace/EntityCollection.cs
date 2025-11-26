@@ -17,7 +17,10 @@ namespace EscolaVirtual2025.Classes.InterFace
         }
 
         public List<T> Items => m_dataSource.Where(x => m_ids.Contains(getIdFunc(x))).ToList();
-
+        public int Count
+        {
+            get => Items.Count;
+        }
         public void Add(T item)
         {
             var id = getIdFunc(item);

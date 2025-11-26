@@ -1,5 +1,6 @@
 ﻿using EscolaVirtual2025.Classes.Users;
 using EscolaVirtual2025.Data;
+using EscolaVirtual2025.Data.Import;
 using EscolaVirtual2025.Forms.Admin.AdminForms.Students;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -101,6 +102,40 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms
             else
             {
                 btnRemove.Enabled = true;
+            }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "JSON Files (*.json)|*.json|XML Files (*.xml)|*.xml";
+                dialog.Title = "Escolher ficheiro de alunos";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var importManager = new ImportManager();
+                    ImportResult result;
+
+                    if (dialog.FileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                        result = importManager.ImportarAlunosJSON(dialog.FileName);
+                    else
+                        result = importManager.ImportarAlunosXML(dialog.FileName);
+
+                    // Mostrar resultado
+                    MessageBox.Show(
+                        $"Alunos importados: {result.ImportedCount}\nErros: {result.Errors.Count}",
+                        "Resultado da Importação",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    if (result.Errors.Count > 0)
+                    {
+                        var erros = string.Join("\n", result.Errors);
+                        MessageBox.Show(erros, "Erros Detalhados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             }
         }
     }

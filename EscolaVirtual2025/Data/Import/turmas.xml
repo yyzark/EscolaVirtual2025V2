@@ -1,0 +1,133 @@
+﻿<ClassRoomsRootDto>
+	<Turmas>
+		<ClassRoomDto>
+			<id>1</id>
+			<letter>A</letter>
+			<yearId>10</yearId>
+			<alunos>
+				<StudentDto>
+					<username>joaosilva</username>
+					<password>senha123</password>
+					<name>João Silva</name>
+					<nif>123456789</nif>
+					<schoolCardId>101</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>mariacruz</username>
+					<password>pass456</password>
+					<name>Maria Cruz</name>
+					<nif>987654321</nif>
+					<schoolCardId>102</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>pedrosantos</username>
+					<password>abc1234</password>
+					<name>Pedro Santos</name>
+					<nif>111222333</nif>
+					<schoolCardId>103</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>anaoliveira</username>
+					<password>pass7890</password>
+					<name>Ana Oliveira</name>
+					<nif>444555666</nif>
+					<schoolCardId>104</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>carloscosta</username>
+					<password>senha456</password>
+					<name>Carlos Costa</name>
+					<nif>777888999</nif>
+					<schoolCardId>105</schoolCardId>
+				</StudentDto>
+			</alunos>
+		</ClassRoomDto>
+
+		<ClassRoomDto>
+			<id>2</id>
+			<letter>B</letter>
+			<yearId>11</yearId>
+			<alunos>
+				<StudentDto>
+					<username>luismartins</username>
+					<password>abc12345</password>
+					<name>Luís Martins</name>
+					<nif>112233445</nif>
+					<schoolCardId>106</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>sofiaribeiro</username>
+					<password>senha678</password>
+					<name>Sofia Ribeiro</name>
+					<nif>556677889</nif>
+					<schoolCardId>107</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>miguelalves</username>
+					<password>pass9012</password>
+					<name>Miguel Alves</name>
+					<nif>998877665</nif>
+					<schoolCardId>108</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>patriciasousa</username>
+					<password>senha234</password>
+					<name>Patrícia Sousa</name>
+					<nif>223344556</nif>
+					<schoolCardId>109</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>ricardolima</username>
+					<password>abc5678</password>
+					<name>Ricardo Lima</name>
+					<nif>667788990</nif>
+					<schoolCardId>110</schoolCardId>
+				</StudentDto>
+			</alunos>
+		</ClassRoomDto>
+
+		<ClassRoomDto>
+			<id>3</id>
+			<letter>C</letter>
+			<yearId>12</yearId>
+			<alunos>
+				<StudentDto>
+					<username>fatimasilva</username>
+					<password>pass3456</password>
+					<name>Fátima Silva</name>
+					<nif>101010101</nif>
+					<schoolCardId>111</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>joaquimrodrigues</username>
+					<password>senha890</password>
+					<name>Joaquim Rodrigues</name>
+					<nif>202020202</nif>
+					<schoolCardId>112</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>claracosta</username>
+					<password>abc6789</password>
+					<name>Clara Costa</name>
+					<nif>303030303</nif>
+					<schoolCardId>113</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>diogomendes</username>
+					<password>pass0123</password>
+					<name>Diogo Mendes</name>
+					<nif>404040404</nif>
+					<schoolCardId>114</schoolCardId>
+				</StudentDto>
+				<StudentDto>
+					<username>marialuisa</username>
+					<password>senha345</password>
+					<name>Maria Luísa</name>
+					<nif>505050505</nif>
+					<schoolCardId>115</schoolCardId>
+				</StudentDto>
+			</alunos>
+		</ClassRoomDto>
+
+	</Turmas>
+</ClassRoomsRootDto>

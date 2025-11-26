@@ -38,6 +38,7 @@
             this.clmName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmNif = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmClassRoom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnImport = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,7 @@
             this.tableLayoutPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelButtons.Controls.Add(this.btnImport, 0, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.btnAdd, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.btnRemove, 2, 0);
             this.tableLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -165,6 +167,27 @@
             this.clmClassRoom.Text = "Turma";
             this.clmClassRoom.Width = 122;
             // 
+            // btnImport
+            // 
+            this.btnImport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImport.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnImport.Depth = 0;
+            this.btnImport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnImport.HighEmphasis = true;
+            this.btnImport.Icon = null;
+            this.btnImport.Location = new System.Drawing.Point(4, 6);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnImport.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnImport.Name = "btnImport";
+            this.btnImport.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnImport.Size = new System.Drawing.Size(369, 28);
+            this.btnImport.TabIndex = 2;
+            this.btnImport.Text = "Importar";
+            this.btnImport.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnImport.UseAccentColor = false;
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // Form_StudentCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,5 +220,6 @@
         private System.Windows.Forms.ColumnHeader clmName;
         private System.Windows.Forms.ColumnHeader clmNif;
         private System.Windows.Forms.ColumnHeader clmClassRoom;
+        private MaterialSkin.Controls.MaterialButton btnImport;
     }
 }

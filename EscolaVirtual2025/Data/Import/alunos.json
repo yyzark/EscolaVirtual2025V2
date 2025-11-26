@@ -1,0 +1,20 @@
+﻿{
+  "alunos": [
+    {
+      "username": "joaosilva",
+      "password": "senha123",
+      "name": "João Silva",
+      "nif": "123456789",
+      "classId": 1,
+      "schoolCardId": 101
+    },
+    {
+      "username": "mariacruz",
+      "password": "pass456",
+      "name": "Maria Cruz",
+      "nif": "987654321",
+      "classId": 1,
+      "schoolCardId": 102
+    }
+  ]
+}
