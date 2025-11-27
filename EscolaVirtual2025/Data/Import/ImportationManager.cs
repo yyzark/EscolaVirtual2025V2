@@ -232,7 +232,6 @@ namespace EscolaVirtual2025.Data.Import
                         if (year == null)
                         {
                             year = new Year(yearId);
-                            DataManager.Years.Add(year);
                         }
 
                         var lettersUsed = new HashSet<char>(year.ClassRooms.Items.Select(cr => cr.Letter));
@@ -240,7 +239,7 @@ namespace EscolaVirtual2025.Data.Import
                         while (lettersUsed.Contains(newLetter) && newLetter <= 'Z') newLetter++;
                         classRoom = new ClassRoom(newLetter, year, dto.classId.Value);
                         year.ClassRooms.Add(classRoom);
-                        DataManager.ClassRooms.Add(classRoom);
+                        DataManager.Years.Add(year);
                     }
                 }
 
