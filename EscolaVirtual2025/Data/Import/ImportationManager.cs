@@ -227,8 +227,7 @@ namespace EscolaVirtual2025.Data.Import
                     classRoom = DataManager.ClassRooms.FirstOrDefault(c => c.Id == dto.classId.Value);
                     if (classRoom == null)
                     {
-                        // Criar turma automaticamente com letra disponível
-                        var yearId = dto.classId.Value; // ou outro mapeamento que faça sentido
+                        var yearId = dto.classId.Value;
                         var year = DataManager.Years.FirstOrDefault(y => y.Id == yearId);
                         if (year == null)
                         {
@@ -236,7 +235,6 @@ namespace EscolaVirtual2025.Data.Import
                             DataManager.Years.Add(year);
                         }
 
-                        // Escolher letra disponível A-Z
                         var lettersUsed = new HashSet<char>(year.ClassRooms.Items.Select(cr => cr.Letter));
                         char newLetter = 'A';
                         while (lettersUsed.Contains(newLetter) && newLetter <= 'Z') newLetter++;
@@ -262,7 +260,6 @@ namespace EscolaVirtual2025.Data.Import
 
             result.ImportedCount = imported;
         }
-
 
         private void ProcessClassRoomDtos(List<ClassRoomDto> dtos, ImportResult result)
         {
@@ -302,44 +299,39 @@ namespace EscolaVirtual2025.Data.Import
                     continue;
                 }
 
-                if (existingClassIds.Contains(id))
+                // Evitar duplicação global
+                if (existingClassIds.Contains(id) || !incomingClassIds.Add(id))
                 {
-                    result.Errors.Add($"{entryPrefix}: Id de turma já existe no sistema ({id}).");
+                    result.Errors.Add($"{entryPrefix}: Id de turma duplicado ({id}).");
                     continue;
                 }
 
-                if (!incomingClassIds.Add(id))
+                var key = $"{yearId}_{letter}";
+                if (existingYearLetter.Contains(key) || !incomingYearLetter.Add(key))
                 {
-                    result.Errors.Add($"{entryPrefix}: Id de turma duplicado no ficheiro ({id}).");
+                    result.Errors.Add($"{entryPrefix}: Já existe uma turma para o mesmo ano e letra ({yearId} {letter}).");
                     continue;
                 }
 
                 var year = DataManager.Years.FirstOrDefault(y => y.Id == yearId);
+                bool newYear = false;
+
                 if (year == null)
                 {
                     year = new Year(yearId);
-                }
-
-                var key = $"{yearId}_{letter}";
-                if (existingYearLetter.Contains(key))
-                {
-                    result.Errors.Add($"{entryPrefix}: Já existe uma turma no ano {yearId} com a letra '{letter}'.");
-                    continue;
-                }
-
-                if (!incomingYearLetter.Add(key))
-                {
-                    result.Errors.Add($"{entryPrefix}: Duplicação no ficheiro: mais de uma turma para o mesmo year + letter ({yearId} {letter}).");
-                    continue;
+                    newYear = true;
                 }
 
                 try
                 {
+                    // Cria a turma apenas 1 vez
                     var classRoom = new ClassRoom(letter, year, id);
                     year.ClassRooms.Add(classRoom);
-                    DataManager.Years.Add(year);
-                    DataManager.ClassRooms.Add(classRoom);
 
+                    if (newYear)
+                        DataManager.Years.Add(year);
+
+                    // Processar alunos da turma
                     if (dto.alunos != null && dto.alunos.Count > 0)
                     {
                         foreach (var s in dto.alunos)
@@ -350,7 +342,6 @@ namespace EscolaVirtual2025.Data.Import
 
                     existingClassIds.Add(id);
                     existingYearLetter.Add(key);
-
                     imported++;
                 }
                 catch (Exception ex)

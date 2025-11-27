@@ -167,6 +167,7 @@ namespace EscolaVirtual2025.Forms.Admin.AdminForms.ClassRooms
                     }
                 }
             }
+            UpdateListView();
 
         }
     }
