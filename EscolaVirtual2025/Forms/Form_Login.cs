@@ -130,7 +130,7 @@ namespace EscolaVirtual2025
 
 
             //add do admin
-            DataManager.Users.Add(new User("JC", "GOAT", "Jorge Carvalho", UserType.Admin));
+            DataManager.Users.Add(new User("JC", "COOL", "Jorge Carvalho", UserType.Admin));
 
             #region Credenciais Iniciais (probably apagar depois)  
             string cred = File.ReadLines("Credenciais_Admin\\Admin.txt").First();
